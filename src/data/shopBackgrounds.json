@@ -76,6 +76,7 @@
     "name": "Indigo",
     "cost": 650,
     "colors": ["#4b0082", "#8a2be2"]
+<<<<<<< HEAD
   },
   {
     "id": "14",
@@ -136,5 +137,7 @@
     "name": "Nightfall",
     "cost": 1150,
     "colors": ["#0f2027", "#203a43", "#2c5364"]
+=======
+>>>>>>> 50344c3 (massive bug fix and features)
   }
 ]

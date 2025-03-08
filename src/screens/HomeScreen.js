@@ -32,8 +32,13 @@ export default function HomeScreen() {
 
   const handleTestMode = async () => {
     if (remainingUses > 0) {
+<<<<<<< HEAD
       addCoins(1000);
       alert("1000 Coins have been added!");
+=======
+      addCoins(100);
+      alert("100 Coins have been added!");
+>>>>>>> 50344c3 (massive bug fix and features)
 
       const newUses = remainingUses - 1;
       setRemainingUses(newUses);
@@ -57,7 +62,9 @@ export default function HomeScreen() {
       {remainingUses > 0 && (
         <>
           <GradientButton
+
             title={`Add 1000 Coins (${remainingUses}x)`}
+
             onPress={handleTestMode}
             style={styles.testModeButton}
           />

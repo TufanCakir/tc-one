@@ -12,7 +12,10 @@ import { PanGestureHandler } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/SnakeStyles";
+<<<<<<< HEAD
 import Footer from "../components/Footer";
+=======
+>>>>>>> 50344c3 (massive bug fix and features)
 
 const { width, height } = Dimensions.get("window");
 const CELL_SIZE = 20;
@@ -208,7 +211,10 @@ export default function Snake() {
             </View>
           </Animated.View>
         )}
+<<<<<<< HEAD
         <Footer />
+=======
+>>>>>>> 50344c3 (massive bug fix and features)
       </View>
     </PanGestureHandler>
   );

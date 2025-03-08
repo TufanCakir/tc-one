@@ -2,7 +2,10 @@
 import React from "react";
 import { View, ScrollView, Text } from "react-native";
 import styles from "../styles/BasicsScreenStyles";
+<<<<<<< HEAD
 import Footer from "../components/Footer";
+=======
+>>>>>>> 50344c3 (massive bug fix and features)
 
 export default function BasicsScreen() {
   return (
@@ -60,7 +63,10 @@ const styles = StyleSheet.create({
           editor is required.
         </Text>
       </ScrollView>
+<<<<<<< HEAD
       <Footer />
+=======
+>>>>>>> 50344c3 (massive bug fix and features)
     </View>
   );
 }

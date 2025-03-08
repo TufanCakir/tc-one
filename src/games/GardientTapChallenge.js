@@ -1,10 +1,23 @@
 // src/screens/GradientTapChallenge.js
 import React, { useState, useEffect, useContext } from "react";
+<<<<<<< HEAD
 import { Dimensions, View, Text, TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/GradientTapChallengeStyles";
 import Footer from "../components/Footer";
+=======
+import {
+  Dimensions,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { CoinsContext } from "../context/CoinsContext";
+import styles from "../styles/GradientTapChallengeStyles";
+>>>>>>> 50344c3 (massive bug fix and features)
 
 const { width, height } = Dimensions.get("window");
 const BAR_WIDTH = 100;
@@ -62,7 +75,10 @@ export default function GradientTapChallenge() {
           <View
             style={[styles.bar, { left: barX, backgroundColor: "yellow" }]}
           />
+<<<<<<< HEAD
           <Footer />
+=======
+>>>>>>> 50344c3 (massive bug fix and features)
         </View>
       </TouchableWithoutFeedback>
     </View>
