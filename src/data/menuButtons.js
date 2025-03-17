@@ -9,4 +9,5 @@ export const menuButtons = [
   { title: "Todo", screen: "TodoScreen" },
   { title: "Stopwatch", screen: "StopwatchScreen" },
   { title: "OTP Generator Validator", screen: "OTPGeneratorValidatorScreen" },
+  { title: "QR Code Generator", screen: "QRCodeGeneratorScreen" },
 ];

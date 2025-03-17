@@ -1,17 +1,12 @@
 // src/screens/FallingCirclesRPG.js
 import React, { useState, useEffect, useRef, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  Dimensions,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Text, Dimensions, View, TouchableOpacity } from "react-native";
 import { Canvas, Circle } from "@shopify/react-native-skia";
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/FallingCirclesRPGStyles";
+import Footer from "../components/Footer";
 
 const { width, height } = Dimensions.get("window");
 const CIRCLE_RADIUS = 20;
@@ -143,6 +138,7 @@ export default function FallingCirclesRPG() {
           </View>
         </View>
       )}
+      <Footer />
     </View>
   );
 }

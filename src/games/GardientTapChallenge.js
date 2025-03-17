@@ -1,15 +1,10 @@
 // src/screens/GradientTapChallenge.js
 import React, { useState, useEffect, useContext } from "react";
-import {
-  Dimensions,
-  View,
-  Text,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-} from "react-native";
+import { Dimensions, View, Text, TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/GradientTapChallengeStyles";
+import Footer from "../components/Footer";
 
 const { width, height } = Dimensions.get("window");
 const BAR_WIDTH = 100;
@@ -67,6 +62,7 @@ export default function GradientTapChallenge() {
           <View
             style={[styles.bar, { left: barX, backgroundColor: "yellow" }]}
           />
+          <Footer />
         </View>
       </TouchableWithoutFeedback>
     </View>

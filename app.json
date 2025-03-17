@@ -2,7 +2,7 @@
   "expo": {
     "name": "All In One Hub",
     "slug": "all-in-one-hub",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/logo.png",
     "userInterfaceStyle": "light",

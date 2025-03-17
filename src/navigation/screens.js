@@ -25,6 +25,7 @@ import GardientTapChallenge from "../games/GardientTapChallenge";
 import BasicsScreen from "../devToools/BasicsScreen";
 import ShopScreen from "../screens/ShopScreen";
 import BackgroundSelectionScreen from "../screens/BackgroundSelectionScreen";
+import QRCodeGeneratorScreen from "../screens/QRCodeGeneratorScreen";
 
 // Array für eine kompaktere Struktur
 export const screens = [
@@ -97,5 +98,10 @@ export const screens = [
     name: "BackgroundSelectionScreen",
     component: BackgroundSelectionScreen,
     title: "Background Selection",
+  },
+  {
+    name: "QRCodeGeneratorScreen",
+    component: QRCodeGeneratorScreen,
+    title: "QR Code Generator",
   },
 ];

@@ -4,6 +4,7 @@ import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/NumberGuessingStyles";
+import Footer from "../components/Footer";
 
 function generateRandomNumber() {
   return Math.floor(Math.random() * 20) + 1;
@@ -96,6 +97,7 @@ const NumberGuessing = () => {
           </View>
         </View>
       )}
+      <Footer />
     </View>
   );
 };

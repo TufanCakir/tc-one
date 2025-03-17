@@ -3,8 +3,8 @@ import React, { useState, useContext } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
-import GradientButton from "../components/GradientButton"; // Falls GradientButton intern noch LinearGradient verwendet, kann er auch angepasst werden
 import styles from "../styles/RockPaperScissorsStyles";
+import Footer from "../components/Footer";
 
 const RockPaperScissors = () => {
   const navigation = useNavigation();
@@ -96,6 +96,7 @@ const RockPaperScissors = () => {
           </TouchableOpacity>
         </View>
       )}
+      <Footer />
     </View>
   );
 };
