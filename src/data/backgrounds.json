@@ -1,10 +1,5 @@
 [
   {
-    "id": "default",
-    "name": "Default",
-    "colors": ["black", "blue", "black"]
-  },
-  {
     "id": "1",
     "name": "Sunset",
     "cost": 50,
@@ -81,5 +76,65 @@
     "name": "Indigo",
     "cost": 650,
     "colors": ["#4b0082", "#8a2be2"]
+  },
+  {
+    "id": "14",
+    "name": "Blush",
+    "cost": 700,
+    "colors": ["#ff6a88", "#ff99ac"]
+  },
+  {
+    "id": "15",
+    "name": "Cyan Flame",
+    "cost": 750,
+    "colors": ["#00ffff", "#007a7a"]
+  },
+  {
+    "id": "16",
+    "name": "Peach",
+    "cost": 800,
+    "colors": ["#ffecd2", "#fcb69f"]
+  },
+  {
+    "id": "17",
+    "name": "Ice Blue",
+    "cost": 850,
+    "colors": ["#a1c4fd", "#c2e9fb"]
+  },
+  {
+    "id": "18",
+    "name": "Solar Flare",
+    "cost": 900,
+    "colors": ["#f12711", "#f5af19"]
+  },
+  {
+    "id": "19",
+    "name": "Deep Space",
+    "cost": 950,
+    "colors": ["#000000", "#434343"]
+  },
+  {
+    "id": "20",
+    "name": "Mystic Rose",
+    "cost": 1000,
+    "colors": ["#fbd3e9", "#bb377d"]
+  },
+  {
+    "id": "21",
+    "name": "Teal Dream",
+    "cost": 1050,
+    "colors": ["#136a8a", "#267871"]
+  },
+  {
+    "id": "22",
+    "name": "Golden Hour",
+    "cost": 1100,
+    "colors": ["#f6d365", "#fda085"]
+  },
+  {
+    "id": "23",
+    "name": "Nightfall",
+    "cost": 1150,
+    "colors": ["#0f2027", "#203a43", "#2c5364"]
   }
 ]

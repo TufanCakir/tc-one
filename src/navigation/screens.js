@@ -26,6 +26,8 @@ import BasicsScreen from "../devToools/BasicsScreen";
 import ShopScreen from "../screens/ShopScreen";
 import BackgroundSelectionScreen from "../screens/BackgroundSelectionScreen";
 import QRCodeGeneratorScreen from "../screens/QRCodeGeneratorScreen";
+import VotingScreen from "../screens/VotingScreen";
+import BmiCalculatorScreen from "../screens/BmiCalculatorScreen";
 
 // Array für eine kompaktere Struktur
 export const screens = [
@@ -103,5 +105,15 @@ export const screens = [
     name: "QRCodeGeneratorScreen",
     component: QRCodeGeneratorScreen,
     title: "QR Code Generator",
+  },
+  {
+    name: "VotingScreen",
+    component: VotingScreen,
+    title: "Voting",
+  },
+  {
+    name: "BmiCalculatorScreen",
+    component: BmiCalculatorScreen,
+    title: "BMICalculator",
   },
 ];
