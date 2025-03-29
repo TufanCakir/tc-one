@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   genderText: {
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "bold", //
     color: "#000",
   },
   submitButton: {
