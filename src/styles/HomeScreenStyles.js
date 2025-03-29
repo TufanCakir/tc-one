@@ -12,6 +12,14 @@ export default StyleSheet.create({
     marginBottom: 20,
     width: "100%",
   },
+  newsButton: {
+    marginBottom: 20,
+    width: "100%",
+  },
+  settingsButton: {
+    marginBottom: 20,
+    width: "100%",
+  },
   testModeButton: {
     marginBottom: 10,
     width: "100%",

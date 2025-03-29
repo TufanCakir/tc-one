@@ -6,7 +6,6 @@ import styles from "../styles/SettingsStyles";
 
 const buttons = [
   { title: "Terms of Service", screen: "TermsOfServiceScreen" },
-  { title: "News", screen: "NewsScreen" },
   { title: "Set Background", screen: "BackgroundSelectionScreen" },
 ];
 

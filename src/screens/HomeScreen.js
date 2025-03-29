@@ -9,6 +9,8 @@ import MenuModal from "../components/MenuModal";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/HomeScreenStyles";
 
+// ... deine Imports bleiben gleich
+
 export default function HomeScreen() {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,7 +18,6 @@ export default function HomeScreen() {
   const [remainingUses, setRemainingUses] = useState(5); // 🔹 Standard: 5 Nutzungen
 
   useEffect(() => {
-    // Lade verbleibende Nutzungen aus AsyncStorage
     const loadUses = async () => {
       try {
         const storedUses = await AsyncStorage.getItem("testModeUses");
@@ -52,6 +53,20 @@ export default function HomeScreen() {
         title="Menü"
         onPress={() => setModalVisible(true)}
         style={styles.menuButton}
+      />
+
+      {/* 🔹 News Button */}
+      <GradientButton
+        title="News"
+        onPress={() => navigation.navigate("NewsScreen")}
+        style={styles.newsButton}
+      />
+
+      {/* 🔹 Settings Button */}
+      <GradientButton
+        title="Settings"
+        onPress={() => navigation.navigate("SettingsScreen")}
+        style={styles.settingsButton}
       />
 
       {remainingUses > 0 && (

@@ -42,12 +42,6 @@ const Footer = () => {
       >
         <Text style={styles.buttonText}>Profil</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("SettingsScreen")}
-      >
-        <Text style={styles.buttonText}>Settings</Text>
-      </TouchableOpacity>
     </LinearGradient>
   );
 };
