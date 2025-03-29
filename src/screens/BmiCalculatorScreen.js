@@ -8,6 +8,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback, // NEU
 } from "react-native";
+import Footer from "../components/Footer";
 
 const BmiCalculatorScreen = () => {
   const [age, setAge] = useState("");
@@ -120,6 +121,7 @@ const BmiCalculatorScreen = () => {
             </View>
           )}
         </View>
+        <Footer />
       </View>
     </TouchableWithoutFeedback>
   );

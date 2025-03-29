@@ -1,13 +1,10 @@
 [
   {
-<<<<<<< HEAD
-=======
     "id": "default",
     "name": "Default",
     "colors": ["black", "blue", "black"]
   },
   {
->>>>>>> 50344c3 (massive bug fix and features)
     "id": "1",
     "name": "Sunset",
     "cost": 50,
@@ -84,7 +81,6 @@
     "name": "Indigo",
     "cost": 650,
     "colors": ["#4b0082", "#8a2be2"]
-<<<<<<< HEAD
   },
   {
     "id": "14",
@@ -145,7 +141,5 @@
     "name": "Nightfall",
     "cost": 1150,
     "colors": ["#0f2027", "#203a43", "#2c5364"]
-=======
->>>>>>> 50344c3 (massive bug fix and features)
   }
 ]

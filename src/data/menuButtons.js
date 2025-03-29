@@ -9,10 +9,7 @@ export const menuButtons = [
   { title: "Todo", screen: "TodoScreen" },
   { title: "Stopwatch", screen: "StopwatchScreen" },
   { title: "OTP Generator Validator", screen: "OTPGeneratorValidatorScreen" },
-<<<<<<< HEAD
   { title: "QR Code Generator", screen: "QRCodeGeneratorScreen" },
   { title: "Voting", screen: "VotingScreen" },
   { title: "BMICalculator", screen: "BmiCalculatorScreen" },
-=======
->>>>>>> 50344c3 (massive bug fix and features)
 ];

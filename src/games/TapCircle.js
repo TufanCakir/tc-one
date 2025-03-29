@@ -1,10 +1,6 @@
 // src/screens/TapCircle.js
 import React, { useState, useEffect, useContext } from "react";
-<<<<<<< HEAD
 import { Dimensions, View, Text } from "react-native";
-=======
-import { Dimensions, View, Text, TouchableOpacity } from "react-native";
->>>>>>> 50344c3 (massive bug fix and features)
 import {
   Canvas,
   Circle,
@@ -15,10 +11,7 @@ import {
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/TapCircleStyles";
-<<<<<<< HEAD
 import Footer from "../components/Footer";
-=======
->>>>>>> 50344c3 (massive bug fix and features)
 
 const { width, height } = Dimensions.get("window");
 const CIRCLE_RADIUS = 30;
@@ -85,10 +78,7 @@ export default function TapCircle() {
         </Canvas>
       </TapGestureHandler>
       <Text style={styles.instruction}>Tippe auf den Kreis!</Text>
-<<<<<<< HEAD
       <Footer />
-=======
->>>>>>> 50344c3 (massive bug fix and features)
     </View>
   );
 }
