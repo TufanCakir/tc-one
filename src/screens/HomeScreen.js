@@ -1,4 +1,3 @@
-// src/screens/HomeScreen.js
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -8,8 +7,7 @@ import Footer from "../components/Footer";
 import MenuModal from "../components/MenuModal";
 import { CoinsContext } from "../context/CoinsContext";
 import styles from "../styles/HomeScreenStyles";
-
-// ... deine Imports bleiben gleich
+import Header from "../components/Header";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -49,40 +47,27 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <GradientButton
-        title="Menü"
-        onPress={() => setModalVisible(true)}
-        style={styles.menuButton}
-      />
-
-      {/* 🔹 News Button */}
-      <GradientButton
-        title="News"
-        onPress={() => navigation.navigate("NewsScreen")}
-        style={styles.newsButton}
-      />
-
-      {/* 🔹 Settings Button */}
-      <GradientButton
-        title="Settings"
-        onPress={() => navigation.navigate("SettingsScreen")}
-        style={styles.settingsButton}
-      />
-
-      {remainingUses > 0 && (
-        <>
-          <GradientButton
-            title={`Add 1000 Coins (${remainingUses}x)`}
-            onPress={handleTestMode}
-            style={styles.testModeButton}
-          />
-          <Text style={styles.thankYouText}>
-            Thank you for your support! You can claim this bonus {remainingUses}{" "}
-            more times. 🎉
-          </Text>
-        </>
-      )}
-
+      <Header />
+      <View style={styles.content}>
+        <GradientButton
+          title="Menü"
+          onPress={() => setModalVisible(true)}
+          style={styles.menuButton}
+        />
+        {remainingUses > 0 && (
+          <>
+            <GradientButton
+              title={`Add 1000 Coins (${remainingUses}x)`}
+              onPress={handleTestMode}
+              style={styles.testModeButton}
+            />
+            <Text style={styles.thankYouText}>
+              Thank you for your support! You can claim this bonus{" "}
+              {remainingUses} more times. 🎉
+            </Text>
+          </>
+        )}
+      </View>
       <MenuModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}

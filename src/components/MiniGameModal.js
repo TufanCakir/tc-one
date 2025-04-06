@@ -11,6 +11,8 @@ const buttons = [
   { title: "Tap Circle", screen: "TapCircle" },
   { title: "Falling Circles", screen: "FallingCircles" },
   { title: "Gardient Tap Challenge", screen: "GardientTapChallenge" },
+  { title: "Pong", screen: "Pong" },
+  { title: "Tap Game", screen: "TapGame" },
 ];
 
 export default function MiniGameModal({ navigation, onClose }) {

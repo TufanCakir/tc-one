@@ -9,9 +9,7 @@ export default StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
   modalContent: {
-    width: "90%",
-    padding: 20,
-    borderRadius: 10,
+    width: "100%",
     backgroundColor: "black",
   },
   button: {

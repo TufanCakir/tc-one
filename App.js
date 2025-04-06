@@ -1,5 +1,5 @@
 // App.js
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,49 +15,68 @@ import {
   BackgroundProvider,
   BackgroundContext,
 } from "./src/context/BackgroundContext";
+import { SummonedBackgroundsProvider } from "./src/context/SummonedBackgroundsContext";
+import * as SplashScreen from "expo-splash-screen";
+
+// Verhindere, dass der Splash Screen automatisch ausgeblendet wird
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   useUpdateChecker();
   const [loading, setLoading] = useState(false);
   const loadingTimeoutRef = useRef(null);
 
-  // Diese Funktion wird bei jeder Navigationsänderung aufgerufen.
-  const handleNavigationStateChange = (state) => {
+  // Bei jeder Navigationsänderung wird kurzzeitig ein Ladeindikator angezeigt
+  const handleNavigationStateChange = () => {
     if (loadingTimeoutRef.current) {
       clearTimeout(loadingTimeoutRef.current);
     }
     setLoading(true);
     loadingTimeoutRef.current = setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 500);
   };
+
+  // Sobald die App gemountet ist, wird der Splash Screen ausgeblendet
+  useEffect(() => {
+    const hideSplash = async () => {
+      await SplashScreen.hideAsync();
+    };
+    hideSplash();
+  }, []);
 
   return (
     <BackgroundProvider>
-      <AppProviders>
-        <GestureHandlerRootView style={styles.flex}>
-          <BackgroundContainer>
-            <SafeAreaView style={styles.flex}>
-              <NavigationContainer onStateChange={handleNavigationStateChange}>
-                <AppNavigator />
-              </NavigationContainer>
-              {loading && <LoadingOverlay />}
-            </SafeAreaView>
-          </BackgroundContainer>
-        </GestureHandlerRootView>
-      </AppProviders>
+      <SummonedBackgroundsProvider>
+        <AppProviders>
+          <GestureHandlerRootView style={styles.flex}>
+            <BackgroundContainer>
+              <SafeAreaView style={styles.flex}>
+                <View style={styles.contentContainer}>
+                  <NavigationContainer
+                    onStateChange={handleNavigationStateChange}
+                  >
+                    <AppNavigator />
+                  </NavigationContainer>
+                  {loading && <LoadingOverlay />}
+                </View>
+              </SafeAreaView>
+            </BackgroundContainer>
+          </GestureHandlerRootView>
+        </AppProviders>
+      </SummonedBackgroundsProvider>
     </BackgroundProvider>
   );
 }
 
-// 🔹 Hintergrund-Container mit dynamischer Farbe
+// Hintergrund-Container, der die Hintergrundfarbe aus dem Context nutzt
 const BackgroundContainer = ({ children }) => {
   const { backgroundColors } = useContext(BackgroundContext);
   return (
     <View
       style={[
         styles.fullscreen,
-        { backgroundColor: backgroundColors[0] || "black" },
+        { backgroundColor: backgroundColors?.[0] || "black" },
       ]}
     >
       {children}
@@ -65,17 +84,17 @@ const BackgroundContainer = ({ children }) => {
   );
 };
 
-// 🔹 Globaler Ladeindikator mit dynamischer Farbe
+// Ladeindikator, der eine dynamische Hintergrundfarbe und Farbe des Indikators nutzt
 const LoadingOverlay = () => {
   const { backgroundColors } = useContext(BackgroundContext);
-  const defaultColors = ["black", "blue", "black"]; // Standard-Farbverlauf
-  const loaderColor = backgroundColors?.[1] || defaultColors[1]; // 🔹 Mittlere Farbe als Ladeindikator
+  const defaultColors = ["black", "blue", "black"];
+  const loaderColor = backgroundColors?.[1] || defaultColors[1];
 
   return (
     <View
       style={[
         styles.loadingOverlay,
-        { backgroundColor: backgroundColors[0] || defaultColors[0] },
+        { backgroundColor: backgroundColors?.[0] || defaultColors[0] },
       ]}
     >
       <ActivityIndicator size="large" color={loaderColor} />
@@ -89,9 +108,11 @@ const styles = StyleSheet.create({
   },
   fullscreen: {
     flex: 1,
-    position: "absolute", // Fix: Verhindert UI-Flackern
     width: "100%",
     height: "100%",
+  },
+  contentContainer: {
+    flex: 1,
   },
   loadingOverlay: {
     position: "absolute",

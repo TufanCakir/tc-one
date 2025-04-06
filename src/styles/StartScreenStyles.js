@@ -18,19 +18,25 @@ export default StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
   },
-  subtitle: {
-    fontSize: 20,
-    color: "#fff",
-    textAlign: "center",
-    marginBottom: 40,
-  },
   button: {
     borderRadius: 8,
-    width: 300,
+    width: 200,
   },
   buttonText: {
     color: "#fff",
     fontSize: 18,
     fontWeight: "bold",
+  },
+  versionText: {
+    fontSize: 12,
+    color: "white",
+    top: 300,
+    textAlign: "center",
+  },
+  copyrightText: {
+    fontSize: 12,
+    color: "white",
+    top: 310,
+    textAlign: "center",
   },
 });

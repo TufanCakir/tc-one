@@ -1,9 +1,10 @@
 // src/components/Footer.js
 import React, { useContext } from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { View, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BackgroundContext } from "../context/BackgroundContext";
+import FooterSvg from "./FooterSvg";
 import styles from "../styles/FooterStyles";
 
 const Footer = () => {
@@ -12,36 +13,54 @@ const Footer = () => {
 
   return (
     <LinearGradient colors={backgroundColors} style={styles.footer}>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("HomeScreen")}
-      >
-        <Text style={styles.buttonText}>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("DevToolsScreen")}
-      >
-        <Text style={styles.buttonText}>Dev Tools</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("MiniGamesScreen")}
-      >
-        <Text style={styles.buttonText}>Mini Games</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("ShopScreen")}
-      >
-        <Text style={styles.buttonText}>Shop</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("ProfilScreen")}
-      >
-        <Text style={styles.buttonText}>Profil</Text>
-      </TouchableOpacity>
+      <View style={styles.iconRow}>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("HomeScreen")}
+        >
+          <FooterSvg icon="home" />
+          <Text style={styles.iconText}>Home</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("MiniGamesScreen")}
+        >
+          <FooterSvg icon="minigames" />
+          <Text style={styles.iconText}>Mini Games</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("SummonScreen")}
+        >
+          <FooterSvg icon="summon" />
+          <Text style={styles.iconText}>Summon</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("NewsScreen")}
+        >
+          <FooterSvg icon="news" />
+          <Text style={styles.iconText}>News</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("DevToolsScreen")}
+        >
+          <FooterSvg icon="devtools" />
+          <Text style={styles.iconText}>Dev Tools</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => navigation.navigate("SettingsScreen")}
+        >
+          <FooterSvg icon="settings" />
+          <Text style={styles.iconText}>Settings</Text>
+        </TouchableOpacity>
+      </View>
     </LinearGradient>
   );
 };

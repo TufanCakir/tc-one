@@ -5,6 +5,7 @@ import { Canvas, Circle } from "@shopify/react-native-skia";
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { CoinsContext } from "../context/CoinsContext";
+import { BackgroundContext } from "../context/BackgroundContext";
 import styles from "../styles/FallingCirclesRPGStyles";
 import Footer from "../components/Footer";
 
@@ -18,6 +19,7 @@ const COIN_REWARD = 5; // Coins pro Treffer
 export default function FallingCirclesRPG() {
   const navigation = useNavigation();
   const { coins, addCoins } = useContext(CoinsContext);
+  const { backgroundColors } = useContext(BackgroundContext);
   const [score, setScore] = useState(0);
   const [circles, setCircles] = useState([]);
   const [lives, setLives] = useState(3);
@@ -108,20 +110,33 @@ export default function FallingCirclesRPG() {
     setGameOver(false);
   };
 
+  // Dynamische Kreisfarbe: Nutzt den zweiten Wert aus backgroundColors, falls vorhanden, sonst Standard
+  const circleColor =
+    backgroundColors && backgroundColors.length > 1
+      ? backgroundColors[1]
+      : "#FF5722";
+
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <Text style={styles.info}>
         Score: {score} | Lives: {lives} | Coins: {coins}
       </Text>
       <TapGestureHandler onActivated={onTap}>
-        <Canvas style={styles.canvas}>
+        <Canvas
+          style={[
+            styles.canvas,
+            {
+              backgroundColor: backgroundColors ? backgroundColors[0] : "white",
+            },
+          ]}
+        >
           {circles.map((circle) => (
             <Circle
               key={circle.id}
               cx={circle.x}
               cy={circle.y}
               r={CIRCLE_RADIUS}
-              color="#FF5722"
+              color={circleColor}
             />
           ))}
         </Canvas>

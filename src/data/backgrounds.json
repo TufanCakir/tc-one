@@ -141,5 +141,125 @@
     "name": "Nightfall",
     "cost": 1150,
     "colors": ["#0f2027", "#203a43", "#2c5364"]
+  },
+  {
+    "id": "24",
+    "name": "Electric Violet",
+    "cost": 1200,
+    "colors": ["#8A2BE2", "#DA70D6"]
+  },
+  {
+    "id": "25",
+    "name": "Lemon Zest",
+    "cost": 1250,
+    "colors": ["#FFF44F", "#FFD700"]
+  },
+  {
+    "id": "26",
+    "name": "Royal Blue",
+    "cost": 1300,
+    "colors": ["#4169E1", "#27408B"]
+  },
+  {
+    "id": "27",
+    "name": "Frosted Mint",
+    "cost": 1350,
+    "colors": ["#AAF0D1", "#98FF98"]
+  },
+  {
+    "id": "28",
+    "name": "Rose Gold",
+    "cost": 1400,
+    "colors": ["#B76E79", "#E6C2B3"]
+  },
+  {
+    "id": "29",
+    "name": "Deep Ocean",
+    "cost": 1450,
+    "colors": ["#013A63", "#015D75"]
+  },
+  {
+    "id": "30",
+    "name": "Solar Burst",
+    "cost": 1500,
+    "colors": ["#FF4500", "#FFA500"]
+  },
+  {
+    "id": "31",
+    "name": "Pixel Pink",
+    "cost": 1550,
+    "colors": ["#FF1493", "#FF69B4"]
+  },
+  {
+    "id": "32",
+    "name": "Northern Lights",
+    "cost": 1600,
+    "colors": ["#00FF7F", "#4682B4"]
+  },
+  {
+    "id": "33",
+    "name": "Urban Slate",
+    "cost": 1650,
+    "colors": ["#708090", "#2F4F4F"]
+  },
+  {
+    "id": "34",
+    "name": "Mystic Blue",
+    "cost": 1700,
+    "colors": ["#1E3A5F", "#2A5298"]
+  },
+  {
+    "id": "35",
+    "name": "Vivid Orange",
+    "cost": 1750,
+    "colors": ["#FF6700", "#FF8C42"]
+  },
+  {
+    "id": "36",
+    "name": "Pastel Green",
+    "cost": 1800,
+    "colors": ["#A8E6CF", "#DCEDC1"]
+  },
+  {
+    "id": "37",
+    "name": "Coral Reef",
+    "cost": 1850,
+    "colors": ["#FF6B6B", "#FFD93D"]
+  },
+  {
+    "id": "38",
+    "name": "Royal Purple",
+    "cost": 1900,
+    "colors": ["#6A0572", "#A4133C"]
+  },
+  {
+    "id": "39",
+    "name": "Sky Blue",
+    "cost": 1950,
+    "colors": ["#89CFF0", "#5DADE2"]
+  },
+  {
+    "id": "40",
+    "name": "Emerald Green",
+    "cost": 2000,
+    "colors": ["#50C878", "#2ECC71"]
+  },
+  {
+    "id": "41",
+    "name": "Hot Pink",
+    "cost": 2050,
+    "colors": ["#FF69B4", "#FF1493"]
+  },
+  {
+    "id": "42",
+    "name": "Sunflower",
+    "cost": 2100,
+    "colors": ["#FFC312", "#FFB142"]
+  },
+  {
+    "id": "43",
+    "name": "Mocha",
+    "cost": 2150,
+    "colors": ["#3E2723", "#5D4037"]
   }
 ]

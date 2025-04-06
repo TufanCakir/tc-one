@@ -11,9 +11,6 @@ export default function DevToolScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.description}>
-        Learn React Native with practical examples and useful tips.
-      </Text>
       <GradientButton
         title="Learn more"
         onPress={() => setModalVisible(true)}

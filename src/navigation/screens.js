@@ -13,7 +13,6 @@ import TodoScreen from "../screens/TodoScreen";
 import StopwatchScreen from "../screens/StopwatchScreen";
 import OTPGeneratorValidatorScreen from "../screens/OTPGeneratorValidatorScreen";
 import DevToolsScreen from "../screens/DevToolsScreen";
-import ProfilScreen from "../screens/ProfilScreen";
 import MiniGamesScreen from "../screens/MiniGamesScreen";
 import SettingsScreen from "../screens/SettingsScreen";
 import Snake from "../games/Snake";
@@ -23,11 +22,15 @@ import TapCircle from "../games/TapCircle";
 import FallingCircles from "../games/FallingCircles";
 import GardientTapChallenge from "../games/GardientTapChallenge";
 import BasicsScreen from "../devToools/BasicsScreen";
-import ShopScreen from "../screens/ShopScreen";
+import SummonScreen from "../screens/SummonScreen";
+import SummonResultScreen from "../screens/SummonResultScreen";
 import BackgroundSelectionScreen from "../screens/BackgroundSelectionScreen";
 import QRCodeGeneratorScreen from "../screens/QRCodeGeneratorScreen";
 import VotingScreen from "../screens/VotingScreen";
 import BmiCalculatorScreen from "../screens/BmiCalculatorScreen";
+import NumberformatScreen from "../screens/NumberformatScreen";
+import Pong from "../games/Pong";
+import TapGame from "../games/TapGame";
 
 // Array für eine kompaktere Struktur
 export const screens = [
@@ -69,7 +72,6 @@ export const screens = [
     title: "OTP Generator",
   },
   { name: "DevToolsScreen", component: DevToolsScreen, title: "Dev Tools" },
-  { name: "ProfilScreen", component: ProfilScreen, title: "Profile" },
   { name: "MiniGamesScreen", component: MiniGamesScreen, title: "Mini Games" },
   { name: "SettingsScreen", component: SettingsScreen, title: "Settings" },
   { name: "Snake", component: Snake, title: "Snake" },
@@ -95,7 +97,12 @@ export const screens = [
     title: "Gradient Tap Challenge",
   },
   { name: "BasicsScreen", component: BasicsScreen, title: "Basics" },
-  { name: "ShopScreen", component: ShopScreen, title: "Shop" },
+  { name: "SummonScreen", component: SummonScreen, title: "Summon" },
+  {
+    name: "SummonResultScreen",
+    component: SummonResultScreen,
+    title: "Summon Result",
+  },
   {
     name: "BackgroundSelectionScreen",
     component: BackgroundSelectionScreen,
@@ -114,6 +121,21 @@ export const screens = [
   {
     name: "BmiCalculatorScreen",
     component: BmiCalculatorScreen,
-    title: "BMICalculator",
+    title: "BMIC alculator",
+  },
+  {
+    name: "NumberformatScreen",
+    component: NumberformatScreen,
+    title: "Number format",
+  },
+  {
+    name: "Pong",
+    component: Pong,
+    title: "Pong",
+  },
+  {
+    name: "TapGame",
+    component: TapGame,
+    title: "Tap Game",
   },
 ];

@@ -3,19 +3,21 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   footer: {
+    height: 100,
+    justifyContent: "center",
+    paddingBottom: 10,
+  },
+  iconRow: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
-    height: 60,
     width: "100%",
-    position: "absolute",
-    bottom: 0,
   },
-  button: {
-    // Hier können weitere Style-Attribute ergänzt werden, falls benötigt
+  iconContainer: {
+    alignItems: "center",
   },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
+  iconText: {
+    fontSize: 12,
+    color: "#ffffff",
+    marginTop: 4,
   },
 });

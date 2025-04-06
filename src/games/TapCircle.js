@@ -10,6 +10,7 @@ import {
 } from "@shopify/react-native-skia";
 import { TapGestureHandler } from "react-native-gesture-handler";
 import { CoinsContext } from "../context/CoinsContext";
+import { BackgroundContext } from "../context/BackgroundContext";
 import styles from "../styles/TapCircleStyles";
 import Footer from "../components/Footer";
 
@@ -17,16 +18,20 @@ const { width, height } = Dimensions.get("window");
 const CIRCLE_RADIUS = 30;
 const COIN_REWARD = 5; // Coins pro Treffer
 
-// Feste Gradientfarben
-const GRADIENT_COLORS = ["#000000", "#0000FF", "#000000"];
-
 export default function TapCircle() {
   const { coins, addCoins } = useContext(CoinsContext);
+  const { backgroundColors } = useContext(BackgroundContext);
   const [score, setScore] = useState(0);
   const [circlePos, setCirclePos] = useState({
     x: width / 2,
     y: height / 3,
   });
+
+  // Verwende den aktuellen Hintergrund aus dem Context, um die Gradientfarben dynamisch zu setzen
+  const dynamicGradientColors =
+    backgroundColors && backgroundColors.length > 1
+      ? [backgroundColors[0], backgroundColors[1], backgroundColors[0]]
+      : ["#000000", "#0000FF", "#000000"]; // Fallback
 
   // Aktualisiere die Kreisposition alle 1,5 Sekunden
   useEffect(() => {
@@ -55,7 +60,8 @@ export default function TapCircle() {
   const shader = Skia.Shader.MakeLinearGradient(
     vec(circlePos.x - CIRCLE_RADIUS, circlePos.y - CIRCLE_RADIUS),
     vec(circlePos.x + CIRCLE_RADIUS, circlePos.y + CIRCLE_RADIUS),
-    GRADIENT_COLORS.map((c) => Skia.Color(c)),
+    dynamicGradientColors.map((c) => Skia.Color(c)),
+
     null,
     TileMode.Clamp
   );

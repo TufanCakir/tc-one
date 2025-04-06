@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { View, FlatList } from "react-native";
 import { BackgroundContext } from "../context/BackgroundContext";
-import { PurchasedBackgroundsContext } from "../context/PurchasedBackgroundsContext";
+import { SummonedBackgroundsContext } from "../context/SummonedBackgroundsContext";
 import backgroundsData from "../data/backgrounds.json";
 import BackgroundItem from "../components/BackgroundItem";
 import styles from "../styles/BackgroundSelectionStyles";
@@ -10,11 +10,11 @@ import Footer from "../components/Footer";
 
 export default function BackgroundSelectionScreen() {
   const { setBackgroundColors } = useContext(BackgroundContext);
-  const { purchasedBackgrounds } = useContext(PurchasedBackgroundsContext);
+  const { summonedBackgrounds } = useContext(SummonedBackgroundsContext);
 
-  // Filtere Hintergründe, die gekauft wurden oder der Default-Hintergrund ist
+  // Filtere Hintergründe, die beschworen wurden oder der Default-Hintergrund ist
   const filteredBackgrounds = backgroundsData.filter(
-    (item) => item.id === "default" || purchasedBackgrounds.includes(item.id)
+    (item) => item.id === "default" || summonedBackgrounds.includes(item.id)
   );
 
   const handleSelectBackground = (item) => {
@@ -29,7 +29,7 @@ export default function BackgroundSelectionScreen() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={filteredBackgrounds}
+        data={summonedBackgrounds}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}

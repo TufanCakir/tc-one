@@ -1,15 +1,15 @@
 // src/AppProviders.js
 import React from "react";
 import { CoinsProvider } from "./context/CoinsContext";
-import { PurchasedBackgroundsProvider } from "./context/PurchasedBackgroundsContext";
+import { SummonedBackgroundsProvider } from "./context/SummonedBackgroundsContext";
 import { BackgroundProvider } from "./context/BackgroundContext";
 
 export default function AppProviders({ children }) {
   return (
     <CoinsProvider>
-      <PurchasedBackgroundsProvider>
+      <SummonedBackgroundsProvider>
         <BackgroundProvider>{children}</BackgroundProvider>
-      </PurchasedBackgroundsProvider>
+      </SummonedBackgroundsProvider>
     </CoinsProvider>
   );
 }

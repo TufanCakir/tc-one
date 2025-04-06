@@ -59,7 +59,6 @@ const RockPaperScissors = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Rock, Paper, Scissors Game</Text>
       {!gameOver && (
         <View style={styles.buttonContainer}>
           <TouchableOpacity onPress={() => decision("ROCK")}>

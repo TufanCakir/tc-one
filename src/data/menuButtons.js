@@ -11,5 +11,6 @@ export const menuButtons = [
   { title: "OTP Generator Validator", screen: "OTPGeneratorValidatorScreen" },
   { title: "QR Code Generator", screen: "QRCodeGeneratorScreen" },
   { title: "Voting", screen: "VotingScreen" },
-  { title: "BMICalculator", screen: "BmiCalculatorScreen" },
+  { title: "BMI Calculator", screen: "BmiCalculatorScreen" },
+  { title: "Number format", screen: "NumberformatScreen" },
 ];

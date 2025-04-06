@@ -4,14 +4,13 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: 80,
+    justifyContent: "space-between",
   },
   menuButton: {
-    marginBottom: 20,
-    width: "100%",
+    marginTop: 350,
+    width: "50%",
+    justifyContent: "center",
+    left: 100,
   },
   modalContainer: {
     flex: 1,

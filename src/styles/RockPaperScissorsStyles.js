@@ -6,14 +6,6 @@ export default StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 28,
-    marginBottom: 20,
-    color: "#fff",
-    fontWeight: "bold",
-    textTransform: "uppercase",
   },
   buttonContainer: {
     flexDirection: "row",

@@ -4,23 +4,13 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
-    justifyContent: "center",
-    alignItems: "center",
-    paddingBottom: 80,
-  },
-  description: {
-    fontSize: 18,
-    color: "#ffffff",
-    textAlign: "center",
-    marginBottom: 30,
+    justifyContent: "space-between",
   },
   button: {
-    backgroundColor: "transparent",
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 5,
-    width: "100%",
+    marginTop: 350,
+    width: "50%",
+    justifyContent: "center",
+    left: 100,
   },
   modalOverlay: {
     flex: 1,
