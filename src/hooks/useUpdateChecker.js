@@ -1,32 +1,32 @@
 // src/hooks/useUpdateChecker.js
 import { useEffect } from "react";
+import { Alert } from "react-native";
 import * as Updates from "expo-updates";
 
-/**
- * Führt einen Update-Check durch und zeigt bei Bedarf eine Ladeanzeige über `setUpdateUIVisible`.
- * @param {Function} setUpdateUIVisible - State Setter für das Update-Overlay (boolean)
- */
-export default function useUpdateChecker(setUpdateUIVisible) {
+export default function useUpdateChecker() {
   useEffect(() => {
     if (!__DEV__) {
       (async () => {
         try {
           const update = await Updates.checkForUpdateAsync();
           if (update.isAvailable) {
-            // Ladeanzeige einblenden
-            setUpdateUIVisible(true);
-
-            // Update herunterladen
             await Updates.fetchUpdateAsync();
-
-            // Kurze Verzögerung für UX (optional)
-            setTimeout(() => {
-              Updates.reloadAsync(); // App neustarten
-            }, 1000);
+            Alert.alert(
+              "Update verfügbar",
+              "Ein neues Update wurde geladen. Die App wird jetzt neu gestartet.",
+              [
+                {
+                  text: "OK",
+                  onPress: () => {
+                    Updates.reloadAsync();
+                  },
+                },
+              ],
+              { cancelable: false }
+            );
           }
         } catch (e) {
           console.log("Fehler beim Prüfen von Updates:", e);
-          setUpdateUIVisible(false); // Fehlerfall: UI ausblenden
         }
       })();
     }
