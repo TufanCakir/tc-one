@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
+  Text,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./src/navigation/AppNavigator";
@@ -17,9 +18,11 @@ enableScreens();
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  useUpdateChecker();
   const [loading, setLoading] = useState(false);
+  const [updateVisible, setUpdateVisible] = useState(false); // 👈 NEU
   const loadingTimeoutRef = useRef(null);
+
+  useUpdateChecker(setUpdateVisible); // 👈 Übergib Setter für Overlay
 
   const handleNavigationStateChange = () => {
     clearTimeout(loadingTimeoutRef.current);
@@ -41,7 +44,12 @@ export default function App() {
             <AppNavigator />
           </OnlineGuard>
         </NavigationContainer>
+
+        {/* Navigation-Ladeanzeige */}
         {loading && <LoadingOverlay />}
+
+        {/* Update-Overlay wenn Update geladen wird */}
+        {updateVisible && <UpdateOverlay />}
       </SafeAreaView>
     </View>
   );
@@ -50,6 +58,13 @@ export default function App() {
 const LoadingOverlay = () => (
   <View style={styles.loadingOverlayBlack}>
     <ActivityIndicator size="large" color="#fff" />
+  </View>
+);
+
+const UpdateOverlay = () => (
+  <View style={styles.updateOverlay}>
+    <ActivityIndicator size="large" color="#fff" />
+    <Text style={styles.updateText}>Update wird geladen…</Text>
   </View>
 );
 
@@ -68,5 +83,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#000",
     zIndex: 999,
+  },
+  updateOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0,0,0,0.85)",
+    zIndex: 1000,
+  },
+  updateText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: "#fff",
   },
 });

@@ -27,7 +27,7 @@ const ICON_OPTIONS = [
 ];
 
 const ProfileHeader = () => {
-  const [name, setName] = useState("Willkommen Erstelle dein Profil");
+  const [name, setName] = useState("");
   const [iconConfig, setIconConfig] = useState(null);
 
   useEffect(() => {
