@@ -9,20 +9,18 @@ import {
 import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./src/navigation/AppNavigator";
 import useUpdateChecker from "./src/hooks/useUpdateChecker";
-import * as SplashScreen from "expo-splash-screen";
 import { enableScreens } from "react-native-screens";
 import ProfileHeader from "./src/components/ProfileHeader";
 import OnlineGuard from "./src/components/OnlineGuard";
 
 enableScreens();
-SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [loading, setLoading] = useState(false);
-  const [updateVisible, setUpdateVisible] = useState(false); // 👈 NEU
+  const [updateVisible, setUpdateVisible] = useState(false);
   const loadingTimeoutRef = useRef(null);
 
-  useUpdateChecker(setUpdateVisible); // 👈 Übergib Setter für Overlay
+  useUpdateChecker(setUpdateVisible);
 
   const handleNavigationStateChange = () => {
     clearTimeout(loadingTimeoutRef.current);
@@ -31,7 +29,6 @@ export default function App() {
   };
 
   useEffect(() => {
-    SplashScreen.hideAsync();
     return () => clearTimeout(loadingTimeoutRef.current);
   }, []);
 
