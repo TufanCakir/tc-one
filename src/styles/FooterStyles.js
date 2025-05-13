@@ -5,7 +5,13 @@ export default StyleSheet.create({
   footer: {
     height: 100,
     justifyContent: "center",
-    paddingBottom: 10,
+    borderRadius: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 4, // Android Shadow
   },
   iconRow: {
     flexDirection: "row",

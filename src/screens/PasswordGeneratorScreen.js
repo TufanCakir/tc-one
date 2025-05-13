@@ -1,5 +1,4 @@
 // src/components/PasswordGeneratorScreen.js
-import React from "react";
 import {
   View,
   Text,
@@ -109,7 +108,9 @@ export default function PasswordGeneratorScreen() {
           )}
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
-      <Footer />
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }

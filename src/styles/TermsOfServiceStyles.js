@@ -1,12 +1,9 @@
 // src/styles/TermsOfServiceStyles.js
 import { StyleSheet } from "react-native";
-import colors from "../../colors";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
   },
   scrollContainer: {
     flexGrow: 1,
@@ -18,12 +15,12 @@ export default StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
-    color: colors.gold,
+    color: "#fff",
   },
   content: {
     fontSize: 16,
     lineHeight: 24,
-    color: colors.white,
+    color: "#fff",
     paddingBottom: 20,
   },
 });

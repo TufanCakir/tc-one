@@ -1,7 +1,5 @@
 // src/screens/TermsOfServiceScreen.js
-import React from "react";
 import { ScrollView, Text, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Footer from "../components/Footer";
 import styles from "../styles/TermsOfServiceStyles";
 
@@ -11,70 +9,77 @@ export default function TermsOfServiceScreen() {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View>
           <Text style={styles.content}>
-            Terms of Service{"\n\n"}
-            Welcome to [App Name]! These Terms of Service govern your use of our
-            app and services. Please read these terms carefully before using our
-            app. By using the app, you agree to these terms.{"\n\n"}
-            1. General Provisions{"\n"}
-            1.1. These Terms of Service constitute a legally binding agreement
-            between you and [Company/Developer Name].{"\n"}
-            1.2. By accessing or using the app, you agree to these terms.{"\n"}
-            1.3. If you do not agree with these terms, you may not use the app.
-            {"\n\n"}
-            2. Use of the App{"\n"}
-            2.1. The app may only be used for personal and non-commercial
-            purposes.{"\n"}
-            2.2. You may not copy, modify, distribute, or reverse engineer any
-            content or functionality of the app.{"\n"}
-            2.3. It is prohibited to bypass the app’s security measures or to
-            interfere with our servers, networks, or data.{"\n\n"}
-            3. Account and Security{"\n"}
-            3.1. If the app requires a user account, you are responsible for
-            keeping your login credentials confidential.{"\n"}
-            3.2. You may not transfer or sell your account to third parties.
+            Nutzungsbedingungen{"\n\n"}
+            Willkommen bei [All In One Hub]! Diese Nutzungsbedingungen regeln
+            Ihre Nutzung unserer App und Dienste. Bitte lesen Sie diese
+            Bedingungen sorgfältig durch, bevor Sie unsere App verwenden. Durch
+            die Nutzung der App stimmen Sie diesen Bedingungen zu.{"\n\n"}
+            1. Allgemeine Bestimmungen{"\n"}
+            1.1. Diese Nutzungsbedingungen stellen eine rechtlich bindende
+            Vereinbarung zwischen Ihnen und [Unternehmen/Entwicklername] dar.
             {"\n"}
-            3.3. We reserve the right to suspend or delete accounts that violate
-            these Terms of Service.{"\n\n"}
-            4. Virtual Content and Purchases{"\n"}
-            4.1. The app may include virtual items or in-app purchases.{"\n"}
-            4.2. All purchases are final and non-refundable unless required by
-            law.{"\n"}
-            4.3. We reserve the right to change prices and content at any time.
-            {"\n\n"}
-            5. Restrictions and Prohibited Activities{"\n"}
-            5.1. You may not use the app for illegal or inappropriate purposes.
+            1.2. Durch den Zugriff auf die App oder deren Nutzung stimmen Sie
+            diesen Bedingungen zu.{"\n"}
+            1.3. Wenn Sie mit diesen Bedingungen nicht einverstanden sind,
+            dürfen Sie die App nicht nutzen.{"\n\n"}
+            2. Nutzung der App{"\n"}
+            2.1. Die App darf nur für persönliche und nicht-kommerzielle Zwecke
+            verwendet werden.{"\n"}
+            2.2. Sie dürfen keine Inhalte oder Funktionen der App kopieren,
+            verändern, verbreiten oder zurückentwickeln.{"\n"}
+            2.3. Es ist verboten, Sicherheitsmaßnahmen der App zu umgehen oder
+            unsere Server, Netzwerke oder Daten zu manipulieren.{"\n\n"}
+            3. Konto und Sicherheit{"\n"}
+            3.1. Falls die App ein Benutzerkonto erfordert, sind Sie für die
+            Vertraulichkeit Ihrer Zugangsdaten verantwortlich.{"\n"}
+            3.2. Sie dürfen Ihr Konto nicht an Dritte übertragen oder verkaufen.
             {"\n"}
-            5.2. Any form of fraud, hacks, or exploits is prohibited.{"\n"}
-            5.3. The distribution of offensive, hateful, or harmful content is
-            prohibited.{"\n\n"}
-            6. Intellectual Property{"\n"}
-            6.1. All content, designs, and trademarks in the app are the
-            property of [Company/Developer Name] or our licensors.{"\n"}
-            6.2. You do not receive any rights or licenses to this content
-            except for the use of the app in accordance with these terms.
-            {"\n\n"}
-            7. Disclaimer{"\n"}
-            7.1. Use of the app is at your own risk.{"\n"}
-            7.2. We do not guarantee the availability, error-free operation, or
-            security of the app.{"\n"}
-            7.3. We are not liable for any direct or indirect damages arising
-            from the use or unavailability of the app.{"\n\n"}
-            8. Changes to the Terms of Service{"\n"}
-            8.1. We reserve the right to change these Terms of Service at any
-            time.{"\n"}
-            8.2. Changes take effect upon publication in the app.{"\n"}
-            8.3. If you do not agree with the new terms, you must discontinue
-            use of the app.{"\n\n"}
-            9. Privacy{"\n"}
-            9.1. Your use of the app is subject to our [Privacy Policy](Insert
-            link to Privacy Policy).{"\n"}
-            9.2. We collect and process personal data in accordance with
-            applicable data protection laws.{"\n\n"}
-            10. Contact{"\n"}
-            If you have any questions regarding these Terms of Service, you can
-            contact us at the following email address: [support@tufancakir.com].
-            {"\n\n"}
-            By using this app, you agree to these Terms of Service.
+            3.3. Wir behalten uns das Recht vor, Konten, die gegen diese
+            Bedingungen verstoßen, zu sperren oder zu löschen.{"\n\n"}
+            4. Virtuelle Inhalte und Käufe{"\n"}
+            4.1. Die App kann virtuelle Gegenstände oder In-App-Käufe enthalten.
+            {"\n"}
+            4.2. Alle Käufe sind endgültig und nicht erstattungsfähig, es sei
+            denn, gesetzlich vorgeschrieben.{"\n"}
+            4.3. Wir behalten uns das Recht vor, Preise und Inhalte jederzeit zu
+            ändern.{"\n\n"}
+            5. Einschränkungen und verbotene Aktivitäten{"\n"}
+            5.1. Sie dürfen die App nicht für illegale oder unangemessene Zwecke
+            verwenden.{"\n"}
+            5.2. Jegliche Form von Betrug, Hacks oder Exploits ist verboten.
+            {"\n"}
+            5.3. Die Verbreitung von beleidigenden, hasserfüllten oder
+            schädlichen Inhalten ist untersagt.{"\n\n"}
+            6. Geistiges Eigentum{"\n"}
+            6.1. Alle Inhalte, Designs und Marken in der App sind Eigentum von
+            [Unternehmen/Entwicklername] oder unseren Lizenzgebern.{"\n"}
+            6.2. Sie erhalten keine Rechte oder Lizenzen an diesen Inhalten,
+            außer zur Nutzung der App gemäß diesen Bedingungen.{"\n\n"}
+            7. Haftungsausschluss{"\n"}
+            7.1. Die Nutzung der App erfolgt auf eigenes Risiko.{"\n"}
+            7.2. Wir übernehmen keine Gewähr für Verfügbarkeit, Fehlerfreiheit
+            oder Sicherheit der App.{"\n"}
+            7.3. Wir haften nicht für direkte oder indirekte Schäden, die aus
+            der Nutzung oder Nichtverfügbarkeit der App entstehen.{"\n\n"}
+            8. Änderungen der Nutzungsbedingungen{"\n"}
+            8.1. Wir behalten uns das Recht vor, diese Bedingungen jederzeit zu
+            ändern.{"\n"}
+            8.2. Änderungen treten mit Veröffentlichung in der App in Kraft.
+            {"\n"}
+            8.3. Wenn Sie den neuen Bedingungen nicht zustimmen, müssen Sie die
+            Nutzung der App einstellen.{"\n\n"}
+            9. Datenschutz{"\n"}
+            9.1. Ihre Nutzung der App unterliegt unserer
+            [Datenschutzerklärung](Link zur Datenschutzerklärung einfügen).
+            {"\n"}
+            9.2. Wir erheben und verarbeiten personenbezogene Daten im Einklang
+            mit den geltenden Datenschutzgesetzen.{"\n\n"}
+            10. Kontakt{"\n"}
+            Wenn Sie Fragen zu diesen Nutzungsbedingungen haben, kontaktieren
+            Sie uns bitte unter folgender E-Mail-Adresse:
+            [support@tufancakir.com].{"\n\n"}
+            Durch die Nutzung dieser App stimmen Sie diesen Nutzungsbedingungen
+            zu.
           </Text>
         </View>
       </ScrollView>

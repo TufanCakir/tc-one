@@ -1,6 +1,5 @@
 // src/styles/EmojiPickerStyles.js
 import { StyleSheet } from "react-native";
-import colors from "../../colors";
 
 export default StyleSheet.create({
   container: {
@@ -9,26 +8,34 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   pickerButton: {
-    backgroundColor: colors.white,
-    borderRadius: 8,
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-    shadowColor: colors.shadowColor,
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.7,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 150,
+    height: 150,
+    margin: 8,
+    borderRadius: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 4, // Android Shadow
   },
   buttonText: {
-    color: "black",
+    color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
   },
   selectedEmoji: {
     fontSize: 22,
-    color: colors.white,
+    color: "#fff",
     marginTop: 12,
     fontWeight: "bold",
+  },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

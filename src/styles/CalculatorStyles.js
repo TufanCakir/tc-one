@@ -1,6 +1,4 @@
-// src/styles/CalculatorStyles.js
 import { StyleSheet } from "react-native";
-import colors from "../../colors";
 
 export default StyleSheet.create({
   container: {
@@ -12,17 +10,17 @@ export default StyleSheet.create({
     flex: 2,
     justifyContent: "flex-end",
     alignItems: "flex-end",
-    padding: 20,
     width: "90%",
     borderRadius: 10,
   },
   displayText: {
     fontSize: 48,
-    color: colors.white,
+    color: "#fff",
   },
   buttonContainer: {
     flex: 3,
-    width: "90%",
+    width: "100%",
+    margin: 50,
   },
   row: {
     flex: 1,
@@ -35,13 +33,13 @@ export default StyleSheet.create({
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.blueBright,
+    backgroundColor: "#1a1a1a", // dunkelgrau für Standard-Tasten
     elevation: 3,
     margin: 2,
   },
   buttonText: {
     fontSize: 34,
-    color: colors.white,
+    color: "#fff",
   },
   zeroButton: {
     flex: 2,
@@ -52,34 +50,34 @@ export default StyleSheet.create({
     marginLeft: 10,
   },
   operatorButton: {
-    backgroundColor: colors.goldDark,
+    backgroundColor: "#fff", // weiß für Operatoren
   },
   operatorButtonText: {
-    color: colors.white,
+    color: "#000",
   },
   equalButton: {
     flex: 1,
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.redBright,
+    backgroundColor: "#fff", // weiß für Operatoren
     elevation: 3,
   },
   equalButtonText: {
     fontSize: 32,
-    color: colors.white,
+    color: "#000",
   },
   clearButton: {
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.grayLight,
+    backgroundColor: "#fff", // weiß für Operatoren
     marginTop: 10,
     elevation: 3,
     padding: 10,
   },
   clearButtonText: {
     fontSize: 24,
-    color: colors.grayDark,
+    color: "#000",
   },
 });

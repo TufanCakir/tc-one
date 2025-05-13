@@ -1,0 +1,58 @@
+export const settingsButtons = [
+  {
+    title: "YouTube",
+    screen: null,
+    url: "https://youtube.com/@tufancakirorigins?si=xiiB9MuGv6YCEc9W",
+    icon: { set: "Feather", name: "youtube" },
+    accessibilityLabel: "YouTube-Kanal öffnen",
+    accessibilityHint: "Öffnet deinen YouTube-Kanal in einem Browser",
+  },
+  {
+    title: "Instagram",
+    screen: null,
+    url: "https://www.instagram.com/tufancakirorigins/",
+    icon: { set: "Feather", name: "instagram" },
+    accessibilityLabel: "Instagram-Profil öffnen",
+    accessibilityHint: "Öffnet dein Instagram-Profil in einem Browser",
+  },
+  {
+    title: "itch.io",
+    screen: null,
+    url: "https://tufan-cakir.itch.io/",
+    icon: { set: "MaterialCommunityIcons", name: "controller-classic" },
+    accessibilityLabel: "itch.io-Profil öffnen",
+    accessibilityHint: "Öffnet deine Spiele-Seite auf itch.io",
+  },
+  {
+    title: "LinkedIn",
+    screen: null,
+    url: "https://www.linkedin.com/in/tufan-cakir-b03842358/",
+    icon: { set: "Feather", name: "linkedin" },
+    accessibilityLabel: "LinkedIn-Profil öffnen",
+    accessibilityHint: "Öffnet dein LinkedIn-Profil",
+  },
+  {
+    title: "Website",
+    screen: null,
+    url: "https://www.tufancakir.com/",
+    icon: { set: "Feather", name: "globe" },
+    accessibilityLabel: "Persönliche Website öffnen",
+    accessibilityHint: "Öffnet deine offizielle Website",
+  },
+  {
+    title: "Terms of Service",
+    screen: "TermsOfServiceScreen",
+    icon: { set: "Feather", name: "file-text" },
+    accessibilityLabel: "Nutzungsbedingungen anzeigen",
+    accessibilityHint: "Öffnet die Seite mit den Nutzungsbedingungen",
+  },
+  {
+    title: "Account Reset",
+    screen: null,
+    icon: { set: "MaterialCommunityIcons", name: "backup-restore" },
+    isReset: true,
+    accessibilityLabel: "Account zurücksetzen",
+    accessibilityHint:
+      "Setzt deinen Account zurück. Achtung: Alle Daten werden gelöscht",
+  },
+];

@@ -4,35 +4,27 @@ import HomeScreen from "../screens/HomeScreen";
 import CalculatorScreen from "../screens/CalculatorScreen";
 import CalendarScreen from "../screens/CalendarScreen";
 import EmojiPickerScreen from "../screens/EmojiPickerScreen";
-import NewsScreen from "../screens/NewsScreen";
 import NotesScreen from "../screens/NotesScreen";
 import PasswordGeneratorScreen from "../screens/PasswordGeneratorScreen";
-import RandomNumberScreen from "../screens/RandomNumberScreen";
 import TermsOfServiceScreen from "../screens/TermsOfServiceScreen";
 import TodoScreen from "../screens/TodoScreen";
 import StopwatchScreen from "../screens/StopwatchScreen";
 import OTPGeneratorValidatorScreen from "../screens/OTPGeneratorValidatorScreen";
-import DevToolsScreen from "../screens/DevToolsScreen";
-import MiniGamesScreen from "../screens/MiniGamesScreen";
 import SettingsScreen from "../screens/SettingsScreen";
-import Snake from "../games/Snake";
-import RockPaperScissors from "../games/RockPaperScissors";
-import NumberGuessing from "../games/NumberGuessing";
-import TapCircle from "../games/TapCircle";
-import FallingCircles from "../games/FallingCircles";
-import GardientTapChallenge from "../games/GardientTapChallenge";
-import BasicsScreen from "../devToools/BasicsScreen";
-import SummonScreen from "../screens/SummonScreen";
-import SummonResultScreen from "../screens/SummonResultScreen";
-import BackgroundSelectionScreen from "../screens/BackgroundSelectionScreen";
 import QRCodeGeneratorScreen from "../screens/QRCodeGeneratorScreen";
 import VotingScreen from "../screens/VotingScreen";
 import BmiCalculatorScreen from "../screens/BmiCalculatorScreen";
 import NumberformatScreen from "../screens/NumberformatScreen";
-import Pong from "../games/Pong";
-import TapGame from "../games/TapGame";
+import BillSplitterScreen from "../screens/BillSplitterScreen";
+import BlogScreen from "../screens/BlogScreen";
+import TextEditorScreen from "../screens/TextEditorScreen";
+import CompassScreen from "../screens/CompassScreen";
+import AlarmClockScreen from "../screens/AlarmClockScreen";
+import TypingSpeedMonitorScreen from "../screens/TypingSpeedMonitorScreen";
+import JournalScreen from "../screens/JournalScreen";
+import ProfileScreen from "../screens/ProfileScreen";
 
-// Array für eine kompaktere Struktur
+// ❗ optional fallback (robust gegen Fehlimport oder leeres Array)
 export const screens = [
   { name: "StartScreen", component: StartScreen, title: "Start" },
   { name: "HomeScreen", component: HomeScreen, title: "Home" },
@@ -47,18 +39,13 @@ export const screens = [
     component: EmojiPickerScreen,
     title: "Emoji Picker",
   },
-  { name: "NewsScreen", component: NewsScreen, title: "News" },
   { name: "NotesScreen", component: NotesScreen, title: "Notes" },
   {
     name: "PasswordGeneratorScreen",
     component: PasswordGeneratorScreen,
     title: "Password Generator",
   },
-  {
-    name: "RandomNumberScreen",
-    component: RandomNumberScreen,
-    title: "Random Number",
-  },
+
   {
     name: "TermsOfServiceScreen",
     component: TermsOfServiceScreen,
@@ -71,71 +58,61 @@ export const screens = [
     component: OTPGeneratorValidatorScreen,
     title: "OTP Generator",
   },
-  { name: "DevToolsScreen", component: DevToolsScreen, title: "Dev Tools" },
-  { name: "MiniGamesScreen", component: MiniGamesScreen, title: "Mini Games" },
   { name: "SettingsScreen", component: SettingsScreen, title: "Settings" },
-  { name: "Snake", component: Snake, title: "Snake" },
-  {
-    name: "RockPaperScissors",
-    component: RockPaperScissors,
-    title: "Rock Paper Scissors",
-  },
-  {
-    name: "NumberGuessing",
-    component: NumberGuessing,
-    title: "Number Guessing",
-  },
-  { name: "TapCircle", component: TapCircle, title: "Tap Circle" },
-  {
-    name: "FallingCircles",
-    component: FallingCircles,
-    title: "Falling Circles",
-  },
-  {
-    name: "GardientTapChallenge",
-    component: GardientTapChallenge,
-    title: "Gradient Tap Challenge",
-  },
-  { name: "BasicsScreen", component: BasicsScreen, title: "Basics" },
-  { name: "SummonScreen", component: SummonScreen, title: "Summon" },
-  {
-    name: "SummonResultScreen",
-    component: SummonResultScreen,
-    title: "Summon Result",
-  },
-  {
-    name: "BackgroundSelectionScreen",
-    component: BackgroundSelectionScreen,
-    title: "Background Selection",
-  },
   {
     name: "QRCodeGeneratorScreen",
     component: QRCodeGeneratorScreen,
     title: "QR Code Generator",
   },
-  {
-    name: "VotingScreen",
-    component: VotingScreen,
-    title: "Voting",
-  },
+  { name: "VotingScreen", component: VotingScreen, title: "Voting" },
   {
     name: "BmiCalculatorScreen",
     component: BmiCalculatorScreen,
-    title: "BMIC alculator",
+    title: "BMI Calculator",
   },
   {
     name: "NumberformatScreen",
     component: NumberformatScreen,
-    title: "Number format",
+    title: "Number Format",
   },
   {
-    name: "Pong",
-    component: Pong,
-    title: "Pong",
+    name: "BillSplitterScreen",
+    component: BillSplitterScreen,
+    title: "Bill Splitter",
   },
   {
-    name: "TapGame",
-    component: TapGame,
-    title: "Tap Game",
+    name: "TextEditorScreen",
+    component: TextEditorScreen,
+    title: "Text Editor",
+  },
+  {
+    name: "BlogScreen",
+    component: BlogScreen,
+    title: "Blogr",
+  },
+  {
+    name: "CompassScreen",
+    component: CompassScreen,
+    title: "Compass",
+  },
+  {
+    name: "AlarmClockScreen",
+    component: AlarmClockScreen,
+    title: "Alarm Clock",
+  },
+  {
+    name: "TypingSpeedMonitorScreen",
+    component: TypingSpeedMonitorScreen,
+    title: "Typing Speed Monitor",
+  },
+  {
+    name: "JournalScreen",
+    component: JournalScreen,
+    title: "Add",
+  },
+  {
+    name: "ProfileScreen",
+    component: ProfileScreen,
+    title: "Profile",
   },
 ];

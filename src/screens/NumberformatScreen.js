@@ -13,7 +13,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import numberToWords from "number-to-words";
 import Footer from "../components/Footer";
 import styles from "../styles/NumberformatScreenStyles";
-import GradientButton from "../components/GradientButton"; // Import des GradientButton
 import {
   conversionFunctions,
   floatToFraction,
@@ -168,7 +167,7 @@ export default function NumberformatScreen() {
               }}
             />
             {/* Convert Button als GradientButton */}
-            <GradientButton
+            <TouchableOpacity
               title="Convert"
               onPress={handleConversion}
               style={styles.btn}
@@ -211,7 +210,7 @@ export default function NumberformatScreen() {
           <Text style={styles.resultText}>{significantno}</Text>
         </View>
         {/* Reset Button als GradientButton */}
-        <GradientButton
+        <TouchableOpacity
           title="Reset"
           onPress={handleReset}
           style={styles.btn}

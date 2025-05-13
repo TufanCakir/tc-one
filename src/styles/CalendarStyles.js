@@ -34,9 +34,9 @@ export default StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  footerContainer: {
-    width: "100%", // 🔹 Verhindert, dass der Footer links klebt
-    alignItems: "center", // 🔹 Zentriert den Footer
-    paddingVertical: 10, // 🔹 Fügt etwas Abstand hinzu
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

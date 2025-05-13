@@ -1,5 +1,4 @@
 // src/screens/CalculatorScreen.js
-import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import useCalculator from "../hooks/useCalculator";
 import styles from "../styles/CalculatorStyles";

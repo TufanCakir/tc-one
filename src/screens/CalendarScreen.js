@@ -1,5 +1,4 @@
 // src/components/MyCalendarScreen.js
-import React from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { Calendar } from "react-native-calendars";
 import useCalendarEvents from "../hooks/useCalendarEvents";
@@ -57,7 +56,9 @@ export default function MyCalendarScreen() {
           <Text style={styles.eventText}>Keine Events gefunden.</Text>
         )}
       </View>
-      <Footer />
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }

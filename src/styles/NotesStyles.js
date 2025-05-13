@@ -1,37 +1,38 @@
 // src/styles/NotesStyles.js
 import { StyleSheet } from "react-native";
-import colors from "../../colors";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    marginTop: 20,
   },
   input: {
     borderWidth: 2,
-    borderColor: colors.white,
+    borderColor: "#fff",
     padding: 12,
     marginBottom: 12,
     borderRadius: 10,
     fontSize: 18,
-    color: colors.white,
-    backgroundColor: colors.backgroundLight,
+    color: "#fff",
   },
   addButton: {
-    backgroundColor: colors.white,
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 12,
     alignItems: "center",
-    shadowColor: colors.goldDark,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 5,
-    elevation: 5,
+    justifyContent: "center",
+    width: 150,
+    height: 150,
+    left: 100,
+    borderRadius: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 4, // Android Shadow
+    margin: 50,
   },
   addButtonText: {
-    color: "#000000",
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 18,
   },
@@ -39,13 +40,12 @@ export default StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     marginBottom: 10,
-    backgroundColor: colors.backgroundLight,
-    borderColor: colors.gold,
+    borderColor: "#fff",
     borderWidth: 2,
   },
   noteText: {
     fontSize: 18,
-    color: colors.white,
+    color: "#fff",
   },
   noteButtons: {
     flexDirection: "row",
@@ -54,12 +54,12 @@ export default StyleSheet.create({
   },
   editButton: {
     marginRight: 10,
-    color: colors.blueLight,
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
   },
   deleteButton: {
-    color: colors.redBright,
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
   },

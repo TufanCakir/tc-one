@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Keyboard,
-  TouchableWithoutFeedback, // NEU
+  TouchableWithoutFeedback,
 } from "react-native";
 import Footer from "../components/Footer";
 
@@ -29,22 +29,14 @@ const BmiCalculatorScreen = () => {
     const bmi = (parseFloat(weight) / (parseFloat(height) / 100) ** 2).toFixed(
       2
     );
-
     let result = "";
-    if (bmi < 18.5) {
-      result = "Underweight";
-    } else if (bmi >= 18.5 && bmi <= 24.9) {
-      result = "Healthy";
-    } else if (bmi >= 25 && bmi <= 29.9) {
-      result = "Overweight";
-    } else if (bmi >= 30 && bmi <= 34.9) {
-      result = "Obese";
-    } else if (bmi >= 35) {
-      result = "Extremely obese";
-    }
+    if (bmi < 18.5) result = "Underweight";
+    else if (bmi <= 24.9) result = "Healthy";
+    else if (bmi <= 29.9) result = "Overweight";
+    else if (bmi <= 34.9) result = "Obese";
+    else result = "Extremely obese";
 
     setBmiResult({ bmi, result });
-
     setAge("");
     setHeight("");
     setWeight("");
@@ -54,74 +46,81 @@ const BmiCalculatorScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.header}>BMI Calculator</Text>
-        <View style={styles.form}>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Age</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your age"
-              placeholderTextColor="#fff"
-              onChangeText={setAge}
-              value={age}
-              keyboardType="numeric"
-            />
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Height (cm)</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your height"
-              placeholderTextColor="#fff"
-              onChangeText={setHeight}
-              value={height}
-              keyboardType="numeric"
-            />
-          </View>
-          <View style={styles.inputRow}>
-            <Text style={styles.label}>Weight (kg)</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your weight"
-              placeholderTextColor="#fff"
-              onChangeText={setWeight}
-              value={weight}
-              keyboardType="numeric"
-            />
-          </View>
-          <View style={styles.genderRow}>
-            <TouchableOpacity
-              style={[
-                styles.genderButton,
-                gender === "male" && styles.selectedGender,
-              ]}
-              onPress={() => setGender("male")}
-            >
-              <Text style={styles.genderText}>Male</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.genderButton,
-                gender === "female" && styles.selectedGender,
-              ]}
-              onPress={() => setGender("female")}
-            >
-              <Text style={styles.genderText}>Female</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.submitButton} onPress={validateForm}>
-            <Text style={styles.submitButtonText}>Calculate BMI</Text>
-          </TouchableOpacity>
-          {bmiResult && (
-            <View style={styles.resultContainer}>
-              <Text style={styles.resultLabel}>BMI:</Text>
-              <Text style={styles.resultText}>{bmiResult.bmi}</Text>
-              <Text style={styles.resultLabel}>Result:</Text>
-              <Text style={styles.resultText}>{bmiResult.result}</Text>
+        <View style={styles.content}>
+          <Text style={styles.header}>BMI Calculator</Text>
+          <View style={styles.form}>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Age</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter your age"
+                placeholderTextColor="#fff"
+                onChangeText={setAge}
+                value={age}
+                keyboardType="numeric"
+              />
             </View>
-          )}
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Height (cm)</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter your height"
+                placeholderTextColor="#fff"
+                onChangeText={setHeight}
+                value={height}
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.inputRow}>
+              <Text style={styles.label}>Weight (kg)</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder="Enter your weight"
+                placeholderTextColor="#fff"
+                onChangeText={setWeight}
+                value={weight}
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.genderRow}>
+              <TouchableOpacity
+                style={[
+                  styles.genderButton,
+                  gender === "male" && styles.selectedGender,
+                ]}
+                onPress={() => setGender("male")}
+              >
+                <Text style={styles.genderText}>Male</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.genderButton,
+                  gender === "female" && styles.selectedGender,
+                ]}
+                onPress={() => setGender("female")}
+              >
+                <Text style={styles.genderText}>Female</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.submitButton}
+              onPress={validateForm}
+            >
+              <Text style={styles.submitButtonText}>Calculate BMI</Text>
+            </TouchableOpacity>
+            {bmiResult && (
+              <View style={styles.resultContainer}>
+                <Text style={styles.resultLabel}>BMI:</Text>
+                <Text style={styles.resultText}>{bmiResult.bmi}</Text>
+                <Text style={styles.resultLabel}>Result:</Text>
+                <Text style={styles.resultText}>{bmiResult.result}</Text>
+              </View>
+            )}
+          </View>
         </View>
-        <Footer />
+        <View style={styles.footerWrapper}>
+          <Footer />
+        </View>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -129,6 +128,10 @@ const BmiCalculatorScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: "transparent",
+  },
+  content: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -186,11 +189,11 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   selectedGender: {
-    backgroundColor: "#fff",
+    backgroundColor: "#ddd",
   },
   genderText: {
     fontSize: 16,
-    fontWeight: "bold", //
+    fontWeight: "bold",
     color: "#000",
   },
   submitButton: {
@@ -217,6 +220,11 @@ const styles = StyleSheet.create({
   resultText: {
     fontSize: 16,
     color: "#fff",
+  },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });
 

@@ -1,16 +1,16 @@
 import { View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Footer from "../components/Footer";
-import MenuGrid from "../components/MenuGrid";
+import AlarmClock from "../components/AlarmClock";
 import styles from "../styles/HomeScreenStyles";
 
-export default function HomeScreen() {
+export default function AlarmClockScreen() {
   const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <MenuGrid navigation={navigation} />
+        <AlarmClock navigation={navigation} />
       </View>
       <Footer />
     </View>

@@ -62,4 +62,9 @@ export default StyleSheet.create({
     color: "red",
     marginTop: 20,
   },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+  },
 });

@@ -1,5 +1,5 @@
 // src/screens/EmojiPickerScreen.js
-import React, { useState } from "react";
+import { useState } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import EmojiKeyboard from "rn-emoji-keyboard";
 import styles from "../styles/EmojiPickerStyles";
@@ -41,7 +41,9 @@ export default function EmojiPickerScreen() {
         onEmojiSelected={onEmojiSelected}
         onClose={onClose}
       />
-      <Footer />
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }

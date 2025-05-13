@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import useStopwatch from "../hooks/useStopwatch";
 import styles from "../styles/StopwatchStyles";
@@ -50,7 +49,9 @@ const StopwatchScreen = () => {
           </TouchableOpacity>
         )}
       </View>
-      <Footer />
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 };

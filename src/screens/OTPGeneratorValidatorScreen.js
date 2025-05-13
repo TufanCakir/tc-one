@@ -1,5 +1,4 @@
 // src/components/OTPGeneratorValidatorScreen.js
-import React from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import useOTP from "../hooks/useOTP";
 import styles from "../styles/OTPStyles";
@@ -41,7 +40,9 @@ const OTPGeneratorValidatorScreen = () => {
           <Text style={styles.invalidText}>Invalid OTP</Text>
         )}
       </View>
-      <Footer />
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 };

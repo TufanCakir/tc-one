@@ -1,5 +1,5 @@
 // src/components/NoteItem.js
-import React, { memo } from "react";
+import { memo } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import styles from "../styles/NotesStyles";
 

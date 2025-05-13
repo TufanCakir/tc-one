@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import colors from "../../colors";
 
 export default StyleSheet.create({
   container: {
@@ -9,7 +8,7 @@ export default StyleSheet.create({
   },
   timeText: {
     fontSize: 48,
-    color: colors.white,
+    color: "#fff",
   },
   buttonContainer: {
     flexDirection: "row",
@@ -36,5 +35,10 @@ export default StyleSheet.create({
   buttonText: {
     color: "black",
     fontSize: 16,
+  },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

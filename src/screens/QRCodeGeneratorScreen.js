@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -55,7 +55,9 @@ export default function QRCodeGenerator() {
           </View>
         )}
       </View>
-      <Footer />
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }
@@ -63,49 +65,62 @@ export default function QRCodeGenerator() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+
     alignItems: "center",
+    justifyContent: "center",
   },
   wrapper: {
-    maxWidth: 300,
-    backgroundColor: "#fff",
-    borderRadius: 7,
+    width: "100%",
+    maxWidth: 320,
+    backgroundColor: "#000",
+    borderRadius: 12,
     padding: 20,
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 1,
-    shadowRadius: 30,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
   },
   title: {
-    fontSize: 21,
-    fontWeight: "500",
+    fontSize: 22,
+    fontWeight: "600",
+    color: "#fff",
+    textAlign: "center",
     marginBottom: 10,
   },
   description: {
-    color: "#575757",
+    color: "#fff",
     fontSize: 16,
+    textAlign: "center",
     marginBottom: 20,
   },
   input: {
-    fontSize: 18,
-    padding: 17,
+    borderColor: "#fff",
     borderWidth: 1,
-    borderColor: "#999",
-    borderRadius: 5,
+    borderRadius: 10,
+    padding: 14,
+    fontSize: 16,
+    color: "#fff",
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#3498DB",
-    borderRadius: 5,
-    padding: 15,
+    backgroundColor: "#fff",
+    paddingVertical: 14,
+    borderRadius: 10,
     alignItems: "center",
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 18,
+    color: "#000",
+    fontSize: 16,
+    fontWeight: "bold",
   },
   qrCode: {
-    marginTop: 20,
+    marginTop: 24,
     alignItems: "center",
+  },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });
