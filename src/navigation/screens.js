@@ -14,7 +14,6 @@ import SettingsScreen from "../screens/SettingsScreen";
 import QRCodeGeneratorScreen from "../screens/QRCodeGeneratorScreen";
 import VotingScreen from "../screens/VotingScreen";
 import BmiCalculatorScreen from "../screens/BmiCalculatorScreen";
-import NumberformatScreen from "../screens/NumberformatScreen";
 import BillSplitterScreen from "../screens/BillSplitterScreen";
 import BlogScreen from "../screens/BlogScreen";
 import TextEditorScreen from "../screens/TextEditorScreen";
@@ -69,11 +68,6 @@ export const screens = [
     name: "BmiCalculatorScreen",
     component: BmiCalculatorScreen,
     title: "BMI Calculator",
-  },
-  {
-    name: "NumberformatScreen",
-    component: NumberformatScreen,
-    title: "Number Format",
   },
   {
     name: "BillSplitterScreen",

@@ -1,46 +1,39 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   View,
   Text,
-  Platform,
+  TextInput,
   KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
+  ScrollView,
   Keyboard,
   Pressable,
 } from "react-native";
-import {
-  actions,
-  RichEditor,
-  RichToolbar,
-} from "react-native-pell-rich-editor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Footer from "../components/Footer";
 
-const STORAGE_KEY = "@rich_text_content";
-
-const handleHead = ({ tintColor }) => (
-  <Text style={{ color: tintColor, fontWeight: "bold" }}>H1</Text>
-);
+const STORAGE_KEY = "@rich_text_content_simple";
 
 const TextEditorScreen = () => {
-  const richText = useRef();
-  const [initialContent, setInitialContent] = useState("");
+  const [text, setText] = useState("");
 
   useEffect(() => {
-    (async () => {
+    const loadContent = async () => {
       try {
         const saved = await AsyncStorage.getItem(STORAGE_KEY);
-        if (saved) setInitialContent(saved);
+        if (saved) setText(saved);
       } catch (err) {
         console.error("Fehler beim Laden:", err);
       }
-    })();
+    };
+    loadContent();
   }, []);
 
   const handleContentChange = useCallback(async (content) => {
     try {
+      setText(content);
       await AsyncStorage.setItem(STORAGE_KEY, content);
     } catch (err) {
       console.error("Fehler beim Speichern:", err);
@@ -49,7 +42,6 @@ const TextEditorScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* 1. Pressable fängt alle Taps außerhalb des Editors ab */}
       <Pressable style={styles.container} onPress={Keyboard.dismiss}>
         <KeyboardAvoidingView
           style={styles.container}
@@ -57,50 +49,29 @@ const TextEditorScreen = () => {
           keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
         >
           <View style={styles.inner}>
-            <Text style={styles.title}>📝 Text Editor</Text>
-
-            <RichToolbar
-              style={styles.toolbar}
-              editor={richText}
-              actions={[
-                actions.setBold,
-                actions.setItalic,
-                actions.setUnderline,
-                actions.setStrikethrough,
-                actions.heading1,
-                actions.insertOrderedList,
-                actions.insertBulletsList,
-                actions.insertLink,
-              ]}
-              iconMap={{ [actions.heading1]: handleHead }}
-            />
+            <Text style={styles.title}>Text Editor</Text>
 
             <Text style={styles.label}>Inhalt:</Text>
 
             <ScrollView
               style={styles.editorWrapper}
-              keyboardShouldPersistTaps="always" // <<< hier
-              keyboardDismissMode="on-drag" // oder "interactive" auf iOS
+              keyboardShouldPersistTaps="handled"
             >
-              <RichEditor
-                ref={richText}
-                initialContentHTML={initialContent}
-                onChange={handleContentChange}
-                placeholder="Schreibe hier..."
+              <TextInput
                 style={styles.editor}
-                editorStyle={{
-                  backgroundColor: "#111",
-                  color: "#fff",
-                  placeholderColor: "#aaa",
-                }}
+                multiline
+                placeholder="Schreib etwas…"
+                placeholderTextColor="#888"
+                value={text}
+                onChangeText={handleContentChange}
               />
-              {/* Leerbereich als Touch-Zone */}
-              <View style={{ height: 150 }} />
+              <View style={{ height: 100 }} />
             </ScrollView>
           </View>
         </KeyboardAvoidingView>
       </Pressable>
 
+      {/* Footer */}
       <View style={styles.footerWrapper}>
         <Footer />
       </View>
@@ -112,7 +83,8 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   inner: {
     flex: 1,
-    padding: 10,
+    paddingHorizontal: 12,
+    paddingTop: 10,
     paddingBottom: 80,
   },
   title: {
@@ -120,12 +92,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#00ff88",
     textAlign: "center",
-    marginVertical: 10,
-  },
-  toolbar: {
-    backgroundColor: "#222",
-    borderRadius: 10,
-    marginBottom: 10,
+    marginBottom: 12,
   },
   label: {
     fontSize: 16,
@@ -138,13 +105,19 @@ const styles = StyleSheet.create({
   },
   editor: {
     minHeight: 300,
-    padding: 10,
-    borderRadius: 8,
-    borderWidth: 1,
+    color: "#fff",
+    backgroundColor: "#111",
     borderColor: "#333",
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 12,
+    fontSize: 16,
+    textAlignVertical: "top",
   },
   footerWrapper: {
-    marginTop: 10,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });
 

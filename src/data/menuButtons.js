@@ -77,13 +77,6 @@ export const menuButtons = [
     accessibilityHint: "Berechne deinen Body-Mass-Index",
   },
   {
-    title: "Number format",
-    screen: "NumberformatScreen",
-    icon: { name: "format-list-numbered", set: "MaterialCommunityIcons" },
-    accessibilityLabel: "Zahlenformatierer öffnen",
-    accessibilityHint: "Formatiere Zahlen übersichtlich",
-  },
-  {
     title: "Bill Splitter",
     screen: "BillSplitterScreen",
     icon: { name: "hornbill", set: "FontAwesome5" },
