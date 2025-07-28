@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "TC One",
-    "slug": "tc-one",
+    "slug": "all-in-one-hub",
     "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/tc-one-icon.png",
