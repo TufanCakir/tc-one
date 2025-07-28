@@ -2,7 +2,7 @@
   "expo": {
     "name": "TC One",
     "slug": "tc-one",
-    "version": "1.0.8",
+    "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/tc-one-icon.png",
     "userInterfaceStyle": "light",
