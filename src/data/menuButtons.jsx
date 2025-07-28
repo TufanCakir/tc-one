@@ -118,4 +118,11 @@ export const menuButtons = [
     accessibilityLabel: "Tippgeschwindigkeit testen",
     accessibilityHint: "Messe deine Schreibgeschwindigkeit",
   },
+  {
+    title: "Music Player",
+    screen: "VideoPlayerScreen",
+    icon: { name: "playcircleo", set: "AntDesign" },
+    accessibilityLabel: "Tippgeschwindigkeit testen",
+    accessibilityHint: "Messe deine Schreibgeschwindigkeit",
+  },
 ];

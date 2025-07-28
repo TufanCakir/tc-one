@@ -2,7 +2,6 @@ import { View, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import {
   Ionicons,
-  Entypo,
   FontAwesome6,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";

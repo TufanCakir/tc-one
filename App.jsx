@@ -7,9 +7,9 @@ import {
   Text,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
+import { enableScreens } from "react-native-screens";
 import AppNavigator from "./src/navigation/AppNavigator";
 import useUpdateChecker from "./src/hooks/useUpdateChecker";
-import { enableScreens } from "react-native-screens";
 import ProfileHeader from "./src/components/ProfileHeader";
 import OnlineGuard from "./src/components/OnlineGuard";
 
@@ -33,44 +33,38 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.flex}>
-      <SafeAreaView style={styles.flex}>
-        <ProfileHeader />
-        <NavigationContainer onStateChange={handleNavigationStateChange}>
-          <OnlineGuard>
-            <AppNavigator />
-          </OnlineGuard>
-        </NavigationContainer>
+    <SafeAreaView style={styles.container}>
+      <ProfileHeader />
+      <NavigationContainer onStateChange={handleNavigationStateChange}>
+        <OnlineGuard>
+          <AppNavigator />
+        </OnlineGuard>
+      </NavigationContainer>
 
-        {/* Navigation-Ladeanzeige */}
-        {loading && <LoadingOverlay />}
+      {/* Navigation-Ladeanzeige */}
+      {loading && (
+        <View style={styles.loadingOverlay}>
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
 
-        {/* Update-Overlay wenn Update geladen wird */}
-        {updateVisible && <UpdateOverlay />}
-      </SafeAreaView>
-    </View>
+      {/* Update-Overlay */}
+      {updateVisible && (
+        <View style={styles.updateOverlay}>
+          <ActivityIndicator size="large" color="#fff" />
+          <Text style={styles.updateText}>Update wird geladen…</Text>
+        </View>
+      )}
+    </SafeAreaView>
   );
 }
 
-const LoadingOverlay = () => (
-  <View style={styles.loadingOverlayBlack}>
-    <ActivityIndicator size="large" color="#fff" />
-  </View>
-);
-
-const UpdateOverlay = () => (
-  <View style={styles.updateOverlay}>
-    <ActivityIndicator size="large" color="#fff" />
-    <Text style={styles.updateText}>Update wird geladen…</Text>
-  </View>
-);
-
 const styles = StyleSheet.create({
-  flex: {
+  container: {
     flex: 1,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
-  loadingOverlayBlack: {
+  loadingOverlay: {
     position: "absolute",
     top: 0,
     left: 0,

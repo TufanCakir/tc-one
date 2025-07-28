@@ -16,6 +16,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 const iconSets = {
   Ionicons,
@@ -23,6 +24,7 @@ const iconSets = {
   Feather,
   FontAwesome5,
   AntDesign,
+  Entypo,
 };
 
 const ICON_SIZE = 28;

@@ -4,7 +4,7 @@
     "slug": "all-in-one-hub",
     "version": "1.0.8",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/tc-one-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -37,6 +37,9 @@
       "eas": {
         "projectId": "99813273-97ba-4e20-9b16-6dfc1aff5647"
       }
-    }
+    },
+    "plugins": [
+      "expo-video"
+    ]
   }
 }
