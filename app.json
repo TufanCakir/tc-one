@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "All In One Hub",
-    "slug": "all-in-one-hub",
+    "name": "TC One",
+    "slug": "tc-one",
     "version": "1.0.8",
     "orientation": "portrait",
     "icon": "./assets/tc-one-icon.png",
@@ -38,8 +38,6 @@
         "projectId": "99813273-97ba-4e20-9b16-6dfc1aff5647"
       }
     },
-    "plugins": [
-      "expo-video"
-    ]
+    "plugins": ["expo-video"]
   }
 }
