@@ -17,7 +17,6 @@ import {
   MaterialCommunityIcons,
   FontAwesome5,
 } from "@expo/vector-icons";
-import Footer from "../components/Footer";
 
 const STORAGE_KEY_NAME = "@profile_name";
 const STORAGE_KEY_ICON = "@profile_icon";
@@ -73,7 +72,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <ScrollView
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
@@ -119,8 +118,7 @@ const ProfileScreen = () => {
           <Text style={styles.saveBtnText}>Speichern</Text>
         </TouchableOpacity>
       </ScrollView>
-      <Footer />
-    </SafeAreaView>
+    </View>
   );
 };
 

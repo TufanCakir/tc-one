@@ -13,7 +13,6 @@ import {
   Dimensions,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Footer from "../components/Footer";
 
 const STORAGE_KEY = "@journal_entries";
 
@@ -115,11 +114,6 @@ const JournalScreen = () => {
           )}
         </View>
       </KeyboardAvoidingView>
-
-      {/* Fester Footer */}
-      <View style={styles.footerWrapper}>
-        <Footer />
-      </View>
     </SafeAreaView>
   );
 };
@@ -189,12 +183,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
-  },
-  footerWrapper: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    zIndex: 1,
   },
 });
 

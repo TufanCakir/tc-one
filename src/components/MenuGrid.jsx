@@ -17,6 +17,7 @@ import { Feather } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 const iconSets = {
   Ionicons,
@@ -25,6 +26,7 @@ const iconSets = {
   FontAwesome5,
   AntDesign,
   Entypo,
+  FontAwesome,
 };
 
 const ICON_SIZE = 28;
@@ -85,7 +87,6 @@ const MenuGrid = ({ navigation }) => {
           item?.screen || item?.title || `menu-${index}`
         }
         numColumns={3}
-        contentContainerStyle={styles.gridContent}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
       />

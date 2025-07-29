@@ -3,9 +3,8 @@ import { StyleSheet, Platform } from "react-native";
 export default StyleSheet.create({
   gridContainer: {
     flex: 1,
-  },
-  gridContent: {
-    padding: 12,
+    alignItems: "center",
+    justifyContent: "center",
   },
   menuItem: {
     alignItems: "center",
@@ -30,7 +29,7 @@ export default StyleSheet.create({
   topRightButton: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    padding: 10,
+    left: 200,
   },
   modalOverlay: {
     flex: 1,

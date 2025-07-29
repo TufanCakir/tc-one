@@ -23,6 +23,13 @@ import TypingSpeedMonitorScreen from "../screens/TypingSpeedMonitorScreen";
 import JournalScreen from "../screens/JournalScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import VideoPlayerScreen from "../screens/VideoPlayerScreen";
+import MapsScreen from "../screens/MapsScreen";
+import CheckBoxScreen from "../screens/CheckBoxScreen";
+import CalendarOneScreen from "../screens/CalendarOneScreen";
+import ImagePickerScreen from "../screens/ImagePickerScreen";
+import BatteryScreen from "../screens/BatteryScreen";
+import PrintScreen from "../screens/PrintScreen";
+import WebViewScreen from "../screens/WebViewScreen";
 
 export const screens = [
   { name: "StartScreen", component: StartScreen, title: "Start" },
@@ -54,6 +61,13 @@ export const screens = [
   { name: "TypingSpeedMonitorScreen", component: TypingSpeedMonitorScreen },
   { name: "VotingScreen", component: VotingScreen },
   { name: "VideoPlayerScreen", component: VideoPlayerScreen },
+  { name: "MapsScreen", component: MapsScreen },
+  { name: "CheckBoxScreen", component: CheckBoxScreen },
+  { name: "CalendarOneScreen", component: CalendarOneScreen },
+  { name: "ImagePickerScreen", component: ImagePickerScreen },
+  { name: "BatteryScreen", component: BatteryScreen },
+  { name: "PrintScreen", component: PrintScreen },
+  { name: "WebViewScreen", component: WebViewScreen },
 ].map((screen) => ({
   ...screen,
   title:

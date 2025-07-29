@@ -1,0 +1,24 @@
+{
+  "light": {
+    "background": "#FFFFFF",
+    "text": "#000000",
+    "accent": "#333333",
+    "border": "#E0E0E0",
+    "shadow": "rgba(0, 0, 0, 0.1)",
+    "buttonBackground": "#000000",
+    "buttonText": "#FFFFFF",
+    "cardBackground": "#F9F9F9",
+    "statusBar": "light-content"
+  },
+  "dark": {
+    "background": "#000000",
+    "text": "#FFFFFF",
+    "accent": "#CCCCCC",
+    "border": "#333333",
+    "shadow": "rgba(255, 255, 255, 0.1)",
+    "buttonBackground": "#FFFFFF",
+    "buttonText": "#000000",
+    "cardBackground": "#111111",
+    "statusBar": "light-content"
+  }
+}

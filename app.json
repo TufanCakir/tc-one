@@ -1,43 +1,42 @@
 {
   "expo": {
     "name": "TC One",
-    "slug": "all-in-one-hub",
+    "slug": "tc-one",
     "version": "1.0.9",
     "orientation": "portrait",
     "icon": "./assets/tc-one-icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/tc-one-icon.png",
       "resizeMode": "cover",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.tufancakir.allinone",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "package": "com.tufancakir.allinone"
+        "foregroundImage": "./assets/tc-one-icon.png",
+        "backgroundColor": "#000000"
+      }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/tc-one-icon.png"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
       "enabled": true
     },
-    "extra": {
-      "eas": {
-        "projectId": "99813273-97ba-4e20-9b16-6dfc1aff5647"
-      }
-    },
-    "plugins": ["expo-video"]
+    "plugins": [
+      "expo-video",
+      "expo-secure-store",
+      "expo-localization",
+      "expo-mail-composer",
+      "expo-web-browser"
+    ]
   }
 }

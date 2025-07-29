@@ -17,24 +17,6 @@ const Footer = () => {
       label: "Home",
       screen: "HomeScreen",
     },
-    {
-      iconSet: FontAwesome6,
-      iconName: "add",
-      label: "Add",
-      screen: "JournalScreen",
-    },
-    {
-      iconSet: MaterialCommunityIcons,
-      iconName: "face-man-profile",
-      label: "Profile",
-      screen: "ProfileScreen",
-    },
-    {
-      iconSet: Ionicons,
-      iconName: "settings-outline",
-      label: "Settings",
-      screen: "SettingsScreen",
-    },
   ];
 
   return (
