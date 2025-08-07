@@ -16,6 +16,7 @@ import ProfileScreen from "./ProfileScreen";
 import JournalScreen from "./JournalScreen";
 import VideoPlayerScreen from "./VideoPlayerScreen";
 import BatteryScreen from "./BatteryScreen";
+import ProfielHeader from "../components/ProfileHeader";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
@@ -34,6 +35,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      <ProfielHeader />
       <LinearGradient
         colors={["#000000", "#ffffff"]}
         start={{ x: 0, y: 0 }}

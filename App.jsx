@@ -1,11 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  Text,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -14,7 +8,6 @@ import AppProviders from "./src/providers/AppProviders";
 import AppNavigator from "./src/navigation/AppNavigator";
 import useUpdateChecker from "./src/hooks/useUpdateChecker";
 import OnlineGuard from "./src/components/OnlineGuard";
-import ProfileHeader from "./src/components/ProfileHeader";
 
 enableScreens();
 
@@ -37,11 +30,7 @@ export default function App() {
 
   return (
     <AppProviders>
-      <StatusBar backgroundColor="transparent" translucent />
-
       <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
-        <ProfileHeader />
-
         <NavigationContainer onStateChange={handleNavigationStateChange}>
           <OnlineGuard>
             <AppNavigator />

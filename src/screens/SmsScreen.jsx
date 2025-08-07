@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Alert, StyleSheet, Pressable } from "react-native";
 import * as SMS from "expo-sms";
 import { LinearGradient } from "expo-linear-gradient";
+import Footer from "../components/Footer";
 
 export default function SmsScreen() {
   const sendSMS = async () => {
@@ -46,6 +47,9 @@ export default function SmsScreen() {
           <Text style={styles.buttonText}>Send SMS</Text>
         </LinearGradient>
       </Pressable>
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }
@@ -55,7 +59,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
   },
   title: {
     fontSize: 22,
@@ -82,5 +85,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",
+  },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

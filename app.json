@@ -9,7 +9,7 @@
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/tc-one-icon.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
     "ios": {
@@ -31,7 +31,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/tc-one-icon.png"
+      "favicon": "./assets/favicon.png"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,

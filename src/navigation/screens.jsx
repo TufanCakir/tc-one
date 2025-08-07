@@ -30,7 +30,6 @@ import BatteryScreen from "../screens/BatteryScreen";
 import PrintScreen from "../screens/PrintScreen";
 import WebViewScreen from "../screens/WebViewScreen";
 import GalleryScreen from "../screens/GalleryScreen";
-import SymbolsScreen from "../screens/SymbolsScreen";
 import SmsScreen from "../screens/SmsScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SupportScreen from "../screens/SupportScreen";
@@ -73,7 +72,6 @@ export const screens = [
   { name: "PrintScreen", component: PrintScreen },
   { name: "WebViewScreen", component: WebViewScreen },
   { name: "GalleryScreen", component: GalleryScreen },
-  { name: "SymbolsScreen", component: SymbolsScreen },
   { name: "SmsScreen", component: SmsScreen },
   { name: "SupportScreen", component: SupportScreen },
 ].map((screen) => ({
