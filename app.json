@@ -37,7 +37,7 @@
       "fallbackToCacheTimeout": 0,
       "enabled": true
     },
-    "plugins": ["expo-video", "expo-localization", "expo-mail-composer"],
+    "plugins": ["expo-video", "expo-mail-composer"],
     "extra": {
       "eas": {
         "projectId": "f9d4bc7f-d684-4a25-9ff8-fe8f1e9935d2"
