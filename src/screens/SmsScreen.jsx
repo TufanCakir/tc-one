@@ -14,7 +14,7 @@ export default function SmsScreen() {
 
     const { result } = await SMS.sendSMSAsync(
       ["015112345678"], // recipient
-      "Hello from TC One! This is a test message. 😊"
+      "schickt mir feedback, ideen, bugs. danke" // message
     );
 
     if (result === "sent") {
@@ -28,7 +28,7 @@ export default function SmsScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>📩 Send SMS</Text>
+      <Text style={styles.title}>Send SMS</Text>
 
       <Pressable
         onPress={sendSMS}

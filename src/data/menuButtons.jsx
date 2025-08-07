@@ -167,4 +167,11 @@ export const menuButtons = [
     accessibilityLabel: "Tippgeschwindigkeit testen",
     accessibilityHint: "Messe deine Schreibgeschwindigkeit",
   },
+  {
+    title: "Support",
+    screen: "SupportScreen",
+    icon: { name: "contact-support", set: "MaterialIcons" },
+    accessibilityLabel: "Tippgeschwindigkeit testen",
+    accessibilityHint: "Messe deine Schreibgeschwindigkeit",
+  },
 ];

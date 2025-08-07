@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Button, StyleSheet, Alert } from "react-native";
 import * as Print from "expo-print";
+import Footer from "../components/Footer";
 
 export default function PrintScreen() {
   const [selectedPrinter, setSelectedPrinter] = useState(null);
@@ -71,6 +72,9 @@ export default function PrintScreen() {
       ) : (
         <Button title="🖨 Drucker auswählen (nur iOS)" onPress={selectPrinter} />
       )}
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }
@@ -80,7 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
   },
   title: {
     fontSize: 22,
@@ -94,5 +97,10 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 20,
     color: "#fff",
+  },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
   },
 });

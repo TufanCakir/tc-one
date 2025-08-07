@@ -33,6 +33,7 @@ import GalleryScreen from "../screens/GalleryScreen";
 import SymbolsScreen from "../screens/SymbolsScreen";
 import SmsScreen from "../screens/SmsScreen";
 import LoginScreen from "../screens/LoginScreen";
+import SupportScreen from "../screens/SupportScreen";
 
 export const screens = [
   { name: "LoginScreen", component: LoginScreen },
@@ -74,6 +75,7 @@ export const screens = [
   { name: "GalleryScreen", component: GalleryScreen },
   { name: "SymbolsScreen", component: SymbolsScreen },
   { name: "SmsScreen", component: SmsScreen },
+  { name: "SupportScreen", component: SupportScreen },
 ].map((screen) => ({
   ...screen,
   title:

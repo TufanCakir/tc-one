@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Calendar } from "react-native-calendars";
 import * as CalendarAPI from "expo-calendar";
+import Footer from "../components/Footer";
 
 export default function CalendarOneScreen() {
   const [events, setEvents] = useState([]);
@@ -116,7 +117,7 @@ export default function CalendarOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>📅 Dein Kalender</Text>
+      <Text style={styles.header}>Dein Kalender</Text>
       <Calendar
         onDayPress={(day) => setSelectedDate(day.dateString)}
         markedDates={{
@@ -145,8 +146,8 @@ export default function CalendarOneScreen() {
       />
 
       <View style={styles.buttonRow}>
-        <Button title="➕ Event erstellen" onPress={createEvent} />
-        <Button title="❌ Letztes löschen" onPress={deleteEvent} color="red" />
+        <Button title="Event erstellen" onPress={createEvent} />
+        <Button title="Letztes löschen" onPress={deleteEvent} color="red" />
       </View>
 
       <ScrollView style={styles.events}>
@@ -165,15 +166,18 @@ export default function CalendarOneScreen() {
             <Text style={styles.noEvents}>Keine Events an diesem Tag.</Text>
           )
         ) : (
-          <Text style={styles.noEvents}>👉 Wähle ein Datum aus.</Text>
+          <Text style={styles.noEvents}>Wähle ein Datum aus.</Text>
         )}
       </ScrollView>
+      <View style={styles.footerWrapper}>
+        <Footer />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 10 },
+  container: { flex: 1 },
   header: { color: "#0f0", fontSize: 20, fontWeight: "bold", marginBottom: 10 },
   input: {
     backgroundColor: "#222",
@@ -198,4 +202,9 @@ const styles = StyleSheet.create({
   eventTitle: { color: "#fff", fontSize: 16, fontWeight: "bold" },
   eventTime: { color: "#aaa", fontSize: 13, marginTop: 4 },
   noEvents: { color: "#888", marginTop: 20, textAlign: "center" },
+  footerWrapper: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+  },
 });
