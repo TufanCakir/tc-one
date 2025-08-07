@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
   },
   // Header wird separat in der Header-Komponente definiert
   content: {

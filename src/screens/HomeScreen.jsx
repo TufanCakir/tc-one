@@ -8,6 +8,8 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import PagerView from "react-native-pager-view";
 import { useState, useRef } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+
 import MenuGrid from "../components/MenuGrid";
 import SettingsScreen from "./SettingsScreen";
 import ProfileScreen from "./ProfileScreen";
@@ -32,7 +34,12 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.tabBarContainer}>
+      <LinearGradient
+        colors={["#000000", "#ffffff"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 0 }}
+        style={styles.tabBarContainer}
+      >
         <ScrollView
           ref={scrollRef}
           horizontal
@@ -56,7 +63,7 @@ export default function HomeScreen() {
             </TouchableOpacity>
           ))}
         </ScrollView>
-      </View>
+      </LinearGradient>
 
       {/* PagerView */}
       <PagerView
@@ -101,10 +108,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
   },
   tabBarContainer: {
-    backgroundColor: "#111",
     paddingVertical: 8,
   },
   tabBar: {
@@ -123,10 +128,10 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 16,
-    color: "#aaa",
+    color: "#444",
   },
   activeTabText: {
-    color: "#fff",
+    color: "#000",
     fontWeight: "bold",
   },
   pager: {

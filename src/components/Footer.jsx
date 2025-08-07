@@ -1,11 +1,8 @@
 import { View, TouchableOpacity, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import {
-  Ionicons,
-  FontAwesome6,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import styles from "../styles/FooterStyles";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Footer = () => {
   const navigation = useNavigation();
@@ -20,7 +17,12 @@ const Footer = () => {
   ];
 
   return (
-    <View style={styles.footer}>
+    <LinearGradient
+      colors={["#000000", "#ffffff"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 0 }}
+      style={styles.footer} // deine Footer-Größe, z. B. height: 60
+    >
       <View style={styles.iconRow}>
         {buttons.map((btn, index) => {
           const Icon = btn.iconSet;
@@ -36,7 +38,7 @@ const Footer = () => {
           );
         })}
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 

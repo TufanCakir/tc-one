@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import {
-  View,
   FlatList,
   Text,
   TouchableOpacity,
   Modal,
   Pressable,
+  View,
 } from "react-native";
 import { menuButtons } from "../data/menuButtons";
 import styles from "../styles/MenuGridStyles";
+import { LinearGradient } from "expo-linear-gradient";
 
 // Icon-Sets importieren
 import { Ionicons } from "@expo/vector-icons";
@@ -18,6 +19,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const iconSets = {
   Ionicons,
@@ -27,6 +29,7 @@ const iconSets = {
   AntDesign,
   Entypo,
   FontAwesome,
+  MaterialIcons,
 };
 
 const ICON_SIZE = 28;
@@ -44,27 +47,38 @@ const MenuGrid = ({ navigation }) => {
       <TouchableOpacity
         style={styles.menuItem}
         onPress={() => screen && navigation.navigate(screen)}
-        activeOpacity={0.7}
+        activeOpacity={0.9}
         accessibilityRole="button"
         accessibilityLabel={item.accessibilityLabel || title}
         accessibilityHint={item.accessibilityHint}
       >
-        {IconComponent && icon?.name && (
-          <IconComponent
-            name={icon.name}
-            size={ICON_SIZE}
-            color="#fff"
-            accessibilityElementsHidden={true}
-            importantForAccessibility="no"
-          />
-        )}
-        <Text style={styles.label}>{title}</Text>
+        <LinearGradient
+          colors={["#000000", "#ffffff"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.gradientButton}
+        >
+          {IconComponent && icon?.name && (
+            <IconComponent
+              name={icon.name}
+              size={ICON_SIZE}
+              color="#fff"
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no"
+            />
+          )}
+          <Text style={styles.label}>{title}</Text>
+        </LinearGradient>
       </TouchableOpacity>
     );
   };
 
   return (
-    <View style={styles.gridContainer}>
+    <LinearGradient
+      colors={["#000000", "#ffffff"]}
+      style={styles.gridContainer}
+    >
+      {/* Top-Rechts Button */}
       <View style={styles.topRightButton}>
         <TouchableOpacity
           onPress={() => setModalVisible(true)}
@@ -81,6 +95,7 @@ const MenuGrid = ({ navigation }) => {
         </TouchableOpacity>
       </View>
 
+      {/* Grid */}
       <FlatList
         data={data}
         keyExtractor={(item, index) =>
@@ -89,8 +104,10 @@ const MenuGrid = ({ navigation }) => {
         numColumns={3}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 24 }}
       />
 
+      {/* Modal */}
       <Modal
         visible={modalVisible}
         animationType="slide"
@@ -135,7 +152,7 @@ const MenuGrid = ({ navigation }) => {
           </View>
         </View>
       </Modal>
-    </View>
+    </LinearGradient>
   );
 };
 

@@ -14,8 +14,14 @@
     },
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "com.tufancakir.tcone",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Diese App benötigt Zugriff auf die Kamera, um Fotos aufzunehmen.",
+        "NSPhotoLibraryUsageDescription": "Diese App benötigt Zugriff auf deine Fotomediathek, um Bilder auszuwählen.",
+        "NSPhotoLibraryAddUsageDescription": "Diese App benötigt Zugriff, um Bilder in deine Fotomediathek zu speichern.",
+        "NSBluetoothAlwaysUsageDescription": "Diese App kann Bluetooth verwenden, um kompatible Drucker zu finden.",
+        "NSCalendarsUsageDescription": "Diese App benötigt Zugriff auf deinen Kalender, um Ereignisse anzuzeigen und hinzuzufügen."
       }
     },
     "android": {
@@ -31,12 +37,11 @@
       "fallbackToCacheTimeout": 0,
       "enabled": true
     },
-    "plugins": [
-      "expo-video",
-      "expo-secure-store",
-      "expo-localization",
-      "expo-mail-composer",
-      "expo-web-browser"
-    ]
+    "plugins": ["expo-video", "expo-localization", "expo-mail-composer"],
+    "extra": {
+      "eas": {
+        "projectId": "f9d4bc7f-d684-4a25-9ff8-fe8f1e9935d2"
+      }
+    }
   }
 }

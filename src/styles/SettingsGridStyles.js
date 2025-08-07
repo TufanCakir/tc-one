@@ -1,26 +1,37 @@
-// src/styles/SettingsGridStyles.js
+import { StyleSheet, Dimensions } from "react-native";
 
-export default {
-  screenContainer: {
+const { width } = Dimensions.get("window");
+const ITEM_MARGIN = 8;
+const NUM_COLUMNS = 3;
+const ITEM_SIZE = (width - ITEM_MARGIN * (NUM_COLUMNS * 3)) / NUM_COLUMNS;
+
+export default StyleSheet.create({
+  gridContainer: {
     flex: 1,
+    paddingHorizontal: ITEM_MARGIN,
+    paddingTop: 30,
   },
+
   gridContent: {
-    paddingBottom: 24,
+    paddingHorizontal: ITEM_MARGIN,
   },
-  button: {
-    alignItems: "center",
+
+  settingsItem: {
+    width: ITEM_SIZE,
+    height: ITEM_SIZE,
+    margin: ITEM_MARGIN,
+    borderRadius: 16,
+    overflow: "hidden",
+  },
+
+  gradientButton: {
+    flex: 1,
     justifyContent: "center",
-    width: 100,
-    height: 100,
-    margin: 8,
-    borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.06)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 4, // Android Shadow
+    alignItems: "center",
+    borderRadius: 16,
+    padding: 12,
   },
+
   label: {
     marginTop: 8,
     color: "#fff",
@@ -28,4 +39,4 @@ export default {
     fontWeight: "600",
     textAlign: "center",
   },
-};
+});

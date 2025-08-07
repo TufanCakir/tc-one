@@ -1,3 +1,4 @@
+// App.jsx
 import { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
@@ -10,7 +11,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { ThemeProvider, useTheme } from "./src/context/ThemeContext";
+import { ProfileProvider } from "./src/context/ProfileContext";
+
 import AppNavigator from "./src/navigation/AppNavigator";
 import useUpdateChecker from "./src/hooks/useUpdateChecker";
 import ProfileHeader from "./src/components/ProfileHeader";
@@ -20,38 +22,33 @@ import SafeAreaWrapper from "./src/components/SafeAreaWrapper";
 enableScreens();
 
 function AppContent({ loading, updateVisible, onStateChange }) {
-  const { theme } = useTheme();
-
   return (
-    <SafeAreaWrapper edges={["left", "right", "top"]}>
-      <StatusBar
-        barStyle={theme.statusBar}
-        backgroundColor={theme.background}
-      />
-      <ProfileHeader />
-      <NavigationContainer onStateChange={onStateChange}>
-        <OnlineGuard>
-          <AppNavigator />
-        </OnlineGuard>
-      </NavigationContainer>
+    <ProfileProvider>
+      <SafeAreaWrapper edges={["left", "right", "top"]}>
+        <StatusBar backgroundColor="transparent" translucent />
 
-      {loading && (
-        <View
-          style={[styles.loadingOverlay, { backgroundColor: theme.background }]}
-        >
-          <ActivityIndicator size="large" color={theme.text} />
-        </View>
-      )}
+        <ProfileHeader />
 
-      {updateVisible && (
-        <View style={styles.updateOverlay}>
-          <ActivityIndicator size="large" color={theme.text} />
-          <Text style={[styles.updateText, { color: theme.text }]}>
-            Update wird geladen…
-          </Text>
-        </View>
-      )}
-    </SafeAreaWrapper>
+        <NavigationContainer onStateChange={onStateChange}>
+          <OnlineGuard>
+            <AppNavigator />
+          </OnlineGuard>
+        </NavigationContainer>
+
+        {loading && (
+          <View style={styles.loadingOverlay}>
+            <ActivityIndicator size="large" color="#fff" />
+          </View>
+        )}
+
+        {updateVisible && (
+          <View style={styles.updateOverlay}>
+            <ActivityIndicator size="large" color="fff" />
+            <Text style={styles.updateText}>Update wird geladen…</Text>
+          </View>
+        )}
+      </SafeAreaWrapper>
+    </ProfileProvider>
   );
 }
 
@@ -69,18 +66,18 @@ export default function App() {
   };
 
   useEffect(() => {
-    return () => clearTimeout(loadingTimeoutRef.current);
+    return () => {
+      clearTimeout(loadingTimeoutRef.current);
+    };
   }, []);
 
   return (
     <SafeAreaProvider>
-      <ThemeProvider>
-        <AppContent
-          loading={loading}
-          updateVisible={updateVisible}
-          onStateChange={handleNavigationStateChange}
-        />
-      </ThemeProvider>
+      <AppContent
+        loading={loading}
+        updateVisible={updateVisible}
+        onStateChange={handleNavigationStateChange}
+      />
     </SafeAreaProvider>
   );
 }
@@ -94,6 +91,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#000",
     zIndex: 999,
   },
   updateOverlay: {

@@ -6,7 +6,6 @@ export default StyleSheet.create({
     height: 100,
     justifyContent: "center",
     borderRadius: 20,
-    backgroundColor: "#000",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,

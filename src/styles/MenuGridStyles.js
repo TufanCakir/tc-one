@@ -1,80 +1,87 @@
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+
+const { width } = Dimensions.get("window");
+const ITEM_MARGIN = 8;
+const NUM_COLUMNS = 3;
+const ITEM_SIZE = (width - ITEM_MARGIN * (NUM_COLUMNS * 3)) / NUM_COLUMNS;
 
 export default StyleSheet.create({
   gridContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingHorizontal: ITEM_MARGIN,
   },
+
   menuItem: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 100,
-    height: 100,
-    margin: 8,
-    borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.06)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 4, // Android Shadow
+    width: ITEM_SIZE,
+    height: ITEM_SIZE,
+    margin: ITEM_MARGIN,
+    borderRadius: 16,
+    overflow: "hidden",
+    top: 50,
   },
+
+  gradientButton: {
+    flex: 1,
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 12,
+  },
+
   label: {
-    color: "#fff",
     marginTop: 8,
+    color: "#fff",
     fontSize: 14,
+    fontWeight: "600",
     textAlign: "center",
   },
+
   topRightButton: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-    left: 200,
+    position: "absolute",
+    top: 12,
+    right: 12,
+    zIndex: 10,
   },
+
   modalOverlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.6)",
+    backgroundColor: "rgba(0,0,0,0.7)",
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
+    padding: 24,
   },
+
   modalContent: {
     backgroundColor: "#fff",
     borderRadius: 16,
-    padding: 20,
+    padding: 24,
     width: "100%",
-    maxWidth: 400,
+    maxHeight: "80%",
   },
+
   modalTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 10,
+    fontSize: 20,
+    fontWeight: "700",
+    marginBottom: 12,
+    color: "#000",
   },
+
   modalText: {
-    marginBottom: 20,
     fontSize: 14,
     color: "#333",
+    marginBottom: 24,
   },
+
   closeButton: {
+    backgroundColor: "#000",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 12,
     alignSelf: "flex-end",
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: "#007AFF",
-    borderRadius: 8,
   },
+
   closeButtonText: {
     color: "#fff",
+    fontWeight: "600",
     fontSize: 14,
-  },
-  icon: {
-    fontSize: 28,
-    color: "white",
-  },
-  label: {
-    marginTop: 6,
-    fontSize: 14,
-    color: "white",
-    textAlign: "center",
-    fontFamily: Platform.OS === "ios" ? "System" : "sans-serif",
   },
 });

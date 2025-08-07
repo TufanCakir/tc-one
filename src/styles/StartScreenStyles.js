@@ -1,10 +1,10 @@
-// src/styles/StartScreenStyles.js
-
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    padding: 24,
+    justifyContent: "space-between",
   },
   content: {
     flex: 1,
@@ -12,41 +12,35 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 28,
-    fontWeight: "700",
-    color: "white",
-    textAlign: "center",
+    fontSize: 26,
+    fontWeight: "bold",
+    color: "#fff", // Auf dunklem Hintergrund lesbar
     marginBottom: 32,
+    textAlign: "center",
   },
   button: {
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    width: 100,
-    height: 100,
-    borderRadius: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.06)",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 4, // Android Shadow
   },
   buttonText: {
+    color: "#fff",
     fontSize: 18,
-    fontWeight: "600",
-    color: "white",
+    fontWeight: "bold",
   },
   footer: {
     alignItems: "center",
-    paddingVertical: 12,
+    marginBottom: 16,
   },
   versionText: {
+    fontSize: 12,
     color: "#fff",
-    fontSize: 14,
-    marginBottom: 4,
   },
   copyrightText: {
+    fontSize: 12,
     color: "#fff",
-    fontSize: 13,
+    marginTop: 4,
   },
 });

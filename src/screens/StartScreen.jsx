@@ -2,12 +2,13 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Constants from "expo-constants";
 import styles from "../styles/StartScreenStyles";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function StartScreen() {
   const navigation = useNavigation();
 
   const handleStart = () => {
-    navigation.replace("HomeScreen");
+    navigation.replace("LoginScreen");
   };
 
   const version = Constants.expoConfig?.version ?? "1.0.0";
@@ -19,10 +20,17 @@ export default function StartScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.title}>Welcome to All In One Hub</Text>
+        <Text style={styles.title}>Welcome to TC One</Text>
 
-        <TouchableOpacity style={styles.button} onPress={handleStart}>
-          <Text style={styles.buttonText}>Start</Text>
+        <TouchableOpacity onPress={handleStart} activeOpacity={0.8}>
+          <LinearGradient
+            colors={["#000000", "#ffffff"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Start</Text>
+          </LinearGradient>
         </TouchableOpacity>
       </View>
 

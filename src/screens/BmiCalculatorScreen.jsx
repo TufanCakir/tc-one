@@ -129,7 +129,6 @@ const BmiCalculatorScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "transparent",
   },
   content: {
     flex: 1,

@@ -173,7 +173,7 @@ export default function CalendarOneScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#111", padding: 10 },
+  container: { flex: 1, padding: 10 },
   header: { color: "#0f0", fontSize: 20, fontWeight: "bold", marginBottom: 10 },
   input: {
     backgroundColor: "#222",

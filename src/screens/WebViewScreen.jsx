@@ -30,7 +30,6 @@ export default function WebViewScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#000",
   },
   webview: {
     width: Dimensions.get("window").width,

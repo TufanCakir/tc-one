@@ -1,32 +1,14 @@
-// components/ProfileHeader.js
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-  MaterialIcons,
-  FontAwesome,
-  Ionicons,
-  MaterialCommunityIcons,
-  FontAwesome5,
-} from "@expo/vector-icons";
 
-// Gleiche Konstanten wie in ProfileScreen:
+import { useProfile } from "../context/ProfileContext";
+
 const STORAGE_KEY_NAME = "@profile_name";
 const STORAGE_KEY_ICON = "@profile_icon";
 
-const ICON_OPTIONS = [
-  { name: "face", lib: MaterialIcons },
-  { name: "user-circle", lib: FontAwesome },
-  { name: "person-circle", lib: Ionicons },
-  { name: "account", lib: MaterialCommunityIcons },
-  { name: "person-outline", lib: Ionicons },
-  { name: "user", lib: FontAwesome },
-  { name: "account-circle-outline", lib: MaterialCommunityIcons },
-  { name: "person-pin", lib: MaterialIcons },
-  { name: "user-alt", lib: FontAwesome5 },
-];
-
 const ProfileHeader = () => {
+  const { profileImage, profileName } = useProfile(); // globales Profilbild
   const [name, setName] = useState("");
   const [iconConfig, setIconConfig] = useState(null);
 
@@ -37,12 +19,15 @@ const ProfileHeader = () => {
         const storedIconName = await AsyncStorage.getItem(STORAGE_KEY_ICON);
 
         if (storedName) setName(storedName);
+
         if (storedIconName) {
           const match = ICON_OPTIONS.find((opt) => opt.name === storedIconName);
-          if (match) setIconConfig(match);
+          if (match) {
+            setIconConfig(match);
+          }
         }
       } catch (e) {
-        console.warn("Header-Profile-Daten konnten nicht geladen werden", e);
+        console.warn("❌ Fehler beim Laden der Header-Daten:", e);
       }
     })();
   }, []);
@@ -51,15 +36,19 @@ const ProfileHeader = () => {
 
   return (
     <View style={styles.container}>
-      {Icon && (
+      {/* Profilbild anzeigen, falls vorhanden */}
+      {profileImage ? (
+        <Image source={{ uri: profileImage }} style={styles.image} />
+      ) : Icon ? (
         <Icon
           name={iconConfig.name}
           size={36}
           color="#3498db"
           style={styles.icon}
         />
-      )}
-      <Text style={styles.text}>{name}</Text>
+      ) : null}
+
+      <Text style={styles.text}>{profileName || "Unnamed"}</Text>
     </View>
   );
 };
@@ -74,6 +63,14 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginRight: 12,
+  },
+  image: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 12,
+    borderWidth: 2,
+    borderColor: "#3498db",
   },
   text: {
     fontSize: 18,

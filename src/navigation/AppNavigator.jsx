@@ -1,6 +1,6 @@
-// AppNavigator.jsx
 import { StyleSheet, View, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { LinearGradient } from "expo-linear-gradient";
 import { screens } from "./screens";
 
 const Stack = createNativeStackNavigator();
@@ -27,10 +27,10 @@ function Navigator() {
     <Stack.Navigator
       initialRouteName={validScreens.length ? "StartScreen" : "Fallback"}
       screenOptions={{
-        headerStyle: { backgroundColor: "#000" },
+        headerStyle: { backgroundColor: "transparent" },
         headerTintColor: "#fff",
         headerTitleStyle: { fontSize: 20, fontWeight: "bold" },
-        contentStyle: { backgroundColor: "#000" }, // statt transparent
+        contentStyle: { backgroundColor: "transparent" },
       }}
     >
       {validScreens.length > 0 ? (
@@ -63,9 +63,14 @@ function Navigator() {
 
 export default function AppNavigator() {
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      colors={["#000000", "#ffffff"]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.container}
+    >
       <Navigator />
-    </View>
+    </LinearGradient>
   );
 }
 

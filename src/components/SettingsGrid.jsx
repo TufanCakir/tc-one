@@ -3,12 +3,13 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  View,
   Linking,
+  View,
 } from "react-native";
 import styles from "../styles/SettingsGridStyles";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { settingsButtons } from "../data/settingsButtons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const iconSets = {
   Ionicons,
@@ -32,55 +33,63 @@ export default function SettingsGrid({ navigation, onClose, onResetAccount }) {
 
     return (
       <TouchableOpacity
-        style={styles.button}
+        style={styles.settingsItem}
         onPress={() => handlePress(item)}
         accessibilityRole="button"
         accessibilityLabel={item.accessibilityLabel || item.title}
         accessibilityHint={item.accessibilityHint}
+        activeOpacity={0.9}
       >
-        <View style={{ alignItems: "center" }}>
+        <LinearGradient
+          colors={["#000000", "#ffffff"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.gradientButton}
+        >
           {IconComponent && item.icon?.name && (
             <IconComponent
               name={item.icon.name}
               size={28}
-              color="white"
+              color="#fff"
               accessibilityElementsHidden={true}
               importantForAccessibility="no"
             />
           )}
-          <View
-            style={{ flexDirection: "row", alignItems: "center", marginTop: 4 }}
-          >
-            <Text style={styles.label}>{item.title}</Text>
-            {item.url && (
-              <Feather
-                name="external-link"
-                size={14}
-                color="white"
-                style={{ marginLeft: 4 }}
-                accessibilityElementsHidden={true}
-                importantForAccessibility="no"
-              />
-            )}
-          </View>
-        </View>
+
+          <Text style={styles.label}>{item.title}</Text>
+          {item.url && (
+            <Feather
+              name="external-link"
+              size={14}
+              color="#fff"
+              style={{ marginLeft: 4 }}
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no"
+            />
+          )}
+        </LinearGradient>
       </TouchableOpacity>
     );
   };
 
   return (
-    <SafeAreaView style={styles.screenContainer} accessible={false}>
-      <FlatList
-        data={settingsButtons}
-        keyExtractor={(item, index) =>
-          item?.screen || item?.title || `btn-${index}`
-        }
-        numColumns={3}
-        contentContainerStyle={styles.gridContent}
-        renderItem={renderItem}
-        accessibilityRole="menu"
-        accessibilityLabel="Einstellungen"
-      />
-    </SafeAreaView>
+    <LinearGradient
+      colors={["#000000", "#ffffff"]}
+      style={styles.gridContainer}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
+        <FlatList
+          data={settingsButtons}
+          keyExtractor={(item, index) =>
+            item?.screen || item?.title || `btn-${index}`
+          }
+          numColumns={3}
+          contentContainerStyle={styles.gridContent}
+          renderItem={renderItem}
+          accessibilityRole="menu"
+          accessibilityLabel="Einstellungen"
+        />
+      </SafeAreaView>
+    </LinearGradient>
   );
 }

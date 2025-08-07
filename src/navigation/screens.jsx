@@ -24,14 +24,18 @@ import JournalScreen from "../screens/JournalScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import VideoPlayerScreen from "../screens/VideoPlayerScreen";
 import MapsScreen from "../screens/MapsScreen";
-import CheckBoxScreen from "../screens/CheckBoxScreen";
 import CalendarOneScreen from "../screens/CalendarOneScreen";
 import ImagePickerScreen from "../screens/ImagePickerScreen";
 import BatteryScreen from "../screens/BatteryScreen";
 import PrintScreen from "../screens/PrintScreen";
 import WebViewScreen from "../screens/WebViewScreen";
+import GalleryScreen from "../screens/GalleryScreen";
+import SymbolsScreen from "../screens/SymbolsScreen";
+import SmsScreen from "../screens/SmsScreen";
+import LoginScreen from "../screens/LoginScreen";
 
 export const screens = [
+  { name: "LoginScreen", component: LoginScreen },
   { name: "StartScreen", component: StartScreen, title: "Start" },
   { name: "HomeScreen", component: HomeScreen, title: "Home" },
 
@@ -62,12 +66,14 @@ export const screens = [
   { name: "VotingScreen", component: VotingScreen },
   { name: "VideoPlayerScreen", component: VideoPlayerScreen },
   { name: "MapsScreen", component: MapsScreen },
-  { name: "CheckBoxScreen", component: CheckBoxScreen },
   { name: "CalendarOneScreen", component: CalendarOneScreen },
   { name: "ImagePickerScreen", component: ImagePickerScreen },
   { name: "BatteryScreen", component: BatteryScreen },
   { name: "PrintScreen", component: PrintScreen },
   { name: "WebViewScreen", component: WebViewScreen },
+  { name: "GalleryScreen", component: GalleryScreen },
+  { name: "SymbolsScreen", component: SymbolsScreen },
+  { name: "SmsScreen", component: SmsScreen },
 ].map((screen) => ({
   ...screen,
   title:
