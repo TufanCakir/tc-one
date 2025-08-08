@@ -1,54 +1,60 @@
-import { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { StyleSheet, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { LoadingOverlay, UpdateOverlay } from "./src/components/Overlays";
 
+// App structure
 import AppProviders from "./src/providers/AppProviders";
 import AppNavigator from "./src/navigation/AppNavigator";
-import useUpdateChecker from "./src/hooks/useUpdateChecker";
 import OnlineGuard from "./src/components/OnlineGuard";
+import useUpdateChecker from "./src/hooks/useUpdateChecker";
 
 enableScreens();
 
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
-  const loadingTimeoutRef = useRef(null);
+  const loadingTimeoutRef = useRef();
 
+  // Check for updates
   useUpdateChecker(setUpdateVisible);
 
-  const handleNavigationStateChange = () => {
-    clearTimeout(loadingTimeoutRef.current);
+  // Show loading briefly on navigation change
+  const handleNavigationStateChange = useCallback(() => {
+    if (loadingTimeoutRef.current) {
+      clearTimeout(loadingTimeoutRef.current);
+    }
     setLoading(true);
     loadingTimeoutRef.current = setTimeout(() => setLoading(false), 500);
-  };
+  }, []);
 
+  // Cleanup on unmount
   useEffect(() => {
-    return () => clearTimeout(loadingTimeoutRef.current);
+    return () => {
+      if (loadingTimeoutRef.current) {
+        clearTimeout(loadingTimeoutRef.current);
+      }
+    };
   }, []);
 
   return (
     <AppProviders>
       <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
+        <StatusBar
+          backgroundColor="transparent"
+          translucent
+          barStyle="light-content"
+        />
+        {/* Overlays möglichst weit oben für sofortigen Render */}
+        {loading && <LoadingOverlay />}
+        {updateVisible && <UpdateOverlay />}
         <NavigationContainer onStateChange={handleNavigationStateChange}>
           <OnlineGuard>
             <AppNavigator />
           </OnlineGuard>
         </NavigationContainer>
-
-        {loading && (
-          <View style={styles.loadingOverlay}>
-            <ActivityIndicator size="large" color="#fff" />
-          </View>
-        )}
-
-        {updateVisible && (
-          <View style={styles.updateOverlay}>
-            <ActivityIndicator size="large" color="#fff" />
-            <Text style={styles.updateText}>Update wird geladen…</Text>
-          </View>
-        )}
       </SafeAreaView>
     </AppProviders>
   );
@@ -57,33 +63,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#000", // dein Grundhintergrund
-  },
-  loadingOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#000",
-    zIndex: 999,
-  },
-  updateOverlay: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.85)",
-    zIndex: 1000,
-  },
-  updateText: {
-    marginTop: 16,
-    fontSize: 16,
-    color: "#fff",
+    backgroundColor: "#000", // Dark mode background
   },
 });

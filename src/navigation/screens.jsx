@@ -34,6 +34,9 @@ import SmsScreen from "../screens/SmsScreen";
 import LoginScreen from "../screens/LoginScreen";
 import SupportScreen from "../screens/SupportScreen";
 
+// Game Screens
+import SnakeScreen from "../gameScreens/SnakeScreen";
+
 export const screens = [
   { name: "LoginScreen", component: LoginScreen },
   { name: "StartScreen", component: StartScreen, title: "Start" },
@@ -74,6 +77,7 @@ export const screens = [
   { name: "GalleryScreen", component: GalleryScreen },
   { name: "SmsScreen", component: SmsScreen },
   { name: "SupportScreen", component: SupportScreen },
+  { name: "SnakeScreen", component: SnakeScreen, title: "Snake" },
 ].map((screen) => ({
   ...screen,
   title:

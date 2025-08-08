@@ -8,7 +8,8 @@ import {
   Image,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-import { useProfile } from "../context/ProfileContext"; // ✅
+import { LinearGradient } from "expo-linear-gradient"; // ✅
+import { useProfile } from "../context/ProfileContext";
 
 export default function ProfileScreen() {
   const { profileImage, updateProfileImage } = useProfile();
@@ -41,7 +42,7 @@ export default function ProfileScreen() {
         return;
       }
 
-      await updateProfileImage(uri); // ✅ global speichern
+      await updateProfileImage(uri);
       Alert.alert("Erfolg", "Profilbild wurde gespeichert!");
     } catch (error) {
       console.error("Profilbild-Fehler:", error);
@@ -51,7 +52,7 @@ export default function ProfileScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>📸 Profilbild auswählen</Text>
+      <Text style={styles.title}>Profilbild auswählen</Text>
 
       {profileImage && (
         <Image
@@ -61,8 +62,15 @@ export default function ProfileScreen() {
         />
       )}
 
-      <TouchableOpacity style={styles.button} onPress={pickAndSaveProfileImage}>
-        <Text style={styles.buttonText}>Bild aus Galerie wählen</Text>
+      <TouchableOpacity onPress={pickAndSaveProfileImage} activeOpacity={0.85}>
+        <LinearGradient
+          colors={["#000000", "#ffffff"]} // Schwarz-Verlauf
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.gradientButton}
+        >
+          <Text style={styles.buttonText}>Bild aus Galerie wählen</Text>
+        </LinearGradient>
       </TouchableOpacity>
     </View>
   );
@@ -89,14 +97,20 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "#444",
   },
-  button: {
-    backgroundColor: "#222428",
+  gradientButton: {
     paddingVertical: 12,
     paddingHorizontal: 24,
     borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#fff",
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
   },
   buttonText: {
     color: "#fff",
     fontSize: 16,
+    fontWeight: "600",
   },
 });

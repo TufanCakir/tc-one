@@ -1,8 +1,34 @@
-// src/screens/CalculatorScreen.js
 import { View, Text, TouchableOpacity } from "react-native";
 import useCalculator from "../hooks/useCalculator";
 import styles from "../styles/CalculatorStyles";
 import Footer from "../components/Footer";
+
+const numberRows = [
+  [7, 8, 9],
+  [4, 5, 6],
+  [1, 2, 3],
+];
+
+const operators = [
+  { label: "÷", value: "/" },
+  { label: "×", value: "*" },
+  { label: "−", value: "-" },
+  { label: "+", value: "+" },
+];
+
+function CalcButton({ onPress, style, textStyle, children, label }) {
+  return (
+    <TouchableOpacity
+      style={style}
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={label ?? children}
+      activeOpacity={0.75}
+    >
+      <Text style={textStyle}>{children}</Text>
+    </TouchableOpacity>
+  );
+}
 
 export default function CalculatorScreen() {
   const {
@@ -15,98 +41,77 @@ export default function CalculatorScreen() {
 
   return (
     <View style={styles.container}>
+      {/* Display */}
       <View style={styles.displayContainer}>
-        <Text style={styles.displayText}>{displayValue}</Text>
+        <Text style={styles.displayText} numberOfLines={1} adjustsFontSizeToFit>
+          {displayValue}
+        </Text>
       </View>
 
+      {/* Button Area */}
       <View style={styles.buttonContainer}>
-        {/** Erste Reihe */}
-        <View style={styles.row}>
-          {[7, 8, 9].map((num) => (
-            <TouchableOpacity
-              key={num}
-              style={styles.button}
-              onPress={() => handleNumberInput(num)}
+        {numberRows.map((row, rowIndex) => (
+          <View key={`row-${rowIndex}`} style={styles.row}>
+            {row.map((num) => (
+              <CalcButton
+                key={num}
+                onPress={() => handleNumberInput(num)}
+                style={styles.button}
+                textStyle={styles.buttonText}
+                label={`Nummer ${num}`}
+              >
+                {num}
+              </CalcButton>
+            ))}
+            <CalcButton
+              key={operators[rowIndex].value}
+              onPress={() => handleOperatorInput(operators[rowIndex].value)}
+              style={[styles.button, styles.operatorButton]}
+              textStyle={[styles.buttonText, styles.operatorButtonText]}
+              label={`Operator ${operators[rowIndex].label}`}
             >
-              <Text style={styles.buttonText}>{num}</Text>
-            </TouchableOpacity>
-          ))}
-          <TouchableOpacity
-            style={[styles.button, styles.operatorButton]}
-            onPress={() => handleOperatorInput("/")}
-          >
-            <Text style={[styles.buttonText, styles.operatorButtonText]}>
-              ÷
-            </Text>
-          </TouchableOpacity>
-        </View>
+              {operators[rowIndex].label}
+            </CalcButton>
+          </View>
+        ))}
 
-        {/** Zweite Reihe */}
+        {/* Vierte Reihe: 0, +, = */}
         <View style={styles.row}>
-          {[4, 5, 6].map((num) => (
-            <TouchableOpacity
-              key={num}
-              style={styles.button}
-              onPress={() => handleNumberInput(num)}
-            >
-              <Text style={styles.buttonText}>{num}</Text>
-            </TouchableOpacity>
-          ))}
-          <TouchableOpacity
-            style={[styles.button, styles.operatorButton]}
-            onPress={() => handleOperatorInput("*")}
-          >
-            <Text style={[styles.buttonText, styles.operatorButtonText]}>
-              ×
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/** Dritte Reihe */}
-        <View style={styles.row}>
-          {[1, 2, 3].map((num) => (
-            <TouchableOpacity
-              key={num}
-              style={styles.button}
-              onPress={() => handleNumberInput(num)}
-            >
-              <Text style={styles.buttonText}>{num}</Text>
-            </TouchableOpacity>
-          ))}
-          <TouchableOpacity
-            style={[styles.button, styles.operatorButton]}
-            onPress={() => handleOperatorInput("-")}
-          >
-            <Text style={[styles.buttonText, styles.operatorButtonText]}>
-              −
-            </Text>
-          </TouchableOpacity>
-        </View>
-
-        {/** Vierte Reihe */}
-        <View style={styles.row}>
-          <TouchableOpacity
-            style={[styles.button, styles.zeroButton]}
+          <CalcButton
             onPress={() => handleNumberInput(0)}
+            style={[styles.button, styles.zeroButton]}
+            textStyle={[styles.buttonText, styles.zeroButtonText]}
+            label="Null"
           >
-            <Text style={[styles.buttonText, styles.zeroButtonText]}>0</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
+            0
+          </CalcButton>
+          <CalcButton
+            onPress={() => handleOperatorInput(operators[3].value)}
             style={[styles.button, styles.operatorButton]}
-            onPress={() => handleOperatorInput("+")}
+            textStyle={[styles.buttonText, styles.operatorButtonText]}
+            label={`Operator ${operators[3].label}`}
           >
-            <Text style={[styles.buttonText, styles.operatorButtonText]}>
-              +
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.equalButton} onPress={handleEqual}>
-            <Text style={styles.equalButtonText}>=</Text>
-          </TouchableOpacity>
+            {operators[3].label}
+          </CalcButton>
+          <CalcButton
+            onPress={handleEqual}
+            style={styles.equalButton}
+            textStyle={styles.equalButtonText}
+            label="Gleich"
+          >
+            =
+          </CalcButton>
         </View>
 
-        <TouchableOpacity style={styles.clearButton} onPress={handleClear}>
-          <Text style={styles.clearButtonText}>C</Text>
-        </TouchableOpacity>
+        {/* Clear */}
+        <CalcButton
+          onPress={handleClear}
+          style={styles.clearButton}
+          textStyle={styles.clearButtonText}
+          label="Löschen"
+        >
+          C
+        </CalcButton>
       </View>
       <Footer />
     </View>

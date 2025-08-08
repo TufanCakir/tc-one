@@ -80,7 +80,6 @@ export default React.memo(PlayerNameSectionComponent);
 const styles = StyleSheet.create({
   section: {
     padding: 20,
-    backgroundColor: "#111", // Dark background
     borderRadius: 16,
     margin: 16,
   },
@@ -98,14 +97,13 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: "#444",
     borderRadius: 10,
     paddingHorizontal: 14,
     paddingVertical: 10,
     fontSize: 16,
-    color: "#fff",
+    color: "#000",
     marginBottom: 16,
-    backgroundColor: "#222",
+    backgroundColor: "#fff",
   },
   button: {
     paddingVertical: 12,

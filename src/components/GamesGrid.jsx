@@ -1,13 +1,7 @@
-import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Linking,
-} from "react-native";
-import styles from "../styles/SettingsGridStyles";
+import { FlatList, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import styles from "../styles/GameGridStyles";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
-import { settingsButtons } from "../data/settingsButtons";
+import { gameButtons } from "../data/gameButtons";
 import { LinearGradient } from "expo-linear-gradient";
 
 const iconSets = {
@@ -16,12 +10,9 @@ const iconSets = {
   MaterialCommunityIcons,
 };
 
-export default function SettingsGrid({ navigation, onClose, onResetAccount }) {
+export default function GamesGrid({ navigation }) {
   const handlePress = (item) => {
-    if (item.isReset) return onResetAccount?.();
-    if (item.isClose) return onClose?.();
     if (item.screen) return navigation.navigate(item.screen);
-    if (item.url) return Linking.openURL(item.url);
   };
 
   const renderItem = ({ item }) => {
@@ -32,7 +23,7 @@ export default function SettingsGrid({ navigation, onClose, onResetAccount }) {
 
     return (
       <TouchableOpacity
-        style={styles.settingsItem}
+        style={styles.gamesItem}
         onPress={() => handlePress(item)}
         accessibilityRole="button"
         accessibilityLabel={item.accessibilityLabel || item.title}
@@ -78,7 +69,7 @@ export default function SettingsGrid({ navigation, onClose, onResetAccount }) {
     >
       <SafeAreaView style={{ flex: 1 }}>
         <FlatList
-          data={settingsButtons}
+          data={gameButtons}
           keyExtractor={(item, index) =>
             item?.screen || item?.title || `btn-${index}`
           }
@@ -86,7 +77,7 @@ export default function SettingsGrid({ navigation, onClose, onResetAccount }) {
           contentContainerStyle={styles.gridContent}
           renderItem={renderItem}
           accessibilityRole="menu"
-          accessibilityLabel="Einstellungen"
+          accessibilityLabel="Spiele"
         />
       </SafeAreaView>
     </LinearGradient>
