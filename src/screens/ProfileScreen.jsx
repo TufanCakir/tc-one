@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Alert,
+  FlatList,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useProfile } from "../context/ProfileContext";
 import Icon from "../components/Icon";
@@ -17,6 +24,23 @@ export default function ProfileScreen() {
     }
   };
 
+  const renderItem = ({ item }) => (
+    <TouchableOpacity
+      onPress={() => selectIcon(item.id)}
+      style={styles.iconButton}
+      activeOpacity={0.85}
+    >
+      <LinearGradient
+        colors={["#000000", "#444444"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.gradientButton}
+      >
+        <Icon id={item.id} size={40} color="#fff" />
+      </LinearGradient>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Profil-Icon auswählen</Text>
@@ -27,25 +51,15 @@ export default function ProfileScreen() {
         </View>
       )}
 
-      <View style={styles.iconGrid}>
-        {iconData.map((icon) => (
-          <TouchableOpacity
-            key={icon.id}
-            onPress={() => selectIcon(icon.id)}
-            style={styles.iconButton}
-            activeOpacity={0.85}
-          >
-            <LinearGradient
-              colors={["#000000", "#444444"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.gradientButton}
-            >
-              <Icon id={icon.id} size={40} color="#fff" />
-            </LinearGradient>
-          </TouchableOpacity>
-        ))}
-      </View>
+      <FlatList
+        data={iconData}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        numColumns={4} // Anzahl Spalten
+        columnWrapperStyle={styles.row} // Styling pro Reihe
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingBottom: 40 }}
+      />
     </View>
   );
 }
@@ -54,7 +68,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    justifyContent: "flex-start",
     alignItems: "center",
   },
   title: {
@@ -71,14 +84,11 @@ const styles = StyleSheet.create({
     borderColor: "#444",
     backgroundColor: "#222",
   },
-  iconGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
+  row: {
     justifyContent: "center",
-    gap: 12,
   },
   iconButton: {
-    margin: 8,
+    margin: 6,
   },
   gradientButton: {
     padding: 12,

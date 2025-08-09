@@ -117,5 +117,911 @@
     "category": "media",
     "viewBox": "0 0 24 24",
     "paths": [{ "d": "M6 6h12v12H6z", "fill": "#fff" }]
+  },
+  {
+    "id": "grinning_face",
+    "name": "Grinning Face",
+    "category": "emoji",
+    "emoji": "😀"
+  },
+  {
+    "id": "beaming_face",
+    "name": "Beaming Face with Smiling Eyes",
+    "category": "emoji",
+    "emoji": "😁"
+  },
+  {
+    "id": "tears_of_joy",
+    "name": "Face with Tears of Joy",
+    "category": "emoji",
+    "emoji": "😂"
+  },
+  {
+    "id": "rofl",
+    "name": "Rolling on the Floor Laughing",
+    "category": "emoji",
+    "emoji": "🤣"
+  },
+  {
+    "id": "grinning_sweat",
+    "name": "Grinning Face with Sweat",
+    "category": "emoji",
+    "emoji": "😅"
+  },
+  {
+    "id": "halo",
+    "name": "Smiling Face with Halo",
+    "category": "emoji",
+    "emoji": "😇"
+  },
+  {
+    "id": "wink",
+    "name": "Winking Face",
+    "category": "emoji",
+    "emoji": "😉"
+  },
+  {
+    "id": "heart_eyes",
+    "name": "Smiling Face with Heart-Eyes",
+    "category": "emoji",
+    "emoji": "😍"
+  },
+  {
+    "id": "hearts",
+    "name": "Smiling Face with Hearts",
+    "category": "emoji",
+    "emoji": "🥰"
+  },
+  {
+    "id": "kiss",
+    "name": "Face Blowing a Kiss",
+    "category": "emoji",
+    "emoji": "😘"
+  },
+  {
+    "id": "sunglasses",
+    "name": "Smiling Face with Sunglasses",
+    "category": "emoji",
+    "emoji": "😎"
+  },
+  {
+    "id": "nerd",
+    "name": "Nerd Face",
+    "category": "emoji",
+    "emoji": "🤓"
+  },
+  {
+    "id": "smirk",
+    "name": "Smirking Face",
+    "category": "emoji",
+    "emoji": "😏"
+  },
+  {
+    "id": "unamused",
+    "name": "Unamused Face",
+    "category": "emoji",
+    "emoji": "😒"
+  },
+  {
+    "id": "pleading",
+    "name": "Pleading Face",
+    "category": "emoji",
+    "emoji": "🥺"
+  },
+  {
+    "id": "cry",
+    "name": "Crying Face",
+    "category": "emoji",
+    "emoji": "😢"
+  },
+  {
+    "id": "loud_cry",
+    "name": "Loudly Crying Face",
+    "category": "emoji",
+    "emoji": "😭"
+  },
+  {
+    "id": "steam_nose",
+    "name": "Face with Steam from Nose",
+    "category": "emoji",
+    "emoji": "😤"
+  },
+  {
+    "id": "exploding_head",
+    "name": "Exploding Head",
+    "category": "emoji",
+    "emoji": "🤯"
+  },
+  {
+    "id": "melting",
+    "name": "Melting Face",
+    "category": "emoji",
+    "emoji": "🫠"
+  },
+  {
+    "id": "waving_hand",
+    "name": "Waving Hand",
+    "category": "emoji",
+    "emoji": "👋"
+  },
+  {
+    "id": "thumbs_up",
+    "name": "Thumbs Up",
+    "category": "emoji",
+    "emoji": "👍"
+  },
+  {
+    "id": "thumbs_down",
+    "name": "Thumbs Down",
+    "category": "emoji",
+    "emoji": "👎"
+  },
+  {
+    "id": "victory_hand",
+    "name": "Victory Hand",
+    "category": "emoji",
+    "emoji": "✌️"
+  },
+  {
+    "id": "crossed_fingers",
+    "name": "Crossed Fingers",
+    "category": "emoji",
+    "emoji": "🤞"
+  },
+  {
+    "id": "love_you_gesture",
+    "name": "Love-You Gesture",
+    "category": "emoji",
+    "emoji": "🤟"
+  },
+  {
+    "id": "sign_of_the_horns",
+    "name": "Sign of the Horns",
+    "category": "emoji",
+    "emoji": "🤘"
+  },
+  {
+    "id": "clapping_hands",
+    "name": "Clapping Hands",
+    "category": "emoji",
+    "emoji": "👏"
+  },
+  {
+    "id": "raising_hands",
+    "name": "Raising Hands",
+    "category": "emoji",
+    "emoji": "🙌"
+  },
+  {
+    "id": "heart_hands",
+    "name": "Heart Hands",
+    "category": "emoji",
+    "emoji": "🫶"
+  },
+  {
+    "id": "palms_up_together",
+    "name": "Palms Up Together",
+    "category": "emoji",
+    "emoji": "🤲"
+  },
+  {
+    "id": "hand_with_fingers_splayed",
+    "name": "Hand with Fingers Splayed",
+    "category": "emoji",
+    "emoji": "🖐️"
+  },
+  {
+    "id": "raised_hand",
+    "name": "Raised Hand",
+    "category": "emoji",
+    "emoji": "✋"
+  },
+  {
+    "id": "rightwards_hand",
+    "name": "Rightwards Hand",
+    "category": "emoji",
+    "emoji": "🫱"
+  },
+  {
+    "id": "leftwards_hand",
+    "name": "Leftwards Hand",
+    "category": "emoji",
+    "emoji": "🫲"
+  },
+  {
+    "id": "man_standing",
+    "name": "Man Standing",
+    "category": "emoji",
+    "emoji": "🧍‍♂️"
+  },
+  {
+    "id": "woman_standing",
+    "name": "Woman Standing",
+    "category": "emoji",
+    "emoji": "🧍‍♀️"
+  },
+  {
+    "id": "man_running",
+    "name": "Man Running",
+    "category": "emoji",
+    "emoji": "🏃‍♂️"
+  },
+  {
+    "id": "woman_running",
+    "name": "Woman Running",
+    "category": "emoji",
+    "emoji": "🏃‍♀️"
+  },
+  {
+    "id": "man_walking",
+    "name": "Man Walking",
+    "category": "emoji",
+    "emoji": "🚶‍♂️"
+  },
+  {
+    "id": "woman_walking",
+    "name": "Woman Walking",
+    "category": "emoji",
+    "emoji": "🚶‍♀️"
+  },
+  {
+    "id": "man_kneeling",
+    "name": "Man Kneeling",
+    "category": "emoji",
+    "emoji": "🧎‍♂️"
+  },
+  {
+    "id": "woman_kneeling",
+    "name": "Woman Kneeling",
+    "category": "emoji",
+    "emoji": "🧎‍♀️"
+  },
+  {
+    "id": "man_climbing",
+    "name": "Man Climbing",
+    "category": "emoji",
+    "emoji": "🧗‍♂️"
+  },
+  {
+    "id": "woman_climbing",
+    "name": "Woman Climbing",
+    "category": "emoji",
+    "emoji": "🧗‍♀️"
+  },
+  {
+    "id": "person_fencing",
+    "name": "Person Fencing",
+    "category": "emoji",
+    "emoji": "🤺"
+  },
+  {
+    "id": "man_swimming",
+    "name": "Man Swimming",
+    "category": "emoji",
+    "emoji": "🏊‍♂️"
+  },
+  {
+    "id": "woman_biking",
+    "name": "Woman Biking",
+    "category": "emoji",
+    "emoji": "🚴‍♀️"
+  },
+  {
+    "id": "dog",
+    "name": "Dog Face",
+    "category": "emoji",
+    "emoji": "🐶"
+  },
+  {
+    "id": "cat",
+    "name": "Cat Face",
+    "category": "emoji",
+    "emoji": "🐱"
+  },
+  {
+    "id": "mouse",
+    "name": "Mouse Face",
+    "category": "emoji",
+    "emoji": "🐭"
+  },
+  {
+    "id": "hamster",
+    "name": "Hamster Face",
+    "category": "emoji",
+    "emoji": "🐹"
+  },
+  {
+    "id": "rabbit",
+    "name": "Rabbit Face",
+    "category": "emoji",
+    "emoji": "🐰"
+  },
+  {
+    "id": "fox",
+    "name": "Fox Face",
+    "category": "emoji",
+    "emoji": "🦊"
+  },
+  {
+    "id": "bear",
+    "name": "Bear Face",
+    "category": "emoji",
+    "emoji": "🐻"
+  },
+  {
+    "id": "panda",
+    "name": "Panda Face",
+    "category": "emoji",
+    "emoji": "🐼"
+  },
+  {
+    "id": "lion",
+    "name": "Lion Face",
+    "category": "emoji",
+    "emoji": "🦁"
+  },
+  {
+    "id": "tiger",
+    "name": "Tiger Face",
+    "category": "emoji",
+    "emoji": "🐯"
+  },
+  {
+    "id": "koala",
+    "name": "Koala Face",
+    "category": "emoji",
+    "emoji": "🐨"
+  },
+  {
+    "id": "frog",
+    "name": "Frog Face",
+    "category": "emoji",
+    "emoji": "🐸"
+  },
+  {
+    "id": "chicken",
+    "name": "Chicken",
+    "category": "emoji",
+    "emoji": "🐔"
+  },
+  {
+    "id": "penguin",
+    "name": "Penguin",
+    "category": "emoji",
+    "emoji": "🐧"
+  },
+  {
+    "id": "bird",
+    "name": "Bird",
+    "category": "emoji",
+    "emoji": "🐦"
+  },
+  {
+    "id": "duck",
+    "name": "Duck",
+    "category": "emoji",
+    "emoji": "🦆"
+  },
+  {
+    "id": "turtle",
+    "name": "Turtle",
+    "category": "emoji",
+    "emoji": "🐢"
+  },
+  {
+    "id": "butterfly",
+    "name": "Butterfly",
+    "category": "emoji",
+    "emoji": "🦋"
+  },
+  {
+    "id": "tree",
+    "name": "Deciduous Tree",
+    "category": "emoji",
+    "emoji": "🌲"
+  },
+  {
+    "id": "palm_tree",
+    "name": "Palm Tree",
+    "category": "emoji",
+    "emoji": "🌴"
+  },
+  {
+    "id": "cactus",
+    "name": "Cactus",
+    "category": "emoji",
+    "emoji": "🌵"
+  },
+  {
+    "id": "cherry_blossom",
+    "name": "Cherry Blossom",
+    "category": "emoji",
+    "emoji": "🌸"
+  },
+  {
+    "id": "sunflower",
+    "name": "Sunflower",
+    "category": "emoji",
+    "emoji": "🌻"
+  },
+  {
+    "id": "rose",
+    "name": "Rose",
+    "category": "emoji",
+    "emoji": "🌹"
+  },
+  {
+    "id": "four_leaf_clover",
+    "name": "Four Leaf Clover",
+    "category": "emoji",
+    "emoji": "🍀"
+  },
+  {
+    "id": "maple_leaf",
+    "name": "Maple Leaf",
+    "category": "emoji",
+    "emoji": "🍁"
+  },
+  {
+    "id": "green_apple",
+    "name": "Green Apple",
+    "category": "emoji",
+    "emoji": "🍏"
+  },
+  {
+    "id": "red_apple",
+    "name": "Red Apple",
+    "category": "emoji",
+    "emoji": "🍎"
+  },
+  {
+    "id": "pear",
+    "name": "Pear",
+    "category": "emoji",
+    "emoji": "🍐"
+  },
+  {
+    "id": "tangerine",
+    "name": "Tangerine",
+    "category": "emoji",
+    "emoji": "🍊"
+  },
+  {
+    "id": "banana",
+    "name": "Banana",
+    "category": "emoji",
+    "emoji": "🍌"
+  },
+  {
+    "id": "watermelon",
+    "name": "Watermelon",
+    "category": "emoji",
+    "emoji": "🍉"
+  },
+  {
+    "id": "grapes",
+    "name": "Grapes",
+    "category": "emoji",
+    "emoji": "🍇"
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry",
+    "category": "emoji",
+    "emoji": "🍓"
+  },
+  {
+    "id": "kiwi",
+    "name": "Kiwi Fruit",
+    "category": "emoji",
+    "emoji": "🥝"
+  },
+  {
+    "id": "pineapple",
+    "name": "Pineapple",
+    "category": "emoji",
+    "emoji": "🍍"
+  },
+  {
+    "id": "pizza",
+    "name": "Pizza",
+    "category": "emoji",
+    "emoji": "🍕"
+  },
+  {
+    "id": "burger",
+    "name": "Hamburger",
+    "category": "emoji",
+    "emoji": "🍔"
+  },
+  {
+    "id": "fries",
+    "name": "French Fries",
+    "category": "emoji",
+    "emoji": "🍟"
+  },
+  {
+    "id": "hotdog",
+    "name": "Hot Dog",
+    "category": "emoji",
+    "emoji": "🌭"
+  },
+  {
+    "id": "popcorn",
+    "name": "Popcorn",
+    "category": "emoji",
+    "emoji": "🍿"
+  },
+  {
+    "id": "salad",
+    "name": "Green Salad",
+    "category": "emoji",
+    "emoji": "🥗"
+  },
+  {
+    "id": "cake",
+    "name": "Shortcake",
+    "category": "emoji",
+    "emoji": "🍰"
+  },
+  {
+    "id": "doughnut",
+    "name": "Doughnut",
+    "category": "emoji",
+    "emoji": "🍩"
+  },
+  {
+    "id": "cookie",
+    "name": "Cookie",
+    "category": "emoji",
+    "emoji": "🍪"
+  },
+  {
+    "id": "coffee",
+    "name": "Hot Beverage",
+    "category": "emoji",
+    "emoji": "☕"
+  },
+  {
+    "id": "tea",
+    "name": "Teacup Without Handle",
+    "category": "emoji",
+    "emoji": "🍵"
+  },
+  {
+    "id": "soft_drink",
+    "name": "Cup with Straw",
+    "category": "emoji",
+    "emoji": "🥤"
+  },
+  {
+    "id": "car",
+    "name": "Automobile",
+    "category": "emoji",
+    "emoji": "🚗"
+  },
+  {
+    "id": "taxi",
+    "name": "Taxi",
+    "category": "emoji",
+    "emoji": "🚕"
+  },
+  {
+    "id": "suv",
+    "name": "Sport Utility Vehicle",
+    "category": "emoji",
+    "emoji": "🚙"
+  },
+  {
+    "id": "bus",
+    "name": "Bus",
+    "category": "emoji",
+    "emoji": "🚌"
+  },
+  {
+    "id": "trolleybus",
+    "name": "Trolleybus",
+    "category": "emoji",
+    "emoji": "🚎"
+  },
+  {
+    "id": "race_car",
+    "name": "Racing Car",
+    "category": "emoji",
+    "emoji": "🏎️"
+  },
+  {
+    "id": "police_car",
+    "name": "Police Car",
+    "category": "emoji",
+    "emoji": "🚓"
+  },
+  {
+    "id": "ambulance",
+    "name": "Ambulance",
+    "category": "emoji",
+    "emoji": "🚑"
+  },
+  {
+    "id": "fire_engine",
+    "name": "Fire Engine",
+    "category": "emoji",
+    "emoji": "🚒"
+  },
+  {
+    "id": "minibus",
+    "name": "Minibus",
+    "category": "emoji",
+    "emoji": "🚐"
+  },
+  {
+    "id": "airplane",
+    "name": "Airplane",
+    "category": "emoji",
+    "emoji": "✈️"
+  },
+  {
+    "id": "rocket",
+    "name": "Rocket",
+    "category": "emoji",
+    "emoji": "🚀"
+  },
+  {
+    "id": "flying_saucer",
+    "name": "Flying Saucer",
+    "category": "emoji",
+    "emoji": "🛸"
+  },
+  {
+    "id": "ship",
+    "name": "Ship",
+    "category": "emoji",
+    "emoji": "🚢"
+  },
+  {
+    "id": "hourglass_done",
+    "name": "Hourglass Done",
+    "category": "emoji",
+    "emoji": "⌛"
+  },
+  {
+    "id": "hourglass_not_done",
+    "name": "Hourglass Not Done",
+    "category": "emoji",
+    "emoji": "⏳"
+  },
+  {
+    "id": "watch",
+    "name": "Watch",
+    "category": "emoji",
+    "emoji": "⌚"
+  },
+  {
+    "id": "alarm_clock",
+    "name": "Alarm Clock",
+    "category": "emoji",
+    "emoji": "⏰"
+  },
+  {
+    "id": "stopwatch",
+    "name": "Stopwatch",
+    "category": "emoji",
+    "emoji": "⏱️"
+  },
+  {
+    "id": "timer_clock",
+    "name": "Timer Clock",
+    "category": "emoji",
+    "emoji": "⏲️"
+  },
+  {
+    "id": "mantelpiece_clock",
+    "name": "Mantelpiece Clock",
+    "category": "emoji",
+    "emoji": "🕰️"
+  },
+  {
+    "id": "mobile_phone",
+    "name": "Mobile Phone",
+    "category": "emoji",
+    "emoji": "📱"
+  },
+  {
+    "id": "laptop",
+    "name": "Laptop",
+    "category": "emoji",
+    "emoji": "💻"
+  },
+  {
+    "id": "desktop_computer",
+    "name": "Desktop Computer",
+    "category": "emoji",
+    "emoji": "🖥️"
+  },
+  {
+    "id": "printer",
+    "name": "Printer",
+    "category": "emoji",
+    "emoji": "🖨️"
+  },
+  {
+    "id": "battery",
+    "name": "Battery",
+    "category": "emoji",
+    "emoji": "🔋"
+  },
+  {
+    "id": "electric_plug",
+    "name": "Electric Plug",
+    "category": "emoji",
+    "emoji": "🔌"
+  },
+  {
+    "id": "light_bulb",
+    "name": "Light Bulb",
+    "category": "emoji",
+    "emoji": "💡"
+  },
+  {
+    "id": "flashlight",
+    "name": "Flashlight",
+    "category": "emoji",
+    "emoji": "🔦"
+  },
+  {
+    "id": "satellite_antenna",
+    "name": "Satellite Antenna",
+    "category": "emoji",
+    "emoji": "📡"
+  },
+  {
+    "id": "antenna_bars",
+    "name": "Antenna Bars",
+    "category": "emoji",
+    "emoji": "📶"
+  },
+  {
+    "id": "red_heart",
+    "name": "Red Heart",
+    "category": "emoji",
+    "emoji": "❤️"
+  },
+  {
+    "id": "orange_heart",
+    "name": "Orange Heart",
+    "category": "emoji",
+    "emoji": "🧡"
+  },
+  {
+    "id": "yellow_heart",
+    "name": "Yellow Heart",
+    "category": "emoji",
+    "emoji": "💛"
+  },
+  {
+    "id": "green_heart",
+    "name": "Green Heart",
+    "category": "emoji",
+    "emoji": "💚"
+  },
+  {
+    "id": "blue_heart",
+    "name": "Blue Heart",
+    "category": "emoji",
+    "emoji": "💙"
+  },
+  {
+    "id": "purple_heart",
+    "name": "Purple Heart",
+    "category": "emoji",
+    "emoji": "💜"
+  },
+  {
+    "id": "black_heart",
+    "name": "Black Heart",
+    "category": "emoji",
+    "emoji": "🖤"
+  },
+  {
+    "id": "white_heart",
+    "name": "White Heart",
+    "category": "emoji",
+    "emoji": "🤍"
+  },
+  {
+    "id": "brown_heart",
+    "name": "Brown Heart",
+    "category": "emoji",
+    "emoji": "🤎"
+  },
+  {
+    "id": "sparkling_heart",
+    "name": "Sparkling Heart",
+    "category": "emoji",
+    "emoji": "💖"
+  },
+  {
+    "id": "growing_heart",
+    "name": "Growing Heart",
+    "category": "emoji",
+    "emoji": "💗"
+  },
+  {
+    "id": "beating_heart",
+    "name": "Beating Heart",
+    "category": "emoji",
+    "emoji": "💓"
+  },
+  {
+    "id": "revolving_hearts",
+    "name": "Revolving Hearts",
+    "category": "emoji",
+    "emoji": "💞"
+  },
+  {
+    "id": "check_mark",
+    "name": "Check Mark",
+    "category": "emoji",
+    "emoji": "✔️"
+  },
+  {
+    "id": "cross_mark",
+    "name": "Cross Mark",
+    "category": "emoji",
+    "emoji": "✖️"
+  },
+  {
+    "id": "plus_sign",
+    "name": "Plus Sign",
+    "category": "emoji",
+    "emoji": "➕"
+  },
+  {
+    "id": "minus_sign",
+    "name": "Minus Sign",
+    "category": "emoji",
+    "emoji": "➖"
+  },
+  {
+    "id": "right_arrow",
+    "name": "Right Arrow",
+    "category": "emoji",
+    "emoji": "➡️"
+  },
+  {
+    "id": "left_arrow",
+    "name": "Left Arrow",
+    "category": "emoji",
+    "emoji": "⬅️"
+  },
+  {
+    "id": "up_arrow",
+    "name": "Up Arrow",
+    "category": "emoji",
+    "emoji": "⬆️"
+  },
+  {
+    "id": "down_arrow",
+    "name": "Down Arrow",
+    "category": "emoji",
+    "emoji": "⬇️"
+  },
+  {
+    "id": "counterclockwise_arrows",
+    "name": "Counterclockwise Arrows",
+    "category": "emoji",
+    "emoji": "🔄"
+  },
+  {
+    "id": "repeat",
+    "name": "Repeat",
+    "category": "emoji",
+    "emoji": "🔁"
+  },
+  {
+    "id": "shuffle",
+    "name": "Shuffle",
+    "category": "emoji",
+    "emoji": "🔀"
   }
 ]

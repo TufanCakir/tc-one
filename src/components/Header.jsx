@@ -1,10 +1,9 @@
-import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useProfile } from "../context/ProfileContext";
 import Icon from "../components/Icon";
 
 export default function Header() {
-  const { profileImage } = useProfile();
+  const { profileImage, profileName } = useProfile();
 
   return (
     <View style={styles.container}>
@@ -15,6 +14,10 @@ export default function Header() {
           <Text style={styles.placeholder}>🙂</Text>
         )}
       </View>
+
+      <Text style={styles.name}>
+        {profileName || "Gast"} {/* Falls kein Name gespeichert ist */}
+      </Text>
     </View>
   );
 }
@@ -24,7 +27,7 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     paddingHorizontal: 16,
     paddingVertical: 12,
     backgroundColor: "#111",
@@ -35,9 +38,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#222",
     alignItems: "center",
     justifyContent: "center",
+    marginRight: 10,
   },
   placeholder: {
     fontSize: 20,
     color: "#888",
+  },
+  name: {
+    fontSize: 16,
+    color: "#fff",
+    fontWeight: "600",
   },
 });
