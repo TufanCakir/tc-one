@@ -18,7 +18,8 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSBluetoothAlwaysUsageDescription": "Diese App kann Bluetooth verwenden, um kompatible Drucker zu finden.",
-        "NSCalendarsUsageDescription": "Diese App benötigt Zugriff auf deinen Kalender, um Ereignisse anzuzeigen und hinzuzufügen."
+        "NSCalendarsUsageDescription": "Diese App benötigt Zugriff auf deinen Kalender, um Ereignisse anzuzeigen und hinzuzufügen.",
+        "NSContactsUsageDescription": "Diese App benötigt Zugriff auf deine Kontakte, um SMS zu senden."
       }
     },
     "android": {

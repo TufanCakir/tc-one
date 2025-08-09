@@ -130,13 +130,6 @@ export const menuButtons = [
     accessibilityHint: "Starte und stoppe eine Zeitmessung",
   },
   {
-    title: "Support",
-    screen: "SupportScreen",
-    icon: { name: "contact-support", set: ICONS.mi },
-    accessibilityLabel: "Support kontaktieren",
-    accessibilityHint: "Hole dir Hilfe oder stelle eine Anfrage",
-  },
-  {
     title: "Text Editor",
     screen: "TextEditorScreen",
     icon: { name: "edit", set: ICONS.ant },
@@ -163,5 +156,12 @@ export const menuButtons = [
     icon: { name: "chart-bar", set: ICONS.mci },
     accessibilityLabel: "Abstimmungen anzeigen",
     accessibilityHint: "Stimme über Themen ab",
+  },
+  {
+    title: "Support",
+    screen: "SupportScreen",
+    icon: { name: "contact-support", set: ICONS.mi },
+    accessibilityLabel: "Support kontaktieren",
+    accessibilityHint: "Hole dir Hilfe oder stelle eine Anfrage",
   },
 ];

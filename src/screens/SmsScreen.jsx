@@ -1,10 +1,9 @@
-import React from "react";
 import { View, Text, Alert, StyleSheet, Pressable } from "react-native";
 import * as SMS from "expo-sms";
 import { LinearGradient } from "expo-linear-gradient";
 import Footer from "../components/Footer";
 
-const RECIPIENTS = ["015112345678"];
+const RECIPIENTS = ["015112345678"]; // Direktnummer → keine Kontaktberechtigung nötig
 const MESSAGE = "Schickt mir Feedback, Ideen, Bugs. Danke!";
 const GRADIENT_COLORS = ["#000000", "#555555"];
 
@@ -13,25 +12,21 @@ export default function SmsScreen() {
     try {
       const isAvailable = await SMS.isAvailableAsync();
       if (!isAvailable) {
-        Alert.alert(
+        return Alert.alert(
           "Nicht verfügbar",
           "SMS wird auf diesem Gerät nicht unterstützt."
         );
-        return;
       }
 
       const { result } = await SMS.sendSMSAsync(RECIPIENTS, MESSAGE);
 
-      switch (result) {
-        case "sent":
-          Alert.alert("Erfolg", "SMS wurde erfolgreich gesendet!");
-          break;
-        case "cancelled":
-          Alert.alert("Abgebrochen", "Das Senden der SMS wurde abgebrochen.");
-          break;
-        default:
-          Alert.alert("Fehler", "Die SMS konnte nicht gesendet werden.");
-      }
+      const messages = {
+        sent: ["Erfolg", "SMS wurde erfolgreich gesendet!"],
+        cancelled: ["Abgebrochen", "Das Senden der SMS wurde abgebrochen."],
+        default: ["Fehler", "Die SMS konnte nicht gesendet werden."],
+      };
+
+      Alert.alert(...(messages[result] || messages.default));
     } catch (error) {
       console.error("SMS-Fehler:", error);
       Alert.alert("Fehler", "Beim Senden ist ein Problem aufgetreten.");
@@ -60,9 +55,15 @@ export default function SmsScreen() {
         </LinearGradient>
       </Pressable>
 
-      <View style={styles.footerWrapper}>
-        <Footer />
-      </View>
+      <FooterWrapper />
+    </View>
+  );
+}
+
+function FooterWrapper() {
+  return (
+    <View style={styles.footerWrapper}>
+      <Footer />
     </View>
   );
 }
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     borderRadius: 12,
-    overflow: "hidden", // Gradient sauber begrenzen
+    overflow: "hidden", // Gradient sauber abschneiden
   },
   button: {
     paddingVertical: 14,
@@ -99,6 +100,7 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
     fontWeight: "600",
+    letterSpacing: 0.5,
   },
   footerWrapper: {
     position: "absolute",

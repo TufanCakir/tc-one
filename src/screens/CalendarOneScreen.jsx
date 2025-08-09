@@ -127,8 +127,8 @@ export default function CalendarOneScreen() {
             : {}),
         }}
         theme={{
-          backgroundColor: "#111",
-          calendarBackground: "#111",
+          backgroundColor: "#000",
+          calendarBackground: "#000",
           textSectionTitleColor: "#0f0",
           dayTextColor: "#fff",
           monthTextColor: "#0f0",
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   header: { color: "#0f0", fontSize: 20, fontWeight: "bold", marginBottom: 10 },
   input: {
-    backgroundColor: "#222",
+    backgroundColor: "#000",
     color: "#fff",
     padding: 10,
     borderRadius: 8,
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 10,
     borderRadius: 8,
-    backgroundColor: "#222",
+    backgroundColor: "#000",
   },
   eventTitle: { color: "#fff", fontSize: 16, fontWeight: "bold" },
   eventTime: { color: "#aaa", fontSize: 13, marginTop: 4 },
