@@ -1,54 +1,47 @@
-import { useEffect, useState } from "react";
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
-import * as Battery from "expo-battery";
+import { useBatteryLevel, useBatteryState, BatteryState } from "expo-battery";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function BatteryScreen() {
-  const [batteryLevel, setBatteryLevel] = useState(null);
-  const [charging, setCharging] = useState(null);
+  const batteryLevel = useBatteryLevel();
+  const batteryState = useBatteryState();
 
-  useEffect(() => {
-    // Aktuellen Batteriestatus holen
-    const getBatteryInfo = async () => {
-      const level = await Battery.getBatteryLevelAsync();
-      setBatteryLevel(level);
-      const state = await Battery.getBatteryStateAsync();
-      setCharging(state === Battery.BatteryState.CHARGING);
-    };
-    getBatteryInfo();
-
-    // Listener für Updates
-    const subscriptionLevel = Battery.addBatteryLevelListener(
-      ({ batteryLevel }) => setBatteryLevel(batteryLevel)
-    );
-
-    const subscriptionState = Battery.addBatteryStateListener(
-      ({ batteryState }) =>
-        setCharging(batteryState === Battery.BatteryState.CHARGING)
-    );
-
-    return () => {
-      subscriptionLevel.remove();
-      subscriptionState.remove();
-    };
-  }, []);
-
-  if (batteryLevel === null || charging === null) {
+  if (batteryLevel == null) {
     return (
-      <View style={styles.loading}>
-        <ActivityIndicator size="large" color="#fff" />
-        <Text style={styles.text}>Lade Batterie-Info…</Text>
+      <View style={styles.container}>
+        <Text style={styles.loading}>🔍 Lade Batterie-Info…</Text>
       </View>
     );
   }
 
+  const percent = Math.floor(batteryLevel * 100);
+  const charging = batteryState === BatteryState.CHARGING;
+
+  // Farbe abhängig vom Ladestand
+  const batteryColor =
+    percent > 50 ? "#4CAF50" : percent > 20 ? "#FFC107" : "#F44336";
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>🔋 Batterie Status</Text>
-      <Text style={styles.text}>
-        Akkustand: {(batteryLevel * 100).toFixed(0)}%
+      <Text style={styles.title}>🔋 Batterie</Text>
+
+      {/* Batterie-Visual */}
+      <View style={[styles.batteryOutline, { borderColor: batteryColor }]}>
+        <View
+          style={[
+            styles.batteryFill,
+            { width: `${percent}%`, backgroundColor: batteryColor },
+          ]}
+        />
+      </View>
+
+      {/* Prozentsatz */}
+      <Text style={styles.percentText}>
+        {charging ? "⚡" : ""} {percent}%
       </Text>
-      <Text style={styles.text}>
-        Status: {charging ? "⚡ Wird geladen" : "🔋 Nicht am Laden"}
+
+      {/* Status-Text */}
+      <Text style={styles.statusText}>
+        {charging ? "Wird geladen…" : "Nicht am Laden"}
       </Text>
     </View>
   );
@@ -59,22 +52,38 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-  },
-  loading: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#000",
+    padding: 20,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
+    color: "#fff",
     marginBottom: 20,
     fontWeight: "bold",
-    color: "#fff",
   },
-  text: {
+  batteryOutline: {
+    width: 220,
+    height: 40,
+    borderWidth: 3,
+    borderRadius: 8,
+    backgroundColor: "#333",
+    overflow: "hidden",
+    marginBottom: 15,
+  },
+  batteryFill: {
+    height: "100%",
+  },
+  percentText: {
+    fontSize: 22,
+    color: "#fff",
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  statusText: {
+    fontSize: 18,
+    color: "#bbb",
+  },
+  loading: {
     fontSize: 18,
     color: "#fff",
-    marginVertical: 8,
   },
 });

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   SafeAreaView,
   View,
@@ -19,55 +19,60 @@ export default function JournalScreen() {
   const [entries, setEntries] = useState([]);
   const scrollRef = useRef();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const stored = await AsyncStorage.getItem(STORAGE_KEY);
-        if (stored) setEntries(JSON.parse(stored));
-      } catch (e) {
-        console.warn("Fehler beim Laden der Einträge", e);
-      }
-    })();
+  // 🔹 Einträge aus Storage laden
+  const loadEntries = useCallback(async () => {
+    try {
+      const stored = await AsyncStorage.getItem(STORAGE_KEY);
+      if (stored) setEntries(JSON.parse(stored));
+    } catch (e) {
+      console.warn("Fehler beim Laden der Einträge", e);
+    }
+  }, []);
+
+  // 🔹 Einträge in Storage speichern
+  const saveEntries = useCallback(async (newEntries) => {
+    try {
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(newEntries));
+    } catch (e) {
+      console.warn("Fehler beim Speichern", e);
+    }
   }, []);
 
   useEffect(() => {
-    (async () => {
-      try {
-        await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-      } catch (e) {
-        console.warn("Fehler beim Speichern", e);
-      }
-    })();
-  }, [entries]);
+    loadEntries();
+  }, [loadEntries]);
 
-  const handleAddEntry = () => {
+  useEffect(() => {
+    saveEntries(entries);
+  }, [entries, saveEntries]);
+
+  // 🔹 Neuer Eintrag
+  const handleAddEntry = useCallback(() => {
     setEntries((prev) => [...prev, ""]);
-    setTimeout(() => {
-      scrollRef.current?.scrollToEnd({ animated: true });
-    }, 300);
-  };
+    setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 100);
+  }, []);
 
-  const handleChangeText = (text, index) => {
-    const updated = [...entries];
-    updated[index] = text;
-    setEntries(updated);
-  };
+  // 🔹 Textänderung
+  const handleChangeText = useCallback(
+    (text, index) => {
+      const updated = [...entries];
+      updated[index] = text;
+      setEntries(updated);
+    },
+    [entries]
+  );
 
-  const handleDeleteEntry = () => {
-    if (entries.length === 0) {
-      Alert.alert("Keine Einträge", "Es gibt keinen Eintrag zum Löschen.");
-      return;
-    }
-
-    Alert.alert("Eintrag löschen", "Letzten Eintrag wirklich löschen?", [
+  // 🔹 Eintrag löschen
+  const handleDeleteEntry = useCallback((index) => {
+    Alert.alert("Eintrag löschen", "Diesen Eintrag wirklich löschen?", [
       { text: "Abbrechen", style: "cancel" },
       {
         text: "Löschen",
         style: "destructive",
-        onPress: () => setEntries((prev) => prev.slice(0, -1)),
+        onPress: () => setEntries((prev) => prev.filter((_, i) => i !== index)),
       },
     ]);
-  };
+  }, []);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -75,7 +80,7 @@ export default function JournalScreen() {
         style={styles.container}
         behavior={Platform.OS === "ios" ? "padding" : "height"}
       >
-        {/* Scrollbereich mit fester Höhe */}
+        {/* Scrollbereich */}
         <View style={styles.scrollWrapper}>
           <ScrollView
             ref={scrollRef}
@@ -89,28 +94,26 @@ export default function JournalScreen() {
                   style={styles.textInput}
                   multiline
                   placeholder="Schreibe hier deine Gedanken..."
+                  placeholderTextColor="#888"
                   value={entry}
                   onChangeText={(text) => handleChangeText(text, index)}
                 />
+                <TouchableOpacity
+                  style={[styles.addBtn, styles.deleteBtn, { marginTop: 6 }]}
+                  onPress={() => handleDeleteEntry(index)}
+                >
+                  <Text style={styles.addBtnText}>Löschen</Text>
+                </TouchableOpacity>
               </View>
             ))}
           </ScrollView>
         </View>
 
-        {/* Buttons unter dem Scrollbereich */}
+        {/* Buttons */}
         <View style={styles.buttonRow}>
           <TouchableOpacity style={styles.addBtn} onPress={handleAddEntry}>
             <Text style={styles.addBtnText}>Neuer Eintrag</Text>
           </TouchableOpacity>
-
-          {entries.length > 0 && (
-            <TouchableOpacity
-              style={[styles.addBtn, styles.deleteBtn]}
-              onPress={handleDeleteEntry}
-            >
-              <Text style={styles.addBtnText}>Löschen</Text>
-            </TouchableOpacity>
-          )}
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
