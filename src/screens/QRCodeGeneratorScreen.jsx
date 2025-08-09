@@ -4,10 +4,10 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
   StyleSheet,
 } from "react-native";
 import QRCode from "react-native-qrcode-svg";
+import { LinearGradient } from "expo-linear-gradient";
 import Footer from "../components/Footer";
 
 export default function QRCodeGenerator() {
@@ -16,13 +16,11 @@ export default function QRCodeGenerator() {
 
   const generateQRCode = () => {
     if (!qrValue) return;
-
     setIsActive(true);
   };
 
   const handleInputChange = (text) => {
     setQRValue(text);
-
     if (!text) {
       setIsActive(false);
     }
@@ -38,12 +36,22 @@ export default function QRCodeGenerator() {
         <TextInput
           style={styles.input}
           placeholder="Enter text or URL"
+          placeholderTextColor="#aaa"
           value={qrValue}
           onChangeText={handleInputChange}
         />
-        <TouchableOpacity style={styles.button} onPress={generateQRCode}>
-          <Text style={styles.buttonText}>Generate QR Code</Text>
+
+        <TouchableOpacity onPress={generateQRCode} activeOpacity={0.8}>
+          <LinearGradient
+            colors={["#000000", "#ffffff"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.button}
+          >
+            <Text style={styles.buttonText}>Generate QR Code</Text>
+          </LinearGradient>
         </TouchableOpacity>
+
         {isActive && (
           <View style={styles.qrCode}>
             <QRCode
@@ -55,6 +63,7 @@ export default function QRCodeGenerator() {
           </View>
         )}
       </View>
+
       <View style={styles.footerWrapper}>
         <Footer />
       </View>
@@ -65,7 +74,6 @@ export default function QRCodeGenerator() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
     alignItems: "center",
     justifyContent: "center",
   },
@@ -104,13 +112,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#fff",
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: "center",
   },
   buttonText: {
-    color: "#000",
+    color: "#fff",
     fontSize: 16,
     fontWeight: "bold",
   },

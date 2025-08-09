@@ -55,7 +55,7 @@ function Navigator() {
         // Gradient-Header
         headerBackground: () => (
           <LinearGradient
-            colors={["#101012", "#0a0a0a"]}
+            colors={["#000000", "#ffffff"]}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={StyleSheet.absoluteFill}

@@ -1,38 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import NetInfo from "@react-native-community/netinfo";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export default function OnlineGuard({ children }) {
-  const [isConnected, setIsConnected] = useState(null); // ⬅ initial null
+  const netInfo = useNetInfo();
 
-  useEffect(() => {
-    // Initialen Status abrufen
-    NetInfo.fetch().then((state) => {
-      const reachable =
-        state.isConnected && state.isInternetReachable !== false;
-      setIsConnected(reachable);
-    });
+  const isChecking = netInfo.isConnected === null;
+  const isOnline = netInfo.isConnected && netInfo.isInternetReachable !== false;
 
-    // Live-Aktualisierung
-    const unsubscribe = NetInfo.addEventListener((state) => {
-      const reachable =
-        state.isConnected && state.isInternetReachable !== false;
-      setIsConnected(reachable);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  if (isConnected === null) {
-    // Optional: kleiner Ladescreen beim Initialisieren
+  if (isChecking) {
     return (
       <View style={styles.overlay}>
+        <ActivityIndicator size="large" color="#fff" />
         <Text style={styles.subtext}>Verbindung wird geprüft…</Text>
       </View>
     );
   }
 
-  if (!isConnected) {
+  if (!isOnline) {
     return (
       <View style={styles.overlay}>
         <Text style={styles.message}>⚠️ Keine Internetverbindung</Text>
@@ -65,5 +49,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#ccc",
     textAlign: "center",
+    marginTop: 4,
   },
 });

@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect, useCallback } from "react";
-import { StyleSheet, StatusBar } from "react-native";
+import { useState, useRef, useEffect } from "react";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { enableScreens } from "react-native-screens";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -22,12 +22,14 @@ export default function App() {
   useUpdateChecker(setUpdateVisible);
 
   // Show loading briefly on navigation change
-  const handleNavigationStateChange = useCallback(() => {
-    if (loadingTimeoutRef.current) {
-      clearTimeout(loadingTimeoutRef.current);
-    }
+  const handleNavigationStateChange = () => {
+    clearTimeout(loadingTimeoutRef.current);
     setLoading(true);
     loadingTimeoutRef.current = setTimeout(() => setLoading(false), 500);
+  };
+
+  useEffect(() => {
+    return () => clearTimeout(loadingTimeoutRef.current);
   }, []);
 
   // Cleanup on unmount
@@ -42,14 +44,10 @@ export default function App() {
   return (
     <AppProviders>
       <SafeAreaView style={styles.safeArea} edges={["top", "left", "right"]}>
-        <StatusBar
-          backgroundColor="transparent"
-          translucent
-          barStyle="light-content"
-        />
         {/* Overlays möglichst weit oben für sofortigen Render */}
         {loading && <LoadingOverlay />}
         {updateVisible && <UpdateOverlay />}
+
         <NavigationContainer onStateChange={handleNavigationStateChange}>
           <OnlineGuard>
             <AppNavigator />
@@ -63,6 +61,6 @@ export default function App() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#000", // Dark mode background
+    backgroundColor: "#000",
   },
 });
