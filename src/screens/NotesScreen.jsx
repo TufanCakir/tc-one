@@ -1,4 +1,4 @@
-// src/components/NotesScreen.js
+// src/screens/NotesScreen.js
 import { useCallback } from "react";
 import {
   View,

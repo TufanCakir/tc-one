@@ -1,4 +1,13 @@
 // src/navigation/screens.jsx
+
+// Hilfsfunktion: "MyCoolScreen" → "My Cool"
+const toReadableTitle = (name = "") =>
+  name
+    .replace("Screen", "")
+    .replace(/([A-Z])/g, " $1")
+    .trim() || "Screen";
+
+// Screens-Imports
 import StartScreen from "../screens/StartScreen";
 import HomeScreen from "../screens/HomeScreen";
 import CalculatorScreen from "../screens/CalculatorScreen";
@@ -31,10 +40,10 @@ import SupportScreen from "../screens/SupportScreen";
 // Game Screens
 import SnakeScreen from "../gameScreens/SnakeScreen";
 
-export const screens = [
+// Rohdefinition
+const rawScreens = [
   { name: "StartScreen", component: StartScreen, title: "Start" },
   { name: "HomeScreen", component: HomeScreen, title: "Home" },
-
   { name: "AlarmClockScreen", component: AlarmClockScreen },
   { name: "BillSplitterScreen", component: BillSplitterScreen },
   { name: "BlogScreen", component: BlogScreen, title: "Blog" },
@@ -66,12 +75,17 @@ export const screens = [
   { name: "PrintScreen", component: PrintScreen },
   { name: "SupportScreen", component: SupportScreen },
   { name: "SnakeScreen", component: SnakeScreen, title: "Snake" },
-].map((screen) => ({
-  ...screen,
-  title:
-    screen.title ||
-    screen.name
-      .replace("Screen", "")
-      .replace(/([A-Z])/g, " $1")
-      .trim(),
-}));
+];
+
+// Finale Screens-Liste mit Auto-Titel und Validierung
+export const screens = rawScreens.map((screen, idx) => {
+  if (!screen?.component && __DEV__) {
+    console.warn(
+      `[screens.jsx] Fehlende Komponente bei "${screen?.name}" @${idx}`
+    );
+  }
+  return {
+    ...screen,
+    title: screen.title || toReadableTitle(screen.name),
+  };
+});

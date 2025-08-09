@@ -1,4 +1,4 @@
-// src/screens/EmojiPickerScreen.js
+// src/screens/EmojiPickerScreen.jsx
 import { useState } from "react";
 import { TouchableOpacity, Text, View } from "react-native";
 import EmojiKeyboard from "rn-emoji-keyboard";

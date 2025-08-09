@@ -1,12 +1,21 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Animated, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Dimensions,
+  Alert,
+} from "react-native";
 import { Magnetometer } from "expo-sensors";
+import * as Location from "expo-location";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import Footer from "../components/Footer";
 
 const { width } = Dimensions.get("window");
 const COMPASS_SIZE = width * 0.8;
 
+// Grad in Himmelsrichtungen umwandeln
 const getCardinal = (deg) => {
   if (deg >= 337.5 || deg < 22.5) return "N";
   if (deg >= 22.5 && deg < 67.5) return "NE";
@@ -18,30 +27,80 @@ const getCardinal = (deg) => {
   return "NW";
 };
 
-const CompassScreen = () => {
+export default function CompassScreen() {
   const [heading, setHeading] = useState(0);
+  const [location, setLocation] = useState(null);
   const rotateAnim = useState(new Animated.Value(0))[0];
 
   useEffect(() => {
-    Magnetometer.setUpdateInterval(100);
-    const subscription = Magnetometer.addListener(({ x, y }) => {
-      let angle = Math.atan2(y, x) * (180 / Math.PI);
-      angle = angle >= 0 ? angle : angle + 360;
-      setHeading(Math.round(angle));
-      Animated.timing(rotateAnim, {
-        toValue: angle,
-        duration: 100,
-        useNativeDriver: true,
-      }).start();
+    let isMounted = true;
+
+    // GPS-Berechtigung abfragen
+    (async () => {
+      const { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(
+          "Standort deaktiviert",
+          "Bitte Standortzugriff erlauben, um GPS-Daten anzuzeigen."
+        );
+        return;
+      }
+
+      const loc = await Location.getCurrentPositionAsync({});
+      if (isMounted) setLocation(loc.coords);
+    })();
+
+    // Magnetometer starten
+    Magnetometer.isAvailableAsync().then((available) => {
+      if (!available) {
+        Alert.alert(
+          "Kompass nicht verfügbar",
+          "Dein Gerät unterstützt keinen Magnetometer."
+        );
+        return;
+      }
+
+      Magnetometer.setUpdateInterval(100);
+      const subscription = Magnetometer.addListener(({ x, y }) => {
+        let angle = Math.atan2(y, x) * (180 / Math.PI);
+        angle = angle >= 0 ? angle : angle + 360;
+
+        if (isMounted) {
+          setHeading(Math.round(angle));
+          Animated.timing(rotateAnim, {
+            toValue: angle,
+            duration: 150,
+            useNativeDriver: true,
+          }).start();
+        }
+      });
+
+      return () => subscription.remove();
     });
-    return () => subscription.remove();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
+
+  const rotation = rotateAnim.interpolate({
+    inputRange: [0, 360],
+    outputRange: ["0deg", "360deg"],
+  });
 
   return (
     <View style={styles.container}>
       <Text style={styles.headingText}>
-        Himmelsrichtung: {getCardinal(heading)} ({heading}°)
+        {getCardinal(heading)} ({heading}°)
       </Text>
+
+      {location && (
+        <Text style={styles.locationText}>
+          Lat: {location.latitude.toFixed(5)} | Lon:{" "}
+          {location.longitude.toFixed(5)}
+        </Text>
+      )}
+
       <View style={styles.compassContainer}>
         <MaterialCommunityIcons
           name="compass-outline"
@@ -50,10 +109,7 @@ const CompassScreen = () => {
           style={styles.compassBackground}
         />
         <Animated.View
-          style={[
-            styles.arrowContainer,
-            { transform: [{ rotate: `${360 - heading}deg` }] },
-          ]}
+          style={[styles.arrowContainer, { transform: [{ rotate: rotation }] }]}
         >
           <MaterialIcons
             name="navigation"
@@ -62,42 +118,25 @@ const CompassScreen = () => {
           />
         </Animated.View>
       </View>
+
       <View style={styles.footerWrapper}>
         <Footer />
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headingText: {
-    fontSize: 24,
-    color: "#fff",
-    marginBottom: 20,
-  },
+  container: { flex: 1, alignItems: "center", justifyContent: "center" },
+  headingText: { fontSize: 24, color: "#fff", marginBottom: 10 },
+  locationText: { fontSize: 16, color: "#aaa", marginBottom: 20 },
   compassContainer: {
     width: COMPASS_SIZE,
     height: COMPASS_SIZE,
     alignItems: "center",
     justifyContent: "center",
   },
-  compassBackground: {
-    position: "absolute",
-  },
-  arrowContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  footerWrapper: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-  },
+  compassBackground: { position: "absolute" },
+  arrowContainer: { alignItems: "center", justifyContent: "center" },
+  footerWrapper: { position: "absolute", bottom: 0, width: "100%" },
 });
-
-export default CompassScreen;

@@ -1,4 +1,3 @@
-// App.jsx
 import { useState, useRef, useEffect, useCallback } from "react";
 import { StyleSheet, StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,7 +12,7 @@ import AppNavigator from "./src/navigation/AppNavigator";
 import OnlineGuard from "./src/components/OnlineGuard";
 import useUpdateChecker from "./src/hooks/useUpdateChecker";
 
-// --- Konstanten ---
+// --- Konfiguration ---
 enableScreens();
 
 const STORAGE_KEYS = {
@@ -24,34 +23,32 @@ const STORAGE_KEYS = {
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
-  const loadingTimeoutRef = useRef();
+  const loadingTimeoutRef = useRef(null);
 
   useUpdateChecker(setUpdateVisible);
 
-  // Navigation Loading Handler
+  // Navigation-Loading Handler
   const handleNavigationStateChange = useCallback(() => {
     clearTimeout(loadingTimeoutRef.current);
     setLoading(true);
-    loadingTimeoutRef.current = setTimeout(() => setLoading(false), 400);
+    loadingTimeoutRef.current = setTimeout(() => setLoading(false), 500);
   }, []);
 
   // Bewertungslogik
   const triggerReviewIfEligible = useCallback(async () => {
     try {
-      // App-Start-Zähler
-      const storedCount = await AsyncStorage.getItem(
-        STORAGE_KEYS.APP_START_COUNT
+      const storedCount = parseInt(
+        await AsyncStorage.getItem(STORAGE_KEYS.APP_START_COUNT),
+        10
       );
-      const count = storedCount ? Number(storedCount) + 1 : 1;
+      const count = isNaN(storedCount) ? 1 : storedCount + 1;
       await AsyncStorage.setItem(STORAGE_KEYS.APP_START_COUNT, String(count));
 
-      // Datum prüfen
       const lastDate = await AsyncStorage.getItem(
         STORAGE_KEYS.LAST_REVIEW_DATE
       );
       const today = new Date().toISOString().split("T")[0];
 
-      // Bedingungen prüfen
       if (
         count >= 3 &&
         lastDate !== today &&
@@ -61,27 +58,31 @@ export default function App() {
         await AsyncStorage.setItem(STORAGE_KEYS.LAST_REVIEW_DATE, today);
       }
     } catch (err) {
-      console.warn("Fehler bei der Bewertungsprüfung:", err);
+      console.warn("[Review] Fehler bei der Bewertungsprüfung:", err);
     }
   }, []);
 
-  // Beim App-Start
+  // App-Start Hook
   useEffect(() => {
     triggerReviewIfEligible();
   }, [triggerReviewIfEligible]);
 
-  // Direkt nach Update
+  // Direkt nach Update bewerten
   useEffect(() => {
     if (updateVisible) {
       (async () => {
-        if (await StoreReview.isAvailableAsync()) {
-          await StoreReview.requestReview();
+        try {
+          if (await StoreReview.isAvailableAsync()) {
+            await StoreReview.requestReview();
+          }
+        } catch (err) {
+          console.warn("[Review] Fehler beim direkten Update-Review:", err);
         }
       })();
     }
   }, [updateVisible]);
 
-  // Cleanup
+  // Cleanup Timer
   useEffect(() => {
     return () => clearTimeout(loadingTimeoutRef.current);
   }, []);

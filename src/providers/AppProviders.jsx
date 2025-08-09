@@ -1,11 +1,24 @@
 // src/providers/AppProviders.jsx
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import {
+  SafeAreaProvider,
+  initialWindowMetrics,
+} from "react-native-safe-area-context";
 import { ProfileProvider } from "../context/ProfileContext";
-// ggf. weitere Provider hier importieren
+// Weitere Provider hier importieren, z. B. ThemeProvider, AuthProvider etc.
 
+/**
+ * AppProviders
+ * - Kapselt alle globalen Context-Provider an einem Ort
+ * - Sorgt dafür, dass jede Komponente im Tree die Provider nutzen kann
+ */
 export default function AppProviders({ children }) {
+  if (!children) {
+    console.error("[AppProviders] Keine children übergeben.");
+    return null;
+  }
+
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <ProfileProvider>{children}</ProfileProvider>
     </SafeAreaProvider>
   );

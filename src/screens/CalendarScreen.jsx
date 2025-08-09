@@ -1,11 +1,11 @@
-// src/components/MyCalendarScreen.js
+// src/screens/MyCalendarScreen.jsx
 import { View, Text, TextInput, Button } from "react-native";
 import { Calendar } from "react-native-calendars";
 import useCalendarEvents from "../hooks/useCalendarEvents";
 import styles from "../styles/CalendarStyles";
 import Footer from "../components/Footer";
 
-export default function MyCalendarScreen() {
+export default function CalendarScreen() {
   const {
     selectedDate,
     eventTitle,

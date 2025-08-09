@@ -1,4 +1,4 @@
-// src/screens/TermsOfServiceScreen.js
+// src/screens/TermsOfServiceScreen.jsx
 import { ScrollView, Text, View } from "react-native";
 import Footer from "../components/Footer";
 import styles from "../styles/TermsOfServiceStyles";

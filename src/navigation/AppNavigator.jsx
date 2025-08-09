@@ -6,6 +6,17 @@ import { screens } from "./screens";
 
 const Stack = createNativeStackNavigator();
 
+/** Kleiner Gradient für den Header-Hintergrund */
+const GradientHeader = () => (
+  <LinearGradient
+    colors={["#000000", "#ffffff"]}
+    start={{ x: 0, y: 0 }}
+    end={{ x: 1, y: 1 }}
+    style={StyleSheet.absoluteFill}
+  />
+);
+
+/** Fallback-Screen, wenn keine Screens definiert sind */
 function FallbackScreen() {
   return (
     <View style={styles.fallback}>
@@ -14,7 +25,7 @@ function FallbackScreen() {
   );
 }
 
-// Hilfsfunktion: "MyCoolScreen" -> "My Cool"
+/** Hilfsfunktion: "MyCoolScreen" -> "My Cool" */
 const toReadableTitle = (name = "") =>
   name
     .replace("Screen", "")
@@ -22,7 +33,7 @@ const toReadableTitle = (name = "") =>
     .trim() || "Screen";
 
 function Navigator() {
-  // Nur gültige Screens zulassen (name:string, component:function)
+  // Nur gültige Screens zulassen
   const validScreens = useMemo(() => {
     if (!Array.isArray(screens)) return [];
     return screens.filter((s, idx) => {
@@ -33,9 +44,9 @@ function Navigator() {
       }
       return ok;
     });
-  }, []);
+  }, [screens]);
 
-  // Start-Route bestimmen: "StartScreen" > erster gültiger > Fallback
+  // Start-Route bestimmen
   const startRoute =
     validScreens.find((s) => s.name === "StartScreen")?.name ??
     validScreens[0]?.name ??
@@ -52,26 +63,18 @@ function Navigator() {
         headerShadowVisible: false,
         contentStyle: { backgroundColor: "transparent" },
         animation: Platform.OS === "ios" ? "slide_from_right" : "fade",
-        // Gradient-Header
-        headerBackground: () => (
-          <LinearGradient
-            colors={["#000000", "#ffffff"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={StyleSheet.absoluteFill}
-          />
-        ),
+        headerBackground: GradientHeader,
       }}
     >
       {validScreens.length > 0 ? (
-        validScreens.map(({ name, component, title, headerShown }) => (
+        validScreens.map(({ name, component, title, headerShown = false }) => (
           <Stack.Screen
             key={name}
             name={name}
             component={component}
             options={{
               title: title ?? toReadableTitle(name),
-              headerShown: headerShown ?? false, // default: Header sichtbar
+              headerShown,
             }}
           />
         ))

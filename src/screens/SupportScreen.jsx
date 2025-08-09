@@ -1,4 +1,3 @@
-import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import * as MailComposer from "expo-mail-composer";
 import { LinearGradient } from "expo-linear-gradient";

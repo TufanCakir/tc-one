@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import {
   FlatList,
   Text,
@@ -7,9 +7,9 @@ import {
   Pressable,
   View,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import { menuButtons } from "../data/menuButtons";
 import styles from "../styles/MenuGridStyles";
-import { LinearGradient } from "expo-linear-gradient";
 
 // Icon-Sets importieren
 import { Ionicons } from "@expo/vector-icons";
@@ -21,7 +21,8 @@ import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 
-const iconSets = {
+// Konstanten
+const ICON_SETS = {
   Ionicons,
   MaterialCommunityIcons,
   Feather,
@@ -31,47 +32,55 @@ const iconSets = {
   FontAwesome,
   MaterialIcons,
 };
-
 const ICON_SIZE = 28;
 
-const MenuGrid = ({ navigation }) => {
-  const data = Array.isArray(menuButtons) ? menuButtons : [];
+export default function MenuGrid({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+  const data = useMemo(
+    () => (Array.isArray(menuButtons) ? menuButtons : []),
+    []
+  );
 
-  const renderItem = ({ item }) => {
-    const { title = "Kein Titel", screen, icon } = item || {};
-    const IconComponent =
-      icon?.set && iconSets[icon.set] ? iconSets[icon.set] : null;
+  const handleOpenModal = useCallback(() => setModalVisible(true), []);
+  const handleCloseModal = useCallback(() => setModalVisible(false), []);
 
-    return (
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => screen && navigation.navigate(screen)}
-        activeOpacity={0.9}
-        accessibilityRole="button"
-        accessibilityLabel={item.accessibilityLabel || title}
-        accessibilityHint={item.accessibilityHint}
-      >
-        <LinearGradient
-          colors={["#000000", "#ffffff"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.gradientButton}
+  const renderItem = useCallback(
+    ({ item }) => {
+      const { title = "Kein Titel", screen, icon } = item || {};
+      const IconComponent =
+        icon?.set && ICON_SETS[icon.set] ? ICON_SETS[icon.set] : null;
+
+      return (
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => screen && navigation.navigate(screen)}
+          activeOpacity={0.9}
+          accessibilityRole="button"
+          accessibilityLabel={item?.accessibilityLabel || title}
+          accessibilityHint={item?.accessibilityHint}
         >
-          {IconComponent && icon?.name && (
-            <IconComponent
-              name={icon.name}
-              size={ICON_SIZE}
-              color="#fff"
-              accessibilityElementsHidden={true}
-              importantForAccessibility="no"
-            />
-          )}
-          <Text style={styles.label}>{title}</Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    );
-  };
+          <LinearGradient
+            colors={["#000000", "#ffffff"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.gradientButton}
+          >
+            {IconComponent && icon?.name && (
+              <IconComponent
+                name={icon.name}
+                size={ICON_SIZE}
+                color="#fff"
+                accessibilityElementsHidden
+                importantForAccessibility="no"
+              />
+            )}
+            <Text style={styles.label}>{title}</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      );
+    },
+    [navigation]
+  );
 
   return (
     <LinearGradient
@@ -81,7 +90,7 @@ const MenuGrid = ({ navigation }) => {
       {/* Top-Rechts Button */}
       <View style={styles.topRightButton}>
         <TouchableOpacity
-          onPress={() => setModalVisible(true)}
+          onPress={handleOpenModal}
           accessibilityRole="button"
           accessibilityLabel="Öffne Neuigkeiten"
         >
@@ -89,7 +98,7 @@ const MenuGrid = ({ navigation }) => {
             name="information-circle-outline"
             size={24}
             color="#fff"
-            accessibilityElementsHidden={true}
+            accessibilityElementsHidden
             importantForAccessibility="no"
           />
         </TouchableOpacity>
@@ -111,38 +120,20 @@ const MenuGrid = ({ navigation }) => {
       <Modal
         visible={modalVisible}
         animationType="slide"
-        transparent={true}
-        onRequestClose={() => setModalVisible(false)}
-        accessibilityViewIsModal={true}
-        accessible={true}
+        transparent
+        onRequestClose={handleCloseModal}
+        accessibilityViewIsModal
       >
         <View style={styles.modalOverlay}>
-          <View
-            style={styles.modalContent}
-            accessible={true}
-            accessibilityLabel="Neuigkeiten"
-          >
+          <View style={styles.modalContent} accessibilityLabel="Neuigkeiten">
             <Text style={styles.modalTitle}>Neuigkeiten</Text>
             <Text style={styles.modalText}>
               Hier sind die neuesten Funktionen und Updates, die wir hinzugefügt
               haben:
               {"\n"}- Neues Design und Layout
-              {"\n"}- Verbesserte Benutzeroberfläche
-              {"\n"}- Einige Funktionen wurden entfernt
-              {"\n"}- Einige Funktionen wurden hinzugefügt
-              {"\n"}- Verbesserte Leistung
-              {"\n"}- Neue Icons für die Menüelemente
-              {"\n"}- Neue Icons für die Fußzeile
-              {"\n"}- Verbesserte Benutzererfahrung
-              {"\n"}- Verbesserte Performance
-              {"\n"}- Verbesserte Ladezeiten
-              {"\n"}- Verbesserte Stabilität
-              {"\n"}- Verbesserte Sicherheit
-              {"\n"}- Fehlerbehebungen und Leistungsverbesserungen
-              {"\n"}- Verbesserte Barrierefreiheit
             </Text>
             <Pressable
-              onPress={() => setModalVisible(false)}
+              onPress={handleCloseModal}
               style={styles.closeButton}
               accessibilityRole="button"
               accessibilityLabel="Schließe das Neuigkeiten-Fenster"
@@ -154,6 +145,4 @@ const MenuGrid = ({ navigation }) => {
       </Modal>
     </LinearGradient>
   );
-};
-
-export default MenuGrid;
+}

@@ -1,4 +1,11 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+} from "react";
 import {
   View,
   Text,
@@ -22,6 +29,9 @@ import JournalScreen from "./JournalScreen";
 import BatteryScreen from "./BatteryScreen";
 import Header from "../components/Header";
 
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const TAB_MIN_WIDTH = 90;
+
 // LayoutAnimation für Android aktivieren
 if (
   Platform.OS === "android" &&
@@ -30,37 +40,45 @@ if (
   UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-const TAB_MIN_WIDTH = 90;
-const SCREEN_WIDTH = Dimensions.get("window").width;
-
 export default function HomeScreen() {
   const navigation = useNavigation();
   const pagerRef = useRef(null);
   const scrollRef = useRef(null);
-
-  // Speichere Layoutdaten jedes Tabs: { x, width }
   const tabLayoutsRef = useRef({});
-  const [tabsMeasured, setTabsMeasured] = useState(false);
 
+  const [tabsMeasured, setTabsMeasured] = useState(false);
   const [activePage, setActivePage] = useState(0);
 
-  const tabs = [
-    { label: "Home" },
-    { label: "games" },
-    { label: "Journal" },
-    { label: "Profile" },
-    { label: "Battery Status" },
-    { label: "Settings" },
-  ];
+  const tabs = useMemo(
+    () => [
+      { label: "Home", component: <MenuGrid navigation={navigation} /> },
+      { label: "Games", component: <GameScreen navigation={navigation} /> },
+      {
+        label: "Journal",
+        component: <JournalScreen navigation={navigation} />,
+      },
+      {
+        label: "Profile",
+        component: <ProfileScreen navigation={navigation} />,
+      },
+      {
+        label: "Battery Status",
+        component: <BatteryScreen navigation={navigation} />,
+      },
+      {
+        label: "Settings",
+        component: <SettingsScreen navigation={navigation} />,
+      },
+    ],
+    [navigation]
+  );
 
-  // Zentriert zum Tab anhand onLayout-Daten
   const scrollToTab = useCallback((index) => {
     const layout = tabLayoutsRef.current[index];
     if (!layout || !scrollRef.current) return;
 
     const { x, width } = layout;
     const target = Math.max(0, x + width / 2 - SCREEN_WIDTH / 2);
-
     scrollRef.current.scrollTo({ x: target, animated: true });
   }, []);
 
@@ -88,18 +106,16 @@ export default function HomeScreen() {
     [activePage, scrollToTab]
   );
 
-  // Nach dem ersten vollständigen Layout einmal zum aktiven Tab scrollen
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (tabsMeasured) {
-      // Ein Tick warten, bis ScrollView bereit ist
-      const t = setTimeout(() => scrollToTab(activePage), 0);
-      return () => clearTimeout(t);
+      scrollToTab(activePage);
     }
   }, [tabsMeasured, activePage, scrollToTab]);
 
   return (
     <View style={styles.container}>
       <Header />
+
       <LinearGradient
         colors={["#000000", "#ffffff"]}
         start={{ x: 0, y: 0 }}
@@ -114,12 +130,11 @@ export default function HomeScreen() {
         >
           {tabs.map((tab, index) => (
             <View
-              key={tab.label || index}
+              key={tab.label}
               style={{ minWidth: TAB_MIN_WIDTH }}
               onLayout={(e) => {
                 const { x, width } = e.nativeEvent.layout;
                 tabLayoutsRef.current[index] = { x, width };
-                // Wenn alle gemessen sind, Flag setzen
                 if (Object.keys(tabLayoutsRef.current).length === tabs.length) {
                   setTabsMeasured(true);
                 }
@@ -129,8 +144,9 @@ export default function HomeScreen() {
                 style={[styles.tab, activePage === index && styles.activeTab]}
                 onPress={() => handleTabPress(index)}
                 activeOpacity={0.7}
-                accessibilityRole="button"
-                accessibilityLabel={`Tab ${tab.label}`}
+                accessibilityRole="tab"
+                accessibilityLabel={`${tab.label} Tab`}
+                accessibilityState={{ selected: activePage === index }}
               >
                 <Text
                   style={[
@@ -153,24 +169,9 @@ export default function HomeScreen() {
         offscreenPageLimit={1}
         onPageSelected={handlePageSelected}
       >
-        <View key="0">
-          <MenuGrid navigation={navigation} />
-        </View>
-        <View key="1">
-          <GameScreen navigation={navigation} />
-        </View>
-        <View key="2">
-          <JournalScreen navigation={navigation} />
-        </View>
-        <View key="3">
-          <ProfileScreen navigation={navigation} />
-        </View>
-        <View key="4">
-          <BatteryScreen navigation={navigation} />
-        </View>
-        <View key="5">
-          <SettingsScreen navigation={navigation} />
-        </View>
+        {tabs.map((tab, index) => (
+          <View key={index}>{tab.component}</View>
+        ))}
       </PagerView>
     </View>
   );

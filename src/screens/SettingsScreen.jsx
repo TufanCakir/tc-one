@@ -1,38 +1,39 @@
 // src/screens/SettingsScreen.jsx
-import React, { Alert, View } from "react-native";
+import React, { useCallback } from "react";
+import { Alert, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Updates from "expo-updates";
+
 import SettingsGrid from "../components/SettingsGrid";
-import styles from "../styles/SettingsStyles";
 import PlayerNameSection from "../components/PlayerNameSection";
+import styles from "../styles/SettingsStyles";
 
 export default function SettingsScreen() {
   const navigation = useNavigation();
 
-  const resetAccount = async () => {
+  const resetAccount = useCallback(async () => {
     try {
       await AsyncStorage.clear();
-      await AsyncStorage.setItem("testModeUses", "5");
-      await AsyncStorage.setItem("coins", "0");
-      await AsyncStorage.setItem("backgroundColors", JSON.stringify(null)); // oder einfach entfernen
-
-      Alert.alert("Erfolg", "Alle Account-Daten wurden zurückgesetzt.", [
-        { text: "OK", onPress: async () => await Updates.reloadAsync() },
-      ]);
+      Alert.alert(
+        "Erfolg",
+        "Alle Account-Daten wurden zurückgesetzt.",
+        [{ text: "OK", onPress: async () => await Updates.reloadAsync() }],
+        { cancelable: false }
+      );
     } catch (error) {
+      console.error("❌ Fehler beim Zurücksetzen von AsyncStorage:", error);
       Alert.alert(
         "Fehler",
-        "Beim Zurücksetzen der Daten ist ein Fehler aufgetreten."
+        "Beim Zurücksetzen der Daten ist ein Problem aufgetreten. Bitte versuche es erneut."
       );
-      console.error("Fehler beim Zurücksetzen von AsyncStorage:", error);
     }
-  };
+  }, []);
 
-  const confirmReset = () => {
+  const confirmReset = useCallback(() => {
     Alert.alert(
       "Account zurücksetzen",
-      "Bist du sicher? Dies wird alle Daten löschen und kann nicht rückgängig gemacht werden!",
+      "Bist du sicher? Alle gespeicherten Daten werden gelöscht und können nicht wiederhergestellt werden.",
       [
         { text: "Abbrechen", style: "cancel" },
         {
@@ -40,9 +41,10 @@ export default function SettingsScreen() {
           onPress: resetAccount,
           style: "destructive",
         },
-      ]
+      ],
+      { cancelable: true }
     );
-  };
+  }, [resetAccount]);
 
   return (
     <View style={styles.container}>
@@ -51,7 +53,7 @@ export default function SettingsScreen() {
         <SettingsGrid
           navigation={navigation}
           onResetAccount={confirmReset}
-          onClose={() => navigation.goBack()}
+          onClose={navigation.goBack}
         />
       </View>
     </View>
