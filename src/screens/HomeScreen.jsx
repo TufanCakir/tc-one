@@ -19,7 +19,6 @@ import SettingsScreen from "./SettingsScreen";
 import GameScreen from "./GameScreen";
 import ProfileScreen from "./ProfileScreen";
 import JournalScreen from "./JournalScreen";
-import VideoPlayerScreen from "./VideoPlayerScreen";
 import BatteryScreen from "./BatteryScreen";
 import ProfileHeader from "../components/ProfileHeader";
 
@@ -50,7 +49,6 @@ export default function HomeScreen() {
     { label: "games" },
     { label: "Journal" },
     { label: "Profile" },
-    { label: "Video Player" },
     { label: "Battery Status" },
     { label: "Settings" },
   ];
@@ -169,12 +167,9 @@ export default function HomeScreen() {
           <ProfileScreen navigation={navigation} />
         </View>
         <View key="4">
-          <VideoPlayerScreen navigation={navigation} />
-        </View>
-        <View key="5">
           <BatteryScreen navigation={navigation} />
         </View>
-        <View key="6">
+        <View key="5">
           <SettingsScreen navigation={navigation} />
         </View>
       </PagerView>

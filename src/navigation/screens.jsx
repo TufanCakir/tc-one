@@ -22,7 +22,6 @@ import AlarmClockScreen from "../screens/AlarmClockScreen";
 import TypingSpeedMonitorScreen from "../screens/TypingSpeedMonitorScreen";
 import JournalScreen from "../screens/JournalScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import VideoPlayerScreen from "../screens/VideoPlayerScreen";
 import MapsScreen from "../screens/MapsScreen";
 import CalendarOneScreen from "../screens/CalendarOneScreen";
 import ImagePickerScreen from "../screens/ImagePickerScreen";
@@ -67,7 +66,6 @@ export const screens = [
   { name: "TodoScreen", component: TodoScreen, title: "To-Do" },
   { name: "TypingSpeedMonitorScreen", component: TypingSpeedMonitorScreen },
   { name: "VotingScreen", component: VotingScreen },
-  { name: "VideoPlayerScreen", component: VideoPlayerScreen },
   { name: "MapsScreen", component: MapsScreen },
   { name: "CalendarOneScreen", component: CalendarOneScreen },
   { name: "ImagePickerScreen", component: ImagePickerScreen },
