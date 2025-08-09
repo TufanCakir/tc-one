@@ -23,7 +23,7 @@ export default function Footer() {
 
   return (
     <LinearGradient
-      colors={["#000000", "#1a1a1a"]}
+      colors={["#000000", "#ffffff"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 0 }}
       style={styles.footer}

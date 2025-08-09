@@ -1,10 +1,13 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import * as MailComposer from "expo-mail-composer";
 import { LinearGradient } from "expo-linear-gradient";
+import * as Haptics from "expo-haptics";
 import Footer from "../components/Footer";
 
 export default function SupportScreen() {
   const sendSupportMail = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+
     const isAvailable = await MailComposer.isAvailableAsync();
 
     if (!isAvailable) {
@@ -30,10 +33,15 @@ export default function SupportScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>Kontaktiere den Support</Text>
       <Text style={styles.subtitle}>
-        Du hast Feedback, Ideen oder ein Problem? Schick mir eine Mail!
+        Du hast Feedback, Ideen oder ein Problem? Schick mir einfach eine
+        Nachricht.
       </Text>
 
-      <TouchableOpacity onPress={sendSupportMail} activeOpacity={0.8}>
+      <TouchableOpacity
+        onPress={sendSupportMail}
+        activeOpacity={0.85}
+        style={styles.buttonWrapper}
+      >
         <LinearGradient
           colors={["#000000", "#ffffff"]}
           start={{ x: 0, y: 0 }}
@@ -43,6 +51,7 @@ export default function SupportScreen() {
           <Text style={styles.buttonText}>Mail an support@tufancakir.com</Text>
         </LinearGradient>
       </TouchableOpacity>
+
       <View style={styles.footerWrapper}>
         <Footer />
       </View>
@@ -57,28 +66,39 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#0f0",
-    marginBottom: 16,
+    fontSize: 26,
+    fontWeight: "600",
+    color: "#fff",
+    marginBottom: 12,
     textAlign: "center",
   },
   subtitle: {
     fontSize: 16,
-    color: "#ccc",
-    marginBottom: 32,
+    color: "#000",
+    marginBottom: 28,
     textAlign: "center",
+    lineHeight: 22,
+  },
+  buttonWrapper: {
+    width: "100%",
+    borderRadius: 14,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 4,
   },
   button: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 12,
-    elevation: 5,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderRadius: 14,
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "600",
+    textAlign: "center",
   },
   footerWrapper: {
     position: "absolute",
