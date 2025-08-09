@@ -19,8 +19,7 @@
         "ITSAppUsesNonExemptEncryption": false,
         "NSCameraUsageDescription": "Diese App benötigt Zugriff auf die Kamera, um Fotos und Videos aufzunehmen.",
         "NSBluetoothAlwaysUsageDescription": "Diese App kann Bluetooth verwenden, um kompatible Drucker zu finden.",
-        "NSCalendarsUsageDescription": "Diese App benötigt Zugriff auf deinen Kalender, um Ereignisse anzuzeigen und hinzuzufügen.",
-        "NSContactsUsageDescription": "Diese App benötigt Zugriff auf deine Kontakte, um SMS zu senden."
+        "NSCalendarsUsageDescription": "Diese App benötigt Zugriff auf deinen Kalender, um Ereignisse anzuzeigen und hinzuzufügen."
       }
     },
     "android": {

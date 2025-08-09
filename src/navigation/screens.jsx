@@ -26,7 +26,6 @@ import MapsScreen from "../screens/MapsScreen";
 import CalendarOneScreen from "../screens/CalendarOneScreen";
 import BatteryScreen from "../screens/BatteryScreen";
 import PrintScreen from "../screens/PrintScreen";
-import SmsScreen from "../screens/SmsScreen";
 import SupportScreen from "../screens/SupportScreen";
 
 // Game Screens
@@ -65,7 +64,6 @@ export const screens = [
   { name: "CalendarOneScreen", component: CalendarOneScreen },
   { name: "BatteryScreen", component: BatteryScreen },
   { name: "PrintScreen", component: PrintScreen },
-  { name: "SmsScreen", component: SmsScreen },
   { name: "SupportScreen", component: SupportScreen },
   { name: "SnakeScreen", component: SnakeScreen, title: "Snake" },
 ].map((screen) => ({

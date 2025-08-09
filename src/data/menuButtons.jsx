@@ -116,13 +116,6 @@ export const menuButtons = [
     accessibilityHint: "Erstelle QR-Codes aus Text",
   },
   {
-    title: "Sms",
-    screen: "SmsScreen",
-    icon: { name: "sms", set: ICONS.fa5 },
-    accessibilityLabel: "SMS senden",
-    accessibilityHint: "Sende Textnachrichten über dein Gerät",
-  },
-  {
     title: "Stopwatch",
     screen: "StopwatchScreen",
     icon: { name: "timer-outline", set: ICONS.ion },

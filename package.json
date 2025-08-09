@@ -27,7 +27,6 @@
     "expo-mail-composer": "~14.1.5",
     "expo-print": "~14.1.4",
     "expo-sensors": "^14.1.4",
-    "expo-sms": "~13.1.4",
     "expo-status-bar": "~2.2.3",
     "expo-store-review": "~8.1.5",
     "expo-updates": "~0.28.17",

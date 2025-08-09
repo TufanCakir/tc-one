@@ -16,6 +16,12 @@ import useUpdateChecker from "./src/hooks/useUpdateChecker";
 
 enableScreens();
 
+// AsyncStorage Keys
+const STORAGE_KEYS = {
+  APP_START_COUNT: "appStartCount",
+  LAST_REVIEW_DATE: "lastReviewDate",
+};
+
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
@@ -29,48 +35,58 @@ export default function App() {
     loadingTimeoutRef.current = setTimeout(() => setLoading(false), 500);
   };
 
-  // Bewertungsaufforderung: erst nach 3 Starts, dann nur 1× pro Tag
-  useEffect(() => {
-    const checkReviewTrigger = async () => {
-      try {
-        // App-Start-Zähler
-        const storedCount = await AsyncStorage.getItem("appStartCount");
-        const count = storedCount ? parseInt(storedCount, 10) + 1 : 1;
-        await AsyncStorage.setItem("appStartCount", count.toString());
+  // Funktion für Bewertungsaufforderung
+  const triggerReviewIfEligible = async () => {
+    try {
+      // App-Start-Zähler aktualisieren
+      const storedCount = await AsyncStorage.getItem(
+        STORAGE_KEYS.APP_START_COUNT
+      );
+      const count = storedCount ? parseInt(storedCount, 10) + 1 : 1;
+      await AsyncStorage.setItem(
+        STORAGE_KEYS.APP_START_COUNT,
+        count.toString()
+      );
 
-        // Datum prüfen
-        const lastDate = await AsyncStorage.getItem("lastReviewDate");
-        const today = new Date().toISOString().split("T")[0];
+      // Datum prüfen
+      const lastDate = await AsyncStorage.getItem(
+        STORAGE_KEYS.LAST_REVIEW_DATE
+      );
+      const today = new Date().toISOString().split("T")[0];
 
-        if (count >= 3 && lastDate !== today) {
-          const available = await StoreReview.isAvailableAsync();
-          if (available) {
-            await StoreReview.requestReview();
-            await AsyncStorage.setItem("lastReviewDate", today);
-          }
+      // Zeige nur bei 3. Start oder später & nur 1× pro Tag
+      if (count >= 3 && lastDate !== today) {
+        if (await StoreReview.isAvailableAsync()) {
+          await StoreReview.requestReview();
+          await AsyncStorage.setItem(STORAGE_KEYS.LAST_REVIEW_DATE, today);
         }
-      } catch (err) {
-        console.warn("Fehler bei der Bewertungsprüfung:", err);
       }
-    };
+    } catch (err) {
+      console.warn("Fehler bei der Bewertungsprüfung:", err);
+    }
+  };
 
-    checkReviewTrigger();
+  // Beim App-Start prüfen
+  useEffect(() => {
+    triggerReviewIfEligible();
   }, []);
 
-  // Optional: zusätzlich bei UpdateOverlay triggern
+  // Optional: Bei UpdateOverlay direkt fragen
   useEffect(() => {
     if (updateVisible) {
       (async () => {
-        const available = await StoreReview.isAvailableAsync();
-        if (available) {
+        if (await StoreReview.isAvailableAsync()) {
           await StoreReview.requestReview();
         }
       })();
     }
   }, [updateVisible]);
 
+  // Cleanup
   useEffect(() => {
-    return () => clearTimeout(loadingTimeoutRef.current);
+    return () => {
+      clearTimeout(loadingTimeoutRef.current);
+    };
   }, []);
 
   return (
