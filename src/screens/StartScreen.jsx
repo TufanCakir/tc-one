@@ -8,7 +8,7 @@ export default function StartScreen() {
   const navigation = useNavigation();
 
   const handleStart = () => {
-    navigation.replace("LoginScreen");
+    navigation.replace("HomeScreen");
   };
 
   const version = Constants.expoConfig?.version ?? "1.0.0";

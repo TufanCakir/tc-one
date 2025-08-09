@@ -1,4 +1,4 @@
-// src/components/PasswordGeneratorScreen.js
+// src/screens/PasswordGeneratorScreen.jsx
 import {
   View,
   Text,

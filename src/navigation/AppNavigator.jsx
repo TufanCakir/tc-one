@@ -1,4 +1,5 @@
-import { StyleSheet, View, Text } from "react-native";
+import React, { useMemo } from "react";
+import { StyleSheet, View, Text, Platform } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { screens } from "./screens";
@@ -13,24 +14,53 @@ function FallbackScreen() {
   );
 }
 
+// Hilfsfunktion: "MyCoolScreen" -> "My Cool"
+const toReadableTitle = (name = "") =>
+  name
+    .replace("Screen", "")
+    .replace(/([A-Z])/g, " $1")
+    .trim() || "Screen";
+
 function Navigator() {
-  const validScreens = Array.isArray(screens)
-    ? screens.filter(
-        (screen) =>
-          screen &&
-          typeof screen.name === "string" &&
-          typeof screen.component === "function"
-      )
-    : [];
+  // Nur gültige Screens zulassen (name:string, component:function)
+  const validScreens = useMemo(() => {
+    if (!Array.isArray(screens)) return [];
+    return screens.filter((s, idx) => {
+      const ok =
+        s && typeof s.name === "string" && typeof s.component === "function";
+      if (!ok && __DEV__) {
+        console.warn(`[Navigator] Ungültiger Screen-Eintrag @${idx}:`, s);
+      }
+      return ok;
+    });
+  }, []);
+
+  // Start-Route bestimmen: "StartScreen" > erster gültiger > Fallback
+  const startRoute =
+    validScreens.find((s) => s.name === "StartScreen")?.name ??
+    validScreens[0]?.name ??
+    "Fallback";
 
   return (
     <Stack.Navigator
-      initialRouteName={validScreens.length ? "StartScreen" : "Fallback"}
+      initialRouteName={startRoute}
       screenOptions={{
-        headerStyle: { backgroundColor: "transparent" },
+        headerTransparent: true,
         headerTintColor: "#fff",
-        headerTitleStyle: { fontSize: 20, fontWeight: "bold" },
+        headerTitleStyle: { fontSize: 20, fontWeight: "700" },
+        headerTitleAlign: "center",
+        headerShadowVisible: false,
         contentStyle: { backgroundColor: "transparent" },
+        animation: Platform.OS === "ios" ? "slide_from_right" : "fade",
+        // Gradient-Header
+        headerBackground: () => (
+          <LinearGradient
+            colors={["#101012", "#0a0a0a"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={StyleSheet.absoluteFill}
+          />
+        ),
       }}
     >
       {validScreens.length > 0 ? (
@@ -40,13 +70,8 @@ function Navigator() {
             name={name}
             component={component}
             options={{
-              title:
-                title ||
-                name
-                  .replace("Screen", "")
-                  .replace(/([A-Z])/g, " $1")
-                  .trim(),
-              headerShown: headerShown ?? false,
+              title: title ?? toReadableTitle(name),
+              headerShown: headerShown ?? false, // default: Header sichtbar
             }}
           />
         ))
@@ -54,7 +79,7 @@ function Navigator() {
         <Stack.Screen
           name="Fallback"
           component={FallbackScreen}
-          options={{ headerShown: false }}
+          options={{ headerShown: false, title: "Fallback" }}
         />
       )}
     </Stack.Navigator>
@@ -75,19 +100,18 @@ export default function AppNavigator() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: { flex: 1 },
   fallback: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#111",
+    padding: 24,
+    backgroundColor: "transparent",
   },
   fallbackText: {
     color: "#fff",
     fontSize: 18,
     textAlign: "center",
-    padding: 20,
+    opacity: 0.9,
   },
 });

@@ -20,7 +20,7 @@ import GameScreen from "./GameScreen";
 import ProfileScreen from "./ProfileScreen";
 import JournalScreen from "./JournalScreen";
 import BatteryScreen from "./BatteryScreen";
-import ProfileHeader from "../components/ProfileHeader";
+import Header from "../components/Header";
 
 // LayoutAnimation für Android aktivieren
 if (
@@ -99,8 +99,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <ProfileHeader />
-
+      <Header />
       <LinearGradient
         colors={["#000000", "#ffffff"]}
         start={{ x: 0, y: 0 }}

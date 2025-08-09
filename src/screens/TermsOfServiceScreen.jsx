@@ -10,10 +10,10 @@ export default function TermsOfServiceScreen() {
         <View>
           <Text style={styles.content}>
             Nutzungsbedingungen{"\n\n"}
-            Willkommen bei [All In One Hub]! Diese Nutzungsbedingungen regeln
-            Ihre Nutzung unserer App und Dienste. Bitte lesen Sie diese
-            Bedingungen sorgfältig durch, bevor Sie unsere App verwenden. Durch
-            die Nutzung der App stimmen Sie diesen Bedingungen zu.{"\n\n"}
+            Willkommen bei [TC One]! die Nutzung unserer App und Dienste. Bitte
+            lesen Sie diese Bedingungen sorgfältig durch, bevor Sie unsere App
+            verwenden. Durch die Nutzung der App stimmen Sie diesen Bedingungen
+            zu.{"\n\n"}
             1. Allgemeine Bestimmungen{"\n"}
             1.1. Diese Nutzungsbedingungen stellen eine rechtlich bindende
             Vereinbarung zwischen Ihnen und [Unternehmen/Entwicklername] dar.
