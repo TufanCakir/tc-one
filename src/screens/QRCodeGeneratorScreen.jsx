@@ -1,3 +1,4 @@
+// src/screens/QRCodeGeneratorScreen.jsx
 import { useState } from "react";
 import {
   View,

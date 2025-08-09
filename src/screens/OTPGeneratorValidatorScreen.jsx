@@ -1,4 +1,4 @@
-// src/components/OTPGeneratorValidatorScreen.js
+// src/screens/OTPGeneratorValidatorScreen.jsx
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import useOTP from "../hooks/useOTP";
