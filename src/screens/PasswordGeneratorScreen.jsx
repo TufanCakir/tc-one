@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import usePasswordGenerator from "../hooks/usePasswordGenerator";
 import styles from "../styles/PasswordGeneratorStyles";
 import Footer from "../components/Footer";
@@ -32,6 +33,13 @@ export default function PasswordGeneratorScreen() {
     copyToClipboard,
   } = usePasswordGenerator();
 
+  const ToggleSwitch = ({ label, value, onChange }) => (
+    <View style={styles.switchContainer}>
+      <Switch value={value} onValueChange={onChange} />
+      <Text style={styles.switchLabel}>{label}</Text>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -46,42 +54,42 @@ export default function PasswordGeneratorScreen() {
               value={passwordLength}
               onChangeText={setPasswordLength}
               style={styles.input}
+              maxLength={2}
             />
           </View>
 
-          {/* Toggles für Passwort-Einstellungen */}
-          <View style={styles.switchContainer}>
-            <Switch
-              value={useSymbols}
-              onValueChange={() => setUseSymbols(!useSymbols)}
-            />
-            <Text style={styles.switchLabel}>Symbols</Text>
-          </View>
-          <View style={styles.switchContainer}>
-            <Switch
-              value={useNumbers}
-              onValueChange={() => setUseNumbers(!useNumbers)}
-            />
-            <Text style={styles.switchLabel}>Numbers</Text>
-          </View>
-          <View style={styles.switchContainer}>
-            <Switch
-              value={useLowerCase}
-              onValueChange={() => setUseLowerCase(!useLowerCase)}
-            />
-            <Text style={styles.switchLabel}>Lowercase Letters</Text>
-          </View>
-          <View style={styles.switchContainer}>
-            <Switch
-              value={useUpperCase}
-              onValueChange={() => setUseUpperCase(!useUpperCase)}
-            />
-            <Text style={styles.switchLabel}>Uppercase Letters</Text>
-          </View>
+          {/* Toggles */}
+          <ToggleSwitch
+            label="Symbols"
+            value={useSymbols}
+            onChange={() => setUseSymbols(!useSymbols)}
+          />
+          <ToggleSwitch
+            label="Numbers"
+            value={useNumbers}
+            onChange={() => setUseNumbers(!useNumbers)}
+          />
+          <ToggleSwitch
+            label="Lowercase Letters"
+            value={useLowerCase}
+            onChange={() => setUseLowerCase(!useLowerCase)}
+          />
+          <ToggleSwitch
+            label="Uppercase Letters"
+            value={useUpperCase}
+            onChange={() => setUseUpperCase(!useUpperCase)}
+          />
 
           {/* Generate Password Button */}
-          <TouchableOpacity style={styles.button} onPress={generatePassword}>
-            <Text style={styles.buttonText}>Generate Password</Text>
+          <TouchableOpacity onPress={generatePassword} activeOpacity={0.85}>
+            <LinearGradient
+              colors={["#000000", "#ffffff"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.button}
+            >
+              <Text style={styles.buttonText}>Generate Password</Text>
+            </LinearGradient>
           </TouchableOpacity>
 
           {/* Display Generated Password */}
@@ -93,11 +101,15 @@ export default function PasswordGeneratorScreen() {
                 style={styles.generatedInput}
                 editable={false}
               />
-              <TouchableOpacity
-                style={styles.copyButton}
-                onPress={copyToClipboard}
-              >
-                <Text style={styles.buttonText}>Copy</Text>
+              <TouchableOpacity onPress={copyToClipboard} activeOpacity={0.85}>
+                <LinearGradient
+                  colors={["#000000", "#ffffff"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.copyButton}
+                >
+                  <Text style={styles.buttonText}>Copy</Text>
+                </LinearGradient>
               </TouchableOpacity>
             </View>
           )}
@@ -108,6 +120,8 @@ export default function PasswordGeneratorScreen() {
           )}
         </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
+
+      {/* Footer */}
       <View style={styles.footerWrapper}>
         <Footer />
       </View>

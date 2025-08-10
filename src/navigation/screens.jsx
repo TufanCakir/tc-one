@@ -32,7 +32,7 @@ import TypingSpeedMonitorScreen from "../screens/TypingSpeedMonitorScreen";
 import JournalScreen from "../screens/JournalScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import MapsScreen from "../screens/MapsScreen";
-import CalendarOneScreen from "../screens/CalendarOneScreen";
+import NativeCalendarScreen from "../screens/NativeCalendarScreen";
 import BatteryScreen from "../screens/BatteryScreen";
 import PrintScreen from "../screens/PrintScreen";
 import SupportScreen from "../screens/SupportScreen";
@@ -70,7 +70,7 @@ const rawScreens = [
   { name: "TypingSpeedMonitorScreen", component: TypingSpeedMonitorScreen },
   { name: "VotingScreen", component: VotingScreen },
   { name: "MapsScreen", component: MapsScreen },
-  { name: "CalendarOneScreen", component: CalendarOneScreen },
+  { name: "NativeCalendarScreen", component: NativeCalendarScreen },
   { name: "BatteryScreen", component: BatteryScreen },
   { name: "PrintScreen", component: PrintScreen },
   { name: "SupportScreen", component: SupportScreen },

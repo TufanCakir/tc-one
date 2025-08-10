@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from "react";
-import { FlatList, Text, TouchableOpacity, SafeAreaView } from "react-native";
+import { useCallback, useMemo } from "react";
+import { View, FlatList, Text, TouchableOpacity } from "react-native";
 import styles from "../styles/GameGridStyles";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { gameButtons } from "../data/gameButtons";
@@ -78,24 +78,19 @@ export default function GamesGrid({ navigation }) {
   );
 
   return (
-    <LinearGradient
-      colors={["#000000", "#ffffff"]}
-      style={styles.gridContainer}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <FlatList
-          data={data}
-          keyExtractor={(item, index) =>
-            item?.screen || item?.title || `btn-${index}`
-          }
-          numColumns={3}
-          contentContainerStyle={styles.gridContent}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          accessibilityRole="menu"
-          accessibilityLabel="Spiele"
-        />
-      </SafeAreaView>
-    </LinearGradient>
+    <View style={styles.gridContainer}>
+      <FlatList
+        data={data}
+        keyExtractor={(item, index) =>
+          item?.screen || item?.title || `btn-${index}`
+        }
+        numColumns={3}
+        contentContainerStyle={styles.gridContent}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        accessibilityRole="menu"
+        accessibilityLabel="Spiele"
+      />
+    </View>
   );
 }

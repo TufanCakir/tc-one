@@ -1,11 +1,5 @@
-import React, { useCallback, useMemo } from "react";
-import {
-  FlatList,
-  Text,
-  TouchableOpacity,
-  SafeAreaView,
-  Linking,
-} from "react-native";
+import { useCallback, useMemo } from "react";
+import { FlatList, Text, TouchableOpacity, Linking, View } from "react-native";
 import styles from "../styles/SettingsGridStyles";
 import { Ionicons, Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { settingsButtons } from "../data/settingsButtons";
@@ -87,24 +81,19 @@ export default function SettingsGrid({ navigation, onClose, onResetAccount }) {
   );
 
   return (
-    <LinearGradient
-      colors={["#000000", "#ffffff"]}
-      style={styles.gridContainer}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <FlatList
-          data={data}
-          keyExtractor={(item, index) =>
-            item?.screen || item?.title || `btn-${index}`
-          }
-          numColumns={3}
-          contentContainerStyle={styles.gridContent}
-          renderItem={renderItem}
-          showsVerticalScrollIndicator={false}
-          accessibilityRole="menu"
-          accessibilityLabel="Einstellungen"
-        />
-      </SafeAreaView>
-    </LinearGradient>
+    <View style={styles.gridContainer}>
+      <FlatList
+        data={data}
+        keyExtractor={(item, index) =>
+          item?.screen || item?.title || `btn-${index}`
+        }
+        numColumns={3}
+        contentContainerStyle={styles.gridContent}
+        renderItem={renderItem}
+        showsVerticalScrollIndicator={false}
+        accessibilityRole="menu"
+        accessibilityLabel="Einstellungen"
+      />
+    </View>
   );
 }

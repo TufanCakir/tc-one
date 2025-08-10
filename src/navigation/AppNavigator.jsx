@@ -4,19 +4,21 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { LinearGradient } from "expo-linear-gradient";
 import { screens } from "./screens";
 
+// --- Konfiguration ---
+const GRADIENT_COLORS = ["#000000", "#ffffff"];
 const Stack = createNativeStackNavigator();
 
-/** Kleiner Gradient für den Header-Hintergrund */
+// --- UI: Header-Hintergrund ---
 const GradientHeader = () => (
   <LinearGradient
-    colors={["#000000", "#ffffff"]}
+    colors={GRADIENT_COLORS}
     start={{ x: 0, y: 0 }}
     end={{ x: 1, y: 1 }}
     style={StyleSheet.absoluteFill}
   />
 );
 
-/** Fallback-Screen, wenn keine Screens definiert sind */
+// --- UI: Fallback-Screen ---
 function FallbackScreen() {
   return (
     <View style={styles.fallback}>
@@ -25,26 +27,30 @@ function FallbackScreen() {
   );
 }
 
-/** Hilfsfunktion: "MyCoolScreen" -> "My Cool" */
+// --- Utils: Titel aufbereiten ---
 const toReadableTitle = (name = "") =>
   name
-    .replace("Screen", "")
-    .replace(/([A-Z])/g, " $1")
+    .replace(/Screen$/i, "") // "Screen" am Ende entfernen (case-insensitive)
+    .replace(/([A-Z])/g, " $1") // CamelCase trennen
+    .replace(/^\s/, "") // führendes Leerzeichen entfernen
     .trim() || "Screen";
 
 function Navigator() {
-  // Nur gültige Screens zulassen
+  // Gültige Screens filtern
   const validScreens = useMemo(() => {
     if (!Array.isArray(screens)) return [];
     return screens.filter((s, idx) => {
-      const ok =
-        s && typeof s.name === "string" && typeof s.component === "function";
+      const validName = typeof s?.name === "string" && s.name.length > 0;
+      const validComp =
+        typeof s?.component === "function" ||
+        React.isValidElement(s?.component);
+      const ok = validName && validComp;
       if (!ok && __DEV__) {
         console.warn(`[Navigator] Ungültiger Screen-Eintrag @${idx}:`, s);
       }
       return ok;
     });
-  }, [screens]);
+  }, []);
 
   // Start-Route bestimmen
   const startRoute =
@@ -92,7 +98,7 @@ function Navigator() {
 export default function AppNavigator() {
   return (
     <LinearGradient
-      colors={["#000000", "#ffffff"]}
+      colors={GRADIENT_COLORS}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}

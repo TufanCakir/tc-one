@@ -12,53 +12,74 @@ import AppNavigator from "./src/navigation/AppNavigator";
 import OnlineGuard from "./src/components/OnlineGuard";
 import useUpdateChecker from "./src/hooks/useUpdateChecker";
 
-// --- Konfiguration ---
 enableScreens();
 
+// --- Konstanten ---
 const STORAGE_KEYS = {
   APP_START_COUNT: "appStartCount",
   LAST_REVIEW_DATE: "lastReviewDate",
 };
+const REVIEW_TRIGGER_COUNT = 3;
+const LOADING_DELAY = 500;
 
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
   const loadingTimeoutRef = useRef(null);
 
+  // Prüft auf Updates
   useUpdateChecker(setUpdateVisible);
 
   // Navigation-Loading Handler
   const handleNavigationStateChange = useCallback(() => {
-    clearTimeout(loadingTimeoutRef.current);
+    if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
     setLoading(true);
-    loadingTimeoutRef.current = setTimeout(() => setLoading(false), 500);
+    loadingTimeoutRef.current = setTimeout(
+      () => setLoading(false),
+      LOADING_DELAY
+    );
   }, []);
 
-  // Bewertungslogik
+  // Bewertungslogik (App-Start)
   const triggerReviewIfEligible = useCallback(async () => {
     try {
       const storedCount = parseInt(
         await AsyncStorage.getItem(STORAGE_KEYS.APP_START_COUNT),
         10
       );
-      const count = isNaN(storedCount) ? 1 : storedCount + 1;
-      await AsyncStorage.setItem(STORAGE_KEYS.APP_START_COUNT, String(count));
+      const newCount = isNaN(storedCount) ? 1 : storedCount + 1;
 
-      const lastDate = await AsyncStorage.getItem(
+      await AsyncStorage.setItem(
+        STORAGE_KEYS.APP_START_COUNT,
+        String(newCount)
+      );
+
+      const lastReviewDate = await AsyncStorage.getItem(
         STORAGE_KEYS.LAST_REVIEW_DATE
       );
-      const today = new Date().toISOString().split("T")[0];
+      const todayDate = new Date().toISOString().split("T")[0];
 
       if (
-        count >= 3 &&
-        lastDate !== today &&
+        newCount >= REVIEW_TRIGGER_COUNT &&
+        lastReviewDate !== todayDate &&
         (await StoreReview.isAvailableAsync())
       ) {
         await StoreReview.requestReview();
-        await AsyncStorage.setItem(STORAGE_KEYS.LAST_REVIEW_DATE, today);
+        await AsyncStorage.setItem(STORAGE_KEYS.LAST_REVIEW_DATE, todayDate);
       }
     } catch (err) {
       console.warn("[Review] Fehler bei der Bewertungsprüfung:", err);
+    }
+  }, []);
+
+  // Direkt nach Update bewerten
+  const triggerReviewAfterUpdate = useCallback(async () => {
+    try {
+      if (await StoreReview.isAvailableAsync()) {
+        await StoreReview.requestReview();
+      }
+    } catch (err) {
+      console.warn("[Review] Fehler beim direkten Update-Review:", err);
     }
   }, []);
 
@@ -67,24 +88,18 @@ export default function App() {
     triggerReviewIfEligible();
   }, [triggerReviewIfEligible]);
 
-  // Direkt nach Update bewerten
+  // Nach Update-Check
   useEffect(() => {
     if (updateVisible) {
-      (async () => {
-        try {
-          if (await StoreReview.isAvailableAsync()) {
-            await StoreReview.requestReview();
-          }
-        } catch (err) {
-          console.warn("[Review] Fehler beim direkten Update-Review:", err);
-        }
-      })();
+      triggerReviewAfterUpdate();
     }
-  }, [updateVisible]);
+  }, [updateVisible, triggerReviewAfterUpdate]);
 
   // Cleanup Timer
   useEffect(() => {
-    return () => clearTimeout(loadingTimeoutRef.current);
+    return () => {
+      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
+    };
   }, []);
 
   return (

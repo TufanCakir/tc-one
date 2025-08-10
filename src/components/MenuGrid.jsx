@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo } from "react";
 import {
   FlatList,
   Text,
@@ -36,6 +36,7 @@ const ICON_SIZE = 28;
 
 export default function MenuGrid({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
+
   const data = useMemo(
     () => (Array.isArray(menuButtons) ? menuButtons : []),
     []
@@ -54,7 +55,7 @@ export default function MenuGrid({ navigation }) {
         <TouchableOpacity
           style={styles.menuItem}
           onPress={() => screen && navigation.navigate(screen)}
-          activeOpacity={0.9}
+          activeOpacity={0.85}
           accessibilityRole="button"
           accessibilityLabel={item?.accessibilityLabel || title}
           accessibilityHint={item?.accessibilityHint}
@@ -74,7 +75,9 @@ export default function MenuGrid({ navigation }) {
                 importantForAccessibility="no"
               />
             )}
-            <Text style={styles.label}>{title}</Text>
+            <Text style={styles.label} numberOfLines={1}>
+              {title}
+            </Text>
           </LinearGradient>
         </TouchableOpacity>
       );
@@ -83,10 +86,7 @@ export default function MenuGrid({ navigation }) {
   );
 
   return (
-    <LinearGradient
-      colors={["#000000", "#ffffff"]}
-      style={styles.gridContainer}
-    >
+    <View style={styles.gridContainer}>
       {/* Top-Rechts Button */}
       <View style={styles.topRightButton}>
         <TouchableOpacity
@@ -96,7 +96,7 @@ export default function MenuGrid({ navigation }) {
         >
           <Ionicons
             name="information-circle-outline"
-            size={24}
+            size={26}
             color="#fff"
             accessibilityElementsHidden
             importantForAccessibility="no"
@@ -113,7 +113,7 @@ export default function MenuGrid({ navigation }) {
         numColumns={3}
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 24 }}
+        contentContainerStyle={{ paddingBottom: 32, paddingHorizontal: 8 }}
       />
 
       {/* Modal */}
@@ -125,24 +125,25 @@ export default function MenuGrid({ navigation }) {
         accessibilityViewIsModal
       >
         <View style={styles.modalOverlay}>
-          <View style={styles.modalContent} accessibilityLabel="Neuigkeiten">
+          <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Neuigkeiten</Text>
             <Text style={styles.modalText}>
-              Hier sind die neuesten Funktionen und Updates, die wir hinzugefügt
-              haben:
-              {"\n"}- Neues Design und Layout
+              Hier sind die neuesten Funktionen und Updates:
+              {"\n"}• Neues Design und Layout
+              {"\n"}• Verbesserte Performance
+              {"\n"}• Bugfixes
             </Text>
             <Pressable
               onPress={handleCloseModal}
               style={styles.closeButton}
               accessibilityRole="button"
-              accessibilityLabel="Schließe das Neuigkeiten-Fenster"
+              accessibilityLabel="Schließe Neuigkeiten"
             >
               <Text style={styles.closeButtonText}>Schließen</Text>
             </Pressable>
           </View>
         </View>
       </Modal>
-    </LinearGradient>
+    </View>
   );
 }

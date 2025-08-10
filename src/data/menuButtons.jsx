@@ -53,8 +53,8 @@ export const menuButtons = [
     accessibilityHint: "Zeigt Termine und Ereignisse",
   },
   {
-    title: "Calendar One",
-    screen: "CalendarOneScreen",
+    title: "Native Calendar",
+    screen: "NativeCalendarScreen",
     icon: { name: "calendar-o", set: ICONS.fa },
     accessibilityLabel: "Alternativen Kalender anzeigen",
     accessibilityHint: "Öffnet eine alternative Kalenderansicht",

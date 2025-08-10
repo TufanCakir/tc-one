@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useProfile } from "../context/ProfileContext";
 import Icon from "../components/Icon";

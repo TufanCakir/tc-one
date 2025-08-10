@@ -2,7 +2,6 @@ import React, {
   useState,
   useRef,
   useCallback,
-  useEffect,
   useLayoutEffect,
   useMemo,
 } from "react";
@@ -16,9 +15,10 @@ import {
   Platform,
   UIManager,
   Dimensions,
+  Animated,
+  Easing,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import PagerView from "react-native-pager-view";
 import { LinearGradient } from "expo-linear-gradient";
 
 import MenuGrid from "../components/MenuGrid";
@@ -32,7 +32,6 @@ import Header from "../components/Header";
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const TAB_MIN_WIDTH = 90;
 
-// LayoutAnimation für Android aktivieren
 if (
   Platform.OS === "android" &&
   UIManager.setLayoutAnimationEnabledExperimental
@@ -42,9 +41,9 @@ if (
 
 export default function HomeScreen() {
   const navigation = useNavigation();
-  const pagerRef = useRef(null);
   const scrollRef = useRef(null);
   const tabLayoutsRef = useRef({});
+  const animatedScrollX = useRef(new Animated.Value(0)).current;
 
   const [tabsMeasured, setTabsMeasured] = useState(false);
   const [activePage, setActivePage] = useState(0);
@@ -87,20 +86,27 @@ export default function HomeScreen() {
       if (index !== activePage) {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         setActivePage(index);
-        pagerRef.current?.setPage(index);
         scrollToTab(index);
+
+        Animated.timing(animatedScrollX, {
+          toValue: SCREEN_WIDTH * index,
+          duration: 350,
+          easing: Easing.out(Easing.cubic),
+          useNativeDriver: false,
+        }).start();
       }
     },
-    [activePage, scrollToTab]
+    [activePage, scrollToTab, animatedScrollX]
   );
 
-  const handlePageSelected = useCallback(
-    (e) => {
-      const position = e.nativeEvent.position;
-      if (position !== activePage) {
-        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-        setActivePage(position);
-        scrollToTab(position);
+  const handleContentScrollEnd = useCallback(
+    (event) => {
+      const pageIndex = Math.round(
+        event.nativeEvent.contentOffset.x / SCREEN_WIDTH
+      );
+      if (pageIndex !== activePage) {
+        setActivePage(pageIndex);
+        scrollToTab(pageIndex);
       }
     },
     [activePage, scrollToTab]
@@ -143,10 +149,7 @@ export default function HomeScreen() {
               <TouchableOpacity
                 style={[styles.tab, activePage === index && styles.activeTab]}
                 onPress={() => handleTabPress(index)}
-                activeOpacity={0.7}
-                accessibilityRole="tab"
-                accessibilityLabel={`${tab.label} Tab`}
-                accessibilityState={{ selected: activePage === index }}
+                activeOpacity={0.8}
               >
                 <Text
                   style={[
@@ -162,17 +165,30 @@ export default function HomeScreen() {
         </ScrollView>
       </LinearGradient>
 
-      <PagerView
-        ref={pagerRef}
-        style={styles.pager}
-        initialPage={0}
-        offscreenPageLimit={1}
-        onPageSelected={handlePageSelected}
+      <Animated.ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onMomentumScrollEnd={handleContentScrollEnd}
+        scrollEventThrottle={16}
+        contentOffset={{ x: activePage * SCREEN_WIDTH, y: 0 }}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: animatedScrollX } } }],
+          { useNativeDriver: false }
+        )}
       >
-        {tabs.map((tab, index) => (
-          <View key={index}>{tab.component}</View>
-        ))}
-      </PagerView>
+        {tabs.map((tab, index) => {
+          // Lazy Loading: nur aktiver + Nachbarn
+          if (Math.abs(activePage - index) > 1) {
+            return <View key={index} style={{ width: SCREEN_WIDTH }} />;
+          }
+          return (
+            <View key={index} style={{ width: SCREEN_WIDTH }}>
+              {tab.component}
+            </View>
+          );
+        })}
+      </Animated.ScrollView>
     </View>
   );
 }
@@ -189,15 +205,12 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 16,
     marginHorizontal: 4,
-    borderRadius: 8,
-    backgroundColor: "rgba(255,255,255,0.06)",
+    borderRadius: 10,
+    backgroundColor: "rgba(255,255,255,0.08)",
   },
   activeTab: {
-    borderBottomWidth: 2,
-    borderBottomColor: "#000",
     backgroundColor: "#fff",
   },
-  tabText: { fontSize: 16, color: "#444" },
-  activeTabText: { color: "#000", fontWeight: "bold" },
-  pager: { flex: 1 },
+  tabText: { fontSize: 16, color: "#e6e6e6" },
+  activeTabText: { color: "#000", fontWeight: "600" },
 });
