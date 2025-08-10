@@ -21,10 +21,17 @@
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "UIBatteryMonitoringEnabled": true,
+
         "NSCameraUsageDescription": "Diese App benötigt Zugriff auf die Kamera, um Fotos und Videos aufzunehmen.",
         "NSBluetoothAlwaysUsageDescription": "Diese App kann Bluetooth verwenden, um kompatible Geräte zu finden und zu verbinden.",
-        "NSCalendarsUsageDescription": "Diese App benötigt Zugriff auf deinen Kalender, um Ereignisse anzuzeigen und hinzuzufügen.",
-        "NSLocationWhenInUseUsageDescription": "Diese App benötigt Zugriff auf deinen Standort, um Karten korrekt anzuzeigen, die Kompassrichtung zu bestimmen und GPS-Funktionen zu nutzen."
+        "NSLocationWhenInUseUsageDescription": "Diese App benötigt Zugriff auf deinen Standort, um Karten korrekt anzuzeigen, die Kompassrichtung zu bestimmen und GPS-Funktionen zu nutzen.",
+
+        "NSCalendarsUsageDescription": "Diese App benötigt Lesezugriff auf deinen Kalender, um Ereignisse anzuzeigen.",
+        "NSCalendarsWriteOnlyAccessUsageDescription": "Diese App benötigt Schreibzugriff auf deinen Kalender, um neue Ereignisse hinzuzufügen.",
+
+        "NSRemindersUsageDescription": "Diese App benötigt Zugriff auf Erinnerungen, um Reminder zu lesen und anzulegen.",
+        "NSPhotoLibraryUsageDescription": "Diese App benötigt Zugriff auf deine Fotos, um gespeicherte Bilder zu verwenden.",
+        "NSMicrophoneUsageDescription": "Diese App benötigt Zugriff auf das Mikrofon, um Audio aufnehmen zu können."
       }
     },
     "android": {
@@ -34,16 +41,27 @@
       },
       "permissions": [
         "CAMERA",
+        "RECORD_AUDIO",
         "ACCESS_FINE_LOCATION",
         "BLUETOOTH",
         "READ_CALENDAR",
-        "WRITE_CALENDAR"
+        "WRITE_CALENDAR",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
       ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-mail-composer"],
+    "plugins": [
+      "expo-mail-composer",
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Diese App benötigt Zugriff auf deinen Kalender, um Termine anzuzeigen und zu erstellen."
+        }
+      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "f9d4bc7f-d684-4a25-9ff8-fe8f1e9935d2"

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   LayoutAnimation,
+  Platform,
 } from "react-native";
 import { Calendar } from "react-native-calendars";
 import * as CalendarAPI from "expo-calendar";
@@ -28,25 +29,41 @@ export default function NativeCalendarScreen() {
 
   const tabs = ["Heute", "Diese Woche", "Diesen Monat", "Alle"];
 
-  const loadEvents = useCallback(async () => {
+  const requestPermission = async () => {
     try {
-      setLoading(true);
-      setPermissionDenied(false);
-
-      const { status } = await CalendarAPI.requestCalendarPermissionsAsync();
+      const { status } = await CalendarAPI.getCalendarPermissionsAsync();
       if (status !== "granted") {
-        setPermissionDenied(true);
-        setLoading(false);
-        return;
+        const { status: newStatus } =
+          await CalendarAPI.requestCalendarPermissionsAsync();
+        if (newStatus !== "granted") {
+          setPermissionDenied(true);
+          return false;
+        }
       }
+      return true;
+    } catch (e) {
+      Alert.alert("Fehler", "Kalenderzugriff konnte nicht geprüft werden.");
+      return false;
+    }
+  };
 
+  const loadEvents = useCallback(async () => {
+    setLoading(true);
+    setPermissionDenied(false);
+
+    const hasPermission = await requestPermission();
+    if (!hasPermission) {
+      setLoading(false);
+      return;
+    }
+
+    try {
       const calendars = await CalendarAPI.getCalendarsAsync(
         CalendarAPI.EntityTypes.EVENT
       );
       const writable = calendars.filter((cal) => cal.allowsModifications);
       if (!writable.length) {
         Alert.alert("Fehler", "Kein schreibbarer Kalender gefunden.");
-        setLoading(false);
         return;
       }
 
@@ -57,7 +74,7 @@ export default function NativeCalendarScreen() {
       const end = new Date();
       end.setMonth(end.getMonth() + 1);
 
-      let allEvents = [];
+      const allEvents = [];
       for (const cal of writable) {
         const evts = await CalendarAPI.getEventsAsync([cal.id], start, end);
         allEvents.push(...evts);
@@ -65,7 +82,6 @@ export default function NativeCalendarScreen() {
 
       setEvents(allEvents);
 
-      // Markierte Tage
       const marks = {};
       allEvents.forEach((event) => {
         const date = event.startDate.split("T")[0];
@@ -90,15 +106,17 @@ export default function NativeCalendarScreen() {
   const createEvent = async () => {
     if (!selectedDate) return Alert.alert("Hinweis", "Bitte Datum auswählen!");
     if (!newTitle.trim()) return Alert.alert("Hinweis", "Titel eingeben!");
+    if (!calId) return;
 
     try {
+      setLoading(true);
       const start = new Date(selectedDate);
       start.setHours(12, 0, 0);
       const end = new Date(selectedDate);
       end.setHours(13, 0, 0);
 
       const eventId = await CalendarAPI.createEventAsync(calId, {
-        title: newTitle,
+        title: newTitle.trim(),
         startDate: start,
         endDate: end,
         timeZone: "Europe/Berlin",
@@ -110,19 +128,25 @@ export default function NativeCalendarScreen() {
       Alert.alert("✅ Erfolg", "Event erstellt!");
     } catch (err) {
       Alert.alert("Fehler beim Erstellen", err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const deleteEvent = async () => {
     if (!createdEventId)
       return Alert.alert("Hinweis", "Kein Event zum Löschen ausgewählt.");
+
     try {
+      setLoading(true);
       await CalendarAPI.deleteEventAsync(createdEventId);
       setCreatedEventId(null);
       await loadEvents();
       Alert.alert("🗑️ Erfolg", "Event gelöscht!");
     } catch (err) {
       Alert.alert("Fehler beim Löschen", err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -146,7 +170,7 @@ export default function NativeCalendarScreen() {
         eventDate.getFullYear() === today.getFullYear()
       );
     }
-    return true; // "Alle"
+    return true;
   });
 
   const eventsForSelectedDate = selectedDate
@@ -154,7 +178,9 @@ export default function NativeCalendarScreen() {
     : [];
 
   const handleTabPress = (tab) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    if (Platform.OS === "ios") {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    }
     setActiveTab(tab);
 
     if (tab === "Heute") {
@@ -282,7 +308,7 @@ export default function NativeCalendarScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: "#000", padding: 10 },
   header: {
     color: "#0f0",
     fontSize: 22,
