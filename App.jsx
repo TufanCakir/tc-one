@@ -25,10 +25,11 @@ const LOADING_DELAY = 500;
 export default function App() {
   const [loading, setLoading] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
+  const [updateDone, setUpdateDone] = useState(false);
   const loadingTimeoutRef = useRef(null);
 
   // Prüft auf Updates
-  useUpdateChecker(setUpdateVisible);
+  useUpdateChecker(setUpdateVisible, setUpdateDone);
 
   // Navigation-Loading Handler
   const handleNavigationStateChange = useCallback(() => {
@@ -108,7 +109,7 @@ export default function App() {
         <StatusBar barStyle="light-content" backgroundColor="#000" />
 
         {loading && <LoadingOverlay />}
-        {updateVisible && <UpdateOverlay />}
+        {updateVisible && <UpdateOverlay done={updateDone} />}
 
         <NavigationContainer onStateChange={handleNavigationStateChange}>
           <OnlineGuard>
