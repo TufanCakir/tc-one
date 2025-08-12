@@ -7,7 +7,9 @@ import {
   StyleSheet,
   Keyboard,
   TouchableWithoutFeedback,
+  Linking,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import Footer from "../components/Footer";
 
 const BmiCalculatorScreen = () => {
@@ -43,9 +45,24 @@ const BmiCalculatorScreen = () => {
     setGender("");
   };
 
+  const openLinkedIn = () => {
+    Linking.openURL("https://www.linkedin.com/in/tufan-cakir");
+  };
+
+  const openWHO = () => {
+    Linking.openURL(
+      "https://www.who.int/news-room/fact-sheets/detail/obesity-and-overweight"
+    );
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
+      <LinearGradient
+        colors={["#000000", "#ffffff"]}
+        style={styles.container}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+      >
         <View style={styles.content}>
           <Text style={styles.header}>BMI Calculator</Text>
           <View style={styles.form}>
@@ -54,7 +71,7 @@ const BmiCalculatorScreen = () => {
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter your age"
-                placeholderTextColor="#fff"
+                placeholderTextColor="#ccc"
                 onChangeText={setAge}
                 value={age}
                 keyboardType="numeric"
@@ -65,7 +82,7 @@ const BmiCalculatorScreen = () => {
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter your height"
-                placeholderTextColor="#fff"
+                placeholderTextColor="#ccc"
                 onChangeText={setHeight}
                 value={height}
                 keyboardType="numeric"
@@ -76,7 +93,7 @@ const BmiCalculatorScreen = () => {
               <TextInput
                 style={styles.textInput}
                 placeholder="Enter your weight"
-                placeholderTextColor="#fff"
+                placeholderTextColor="#ccc"
                 onChangeText={setWeight}
                 value={weight}
                 keyboardType="numeric"
@@ -90,7 +107,14 @@ const BmiCalculatorScreen = () => {
                 ]}
                 onPress={() => setGender("male")}
               >
-                <Text style={styles.genderText}>Male</Text>
+                <Text
+                  style={[
+                    styles.genderText,
+                    gender === "male" && styles.selectedGenderText,
+                  ]}
+                >
+                  Male
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
@@ -99,7 +123,14 @@ const BmiCalculatorScreen = () => {
                 ]}
                 onPress={() => setGender("female")}
               >
-                <Text style={styles.genderText}>Female</Text>
+                <Text
+                  style={[
+                    styles.genderText,
+                    gender === "female" && styles.selectedGenderText,
+                  ]}
+                >
+                  Female
+                </Text>
               </TouchableOpacity>
             </View>
             <TouchableOpacity
@@ -108,56 +139,52 @@ const BmiCalculatorScreen = () => {
             >
               <Text style={styles.submitButtonText}>Calculate BMI</Text>
             </TouchableOpacity>
+
             {bmiResult && (
               <View style={styles.resultContainer}>
                 <Text style={styles.resultLabel}>BMI:</Text>
                 <Text style={styles.resultText}>{bmiResult.bmi}</Text>
                 <Text style={styles.resultLabel}>Result:</Text>
                 <Text style={styles.resultText}>{bmiResult.result}</Text>
+
+                {/* WHO Link */}
+                <TouchableOpacity style={styles.whoButton} onPress={openWHO}>
+                  <Text style={styles.whoButtonText}>Learn more (WHO)</Text>
+                </TouchableOpacity>
               </View>
             )}
           </View>
         </View>
+
         <View style={styles.footerWrapper}>
           <Footer />
         </View>
-      </View>
+      </LinearGradient>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  content: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  header: {
-    fontSize: 28,
-    fontWeight: "bold",
-    color: "#fff",
-    marginBottom: 20,
-  },
+  container: { flex: 1 },
+  content: { flex: 1, alignItems: "center", justifyContent: "center" },
+  header: { fontSize: 28, fontWeight: "bold", color: "#fff", marginBottom: 20 },
   form: {
     borderColor: "#fff",
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 20,
     padding: 20,
     width: "90%",
-    elevation: 5,
+    backgroundColor: "rgba(0,0,0,0.4)",
   },
   inputRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 20,
+    marginBottom: 15,
   },
   label: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "bold",
     marginRight: 10,
     color: "#fff",
@@ -184,47 +211,36 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
-    padding: 10,
-    margin: 10,
+    marginHorizontal: 5,
   },
   selectedGender: {
-    backgroundColor: "#ddd",
+    backgroundColor: "#000",
+    borderWidth: 1,
+    borderColor: "#fff",
   },
-  genderText: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#000",
-  },
+  genderText: { fontSize: 16, fontWeight: "bold", color: "#000" },
+  selectedGenderText: { color: "#fff" },
   submitButton: {
     backgroundColor: "#fff",
     borderRadius: 10,
     height: 50,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: 5,
   },
-  submitButtonText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#000",
+  submitButtonText: { fontSize: 18, fontWeight: "bold", color: "#000" },
+  resultContainer: { marginTop: 20, alignItems: "center" },
+  resultLabel: { fontSize: 18, fontWeight: "bold", color: "#fff" },
+  resultText: { fontSize: 16, color: "#fff", marginBottom: 5 },
+  whoButton: {
+    marginTop: 10,
+    backgroundColor: "#1E90FF",
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 8,
   },
-  resultContainer: {
-    marginTop: 20,
-  },
-  resultLabel: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-    color: "#fff",
-  },
-  resultText: {
-    fontSize: 16,
-    color: "#fff",
-  },
-  footerWrapper: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-  },
+  whoButtonText: { color: "#fff", fontWeight: "bold" },
+  footerWrapper: { position: "absolute", bottom: 0, width: "100%" },
 });
 
 export default BmiCalculatorScreen;

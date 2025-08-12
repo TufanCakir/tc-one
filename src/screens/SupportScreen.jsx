@@ -12,29 +12,28 @@ export default function SupportScreen() {
 
     if (!isAvailable) {
       Alert.alert(
-        "Nicht verfügbar",
-        "E-Mail-Versand ist auf diesem Gerät nicht möglich."
+        "Not Available",
+        "Email sending is not supported on this device."
       );
       return;
     }
 
     await MailComposer.composeAsync({
       recipients: ["support@tufancakir.com"],
-      subject: "Support-Anfrage – TC One",
+      subject: "Support Request – TC One",
       body:
-        "Hallo Tufan,\n\nich habe folgendes Anliegen:\n\n" +
-        "- Feedback / Idee / Bug:\n" +
-        "- Gerät/Plattform:\n" +
-        "- App-Version:\n\nDanke!",
+        "Hello Tufan,\n\nI have the following request:\n\n" +
+        "- Feedback / Idea / Bug:\n" +
+        "- Device / Platform:\n" +
+        "- App Version:\n\nThank you!",
     });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Kontaktiere den Support</Text>
+      <Text style={styles.title}>Contact Support</Text>
       <Text style={styles.subtitle}>
-        Du hast Feedback, Ideen oder ein Problem? Schick mir einfach eine
-        Nachricht.
+        Have feedback, ideas, or an issue? Send me a message anytime.
       </Text>
 
       <TouchableOpacity
@@ -48,7 +47,7 @@ export default function SupportScreen() {
           end={{ x: 1, y: 1 }}
           style={styles.button}
         >
-          <Text style={styles.buttonText}>Mail an support@tufancakir.com</Text>
+          <Text style={styles.buttonText}>Email support@tufancakir.com</Text>
         </LinearGradient>
       </TouchableOpacity>
 

@@ -20,15 +20,16 @@ export default function NativeCalendarScreen() {
   const [events, setEvents] = useState([]);
   const [markedDates, setMarkedDates] = useState({});
   const [selectedDate, setSelectedDate] = useState("");
-  const [calId, setCalId] = useState(null);
-  const [newTitle, setNewTitle] = useState("");
-  const [createdEventId, setCreatedEventId] = useState(null);
+  const [calendarId, setCalendarId] = useState(null);
+  const [newEventTitle, setNewEventTitle] = useState("");
+  const [lastCreatedEventId, setLastCreatedEventId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [permissionDenied, setPermissionDenied] = useState(false);
-  const [activeTab, setActiveTab] = useState("Heute");
+  const [activeTab, setActiveTab] = useState("Today");
 
-  const tabs = ["Heute", "Diese Woche", "Diesen Monat", "Alle"];
+  const tabs = ["Today", "This Week", "This Month", "All"];
 
+  /** Request calendar permission */
   const requestPermission = async () => {
     try {
       const { status } = await CalendarAPI.getCalendarPermissionsAsync();
@@ -42,11 +43,12 @@ export default function NativeCalendarScreen() {
       }
       return true;
     } catch (e) {
-      Alert.alert("Fehler", "Kalenderzugriff konnte nicht geprüft werden.");
+      Alert.alert("Error", "Could not check calendar permissions.");
       return false;
     }
   };
 
+  /** Load events from writable calendars */
   const loadEvents = useCallback(async () => {
     setLoading(true);
     setPermissionDenied(false);
@@ -61,13 +63,16 @@ export default function NativeCalendarScreen() {
       const calendars = await CalendarAPI.getCalendarsAsync(
         CalendarAPI.EntityTypes.EVENT
       );
-      const writable = calendars.filter((cal) => cal.allowsModifications);
-      if (!writable.length) {
-        Alert.alert("Fehler", "Kein schreibbarer Kalender gefunden.");
+      const writableCalendars = calendars.filter(
+        (cal) => cal.allowsModifications
+      );
+
+      if (!writableCalendars.length) {
+        Alert.alert("Error", "No writable calendar found.");
         return;
       }
 
-      setCalId(writable[0].id);
+      setCalendarId(writableCalendars[0].id);
 
       const start = new Date();
       start.setMonth(start.getMonth() - 1);
@@ -75,25 +80,27 @@ export default function NativeCalendarScreen() {
       end.setMonth(end.getMonth() + 1);
 
       const allEvents = [];
-      for (const cal of writable) {
+      for (const cal of writableCalendars) {
         const evts = await CalendarAPI.getEventsAsync([cal.id], start, end);
         allEvents.push(...evts);
       }
 
       setEvents(allEvents);
 
+      /** Mark calendar dates */
       const marks = {};
       allEvents.forEach((event) => {
         const date = event.startDate.split("T")[0];
         marks[date] = { marked: true, dotColor: "#0f0" };
       });
 
+      /** Highlight today */
       const today = new Date().toISOString().split("T")[0];
       if (marks[today]) marks[today].dotColor = "#ff4444";
 
       setMarkedDates(marks);
     } catch (err) {
-      Alert.alert("Fehler", err.message);
+      Alert.alert("Error", err.message);
     } finally {
       setLoading(false);
     }
@@ -103,10 +110,12 @@ export default function NativeCalendarScreen() {
     loadEvents();
   }, [loadEvents]);
 
+  /** Create new event */
   const createEvent = async () => {
-    if (!selectedDate) return Alert.alert("Hinweis", "Bitte Datum auswählen!");
-    if (!newTitle.trim()) return Alert.alert("Hinweis", "Titel eingeben!");
-    if (!calId) return;
+    if (!selectedDate) return Alert.alert("Note", "Please select a date!");
+    if (!newEventTitle.trim())
+      return Alert.alert("Note", "Please enter a title!");
+    if (!calendarId) return;
 
     try {
       setLoading(true);
@@ -115,56 +124,58 @@ export default function NativeCalendarScreen() {
       const end = new Date(selectedDate);
       end.setHours(13, 0, 0);
 
-      const eventId = await CalendarAPI.createEventAsync(calId, {
-        title: newTitle.trim(),
+      const eventId = await CalendarAPI.createEventAsync(calendarId, {
+        title: newEventTitle.trim(),
         startDate: start,
         endDate: end,
         timeZone: "Europe/Berlin",
       });
 
-      setCreatedEventId(eventId);
-      setNewTitle("");
+      setLastCreatedEventId(eventId);
+      setNewEventTitle("");
       await loadEvents();
-      Alert.alert("✅ Erfolg", "Event erstellt!");
+      Alert.alert("✅ Success", "Event created!");
     } catch (err) {
-      Alert.alert("Fehler beim Erstellen", err.message);
+      Alert.alert("Error creating event", err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  /** Delete last created event */
   const deleteEvent = async () => {
-    if (!createdEventId)
-      return Alert.alert("Hinweis", "Kein Event zum Löschen ausgewählt.");
+    if (!lastCreatedEventId)
+      return Alert.alert("Note", "No event selected for deletion.");
 
     try {
       setLoading(true);
-      await CalendarAPI.deleteEventAsync(createdEventId);
-      setCreatedEventId(null);
+      await CalendarAPI.deleteEventAsync(lastCreatedEventId);
+      setLastCreatedEventId(null);
       await loadEvents();
-      Alert.alert("🗑️ Erfolg", "Event gelöscht!");
+      Alert.alert("🗑️ Success", "Event deleted!");
     } catch (err) {
-      Alert.alert("Fehler beim Löschen", err.message);
+      Alert.alert("Error deleting event", err.message);
     } finally {
       setLoading(false);
     }
   };
 
+  /** Filter events by active tab */
   const filteredEvents = events.filter((event) => {
     const eventDate = new Date(event.startDate);
     const today = new Date();
 
-    if (activeTab === "Heute") {
+    if (activeTab === "Today") {
       return eventDate.toDateString() === today.toDateString();
     }
-    if (activeTab === "Diese Woche") {
+    if (activeTab === "This Week") {
       const weekStart = new Date(today);
       weekStart.setDate(today.getDate() - today.getDay());
       const weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 6);
       return eventDate >= weekStart && eventDate <= weekEnd;
     }
-    if (activeTab === "Diesen Monat") {
+    if (activeTab === "This Month") {
       return (
         eventDate.getMonth() === today.getMonth() &&
         eventDate.getFullYear() === today.getFullYear()
@@ -173,17 +184,19 @@ export default function NativeCalendarScreen() {
     return true;
   });
 
+  /** Get events for selected date */
   const eventsForSelectedDate = selectedDate
     ? events.filter((event) => event.startDate.split("T")[0] === selectedDate)
     : [];
 
+  /** Handle tab switching */
   const handleTabPress = (tab) => {
     if (Platform.OS === "ios") {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     }
     setActiveTab(tab);
 
-    if (tab === "Heute") {
+    if (tab === "Today") {
       const todayStr = new Date().toISOString().split("T")[0];
       setSelectedDate(todayStr);
     }
@@ -191,13 +204,13 @@ export default function NativeCalendarScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>📅 Dein Kalender</Text>
+      <Text style={styles.header}>📅 Your Calendar</Text>
 
       {loading ? (
         <ActivityIndicator size="large" color="#0f0" style={{ flex: 1 }} />
       ) : permissionDenied ? (
         <Text style={styles.noEvents}>
-          ❌ Keine Berechtigung zum Lesen des Kalenders.
+          ❌ No permission to access the calendar.
         </Text>
       ) : (
         <>
@@ -229,7 +242,7 @@ export default function NativeCalendarScreen() {
             ))}
           </ScrollView>
 
-          {/* Kalender */}
+          {/* Calendar */}
           <Calendar
             onDayPress={(day) => setSelectedDate(day.dateString)}
             markedDates={{
@@ -252,10 +265,10 @@ export default function NativeCalendarScreen() {
           {/* Input + Buttons */}
           <TextInput
             style={styles.input}
-            placeholder="Event-Titel eingeben"
+            placeholder="Enter event title"
             placeholderTextColor="#666"
-            value={newTitle}
-            onChangeText={setNewTitle}
+            value={newEventTitle}
+            onChangeText={setNewEventTitle}
           />
 
           <View style={styles.buttonRow}>
@@ -265,7 +278,7 @@ export default function NativeCalendarScreen() {
               onPress={createEvent}
             >
               <Ionicons name="add" size={18} color="#000" />
-              <Text style={styles.btnText}>Erstellen</Text>
+              <Text style={styles.btnText}>Create</Text>
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.7}
@@ -273,11 +286,11 @@ export default function NativeCalendarScreen() {
               onPress={deleteEvent}
             >
               <Ionicons name="trash" size={18} color="#fff" />
-              <Text style={[styles.btnText, { color: "#fff" }]}>Löschen</Text>
+              <Text style={[styles.btnText, { color: "#fff" }]}>Delete</Text>
             </TouchableOpacity>
           </View>
 
-          {/* Eventliste */}
+          {/* Event list */}
           <ScrollView style={styles.events}>
             {selectedDate ? (
               eventsForSelectedDate.length > 0 ? (
@@ -291,10 +304,10 @@ export default function NativeCalendarScreen() {
                   </View>
                 ))
               ) : (
-                <Text style={styles.noEvents}>Keine Events an diesem Tag.</Text>
+                <Text style={styles.noEvents}>No events on this day.</Text>
               )
             ) : (
-              <Text style={styles.noEvents}>Wähle ein Datum aus.</Text>
+              <Text style={styles.noEvents}>Please select a date.</Text>
             )}
           </ScrollView>
         </>
@@ -308,7 +321,7 @@ export default function NativeCalendarScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000", padding: 10 },
+  container: { flex: 1 },
   header: {
     color: "#0f0",
     fontSize: 22,

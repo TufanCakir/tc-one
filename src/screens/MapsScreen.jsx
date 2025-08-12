@@ -26,41 +26,44 @@ export default function MapsScreen() {
 
   const [region, setRegion] = useState(DEFAULT_REGION);
   const [mapType, setMapType] = useState("standard");
-  const [myCoord, setMyCoord] = useState(null);
+  const [myLocation, setMyLocation] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  /** Request location permission & get current position */
   const getPermissionAndLocation = useCallback(async () => {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         Alert.alert(
-          "Berechtigung benötigt",
-          "Bitte erlaube den Standortzugriff in den Geräteeinstellungen."
+          "Permission Required",
+          "Please enable location access in your device settings."
         );
         setLoading(false);
         return;
       }
 
-      const loc = await Location.getCurrentPositionAsync({
+      const location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.High,
       });
 
-      const userLocation = {
-        latitude: loc.coords.latitude,
-        longitude: loc.coords.longitude,
+      const userCoords = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
       };
 
-      setMyCoord(userLocation);
+      setMyLocation(userCoords);
+
       const newRegion = {
-        ...userLocation,
+        ...userCoords,
         latitudeDelta: 0.05,
         longitudeDelta: 0.05,
       };
+
       setRegion(newRegion);
       mapRef.current?.animateToRegion(newRegion, 600);
     } catch (err) {
-      console.error("Fehler beim Laden des Standorts:", err);
-      Alert.alert("Fehler", "Standort konnte nicht geladen werden.");
+      console.error("Error getting location:", err);
+      Alert.alert("Error", "Unable to retrieve your location.");
     } finally {
       setLoading(false);
     }
@@ -70,14 +73,16 @@ export default function MapsScreen() {
     getPermissionAndLocation();
   }, [getPermissionAndLocation]);
 
+  /** Center map on user location */
   const recenter = () => {
-    if (!myCoord) return;
+    if (!myLocation) return;
     mapRef.current?.animateToRegion(
-      { ...myCoord, latitudeDelta: 0.05, longitudeDelta: 0.05 },
+      { ...myLocation, latitudeDelta: 0.05, longitudeDelta: 0.05 },
       600
     );
   };
 
+  /** Toggle between map types */
   const toggleMapType = () => {
     setMapType((prev) =>
       prev === "standard"
@@ -102,7 +107,7 @@ export default function MapsScreen() {
             setRegion(newRegion);
           }
         }}
-        showsUserLocation={!!myCoord}
+        showsUserLocation={!!myLocation}
         showsMyLocationButton={false}
         mapType={mapType}
       >
@@ -116,7 +121,7 @@ export default function MapsScreen() {
       {loading && (
         <View style={styles.loaderOverlay}>
           <ActivityIndicator size="large" color="#fff" />
-          <Text style={styles.loaderText}>Standort wird geladen...</Text>
+          <Text style={styles.loaderText}>Loading location...</Text>
         </View>
       )}
 
@@ -128,11 +133,11 @@ export default function MapsScreen() {
           hitSlop={HIT_SLOP}
         >
           <Ionicons name="arrow-back" size={22} color="#fff" />
-          <Text style={styles.backText}>Zurück</Text>
+          <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
       </SafeAreaView>
 
-      {/* FABs */}
+      {/* Floating Action Buttons */}
       <View style={styles.fabGroup}>
         <TouchableOpacity
           style={styles.fab}

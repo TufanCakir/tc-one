@@ -31,7 +31,7 @@ export default function ProfileScreen() {
       activeOpacity={0.85}
     >
       <LinearGradient
-        colors={["#000000", "#444444"]}
+        colors={["#000000", "#ffffff"]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={styles.gradientButton}

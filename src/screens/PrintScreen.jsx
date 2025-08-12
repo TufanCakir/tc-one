@@ -13,9 +13,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import Footer from "../components/Footer";
 
 export default function PrintScreen() {
-  const [title, setTitle] = useState("Mein PDF Dokument 📄");
+  const [title, setTitle] = useState("My PDF Document 📄");
   const [content, setContent] = useState(
-    "Dies ist ein dynamisch erstelltes Dokument."
+    "This is a dynamically generated document."
   );
   const [selectedPrinter, setSelectedPrinter] = useState(null);
 
@@ -35,7 +35,7 @@ export default function PrintScreen() {
         printerUrl: selectedPrinter?.url,
       });
     } catch (error) {
-      Alert.alert("Fehler beim Drucken", error.message);
+      Alert.alert("Print Error", error.message);
     }
   };
 
@@ -44,10 +44,10 @@ export default function PrintScreen() {
       const { uri } = await Print.printToFileAsync({
         html: generateHTML(),
       });
-      Alert.alert("PDF erstellt", `Gespeichert unter: ${uri}`);
+      Alert.alert("PDF Created", `Saved at: ${uri}`);
       console.log("PDF URI:", uri);
     } catch (error) {
-      Alert.alert("Fehler beim PDF erstellen", error.message);
+      Alert.alert("PDF Creation Error", error.message);
     }
   };
 
@@ -56,7 +56,7 @@ export default function PrintScreen() {
       const printer = await Print.selectPrinterAsync();
       setSelectedPrinter(printer);
     } catch (error) {
-      Alert.alert("Fehler beim Auswählen des Druckers", error.message);
+      Alert.alert("Printer Selection Error", error.message);
     }
   };
 
@@ -81,11 +81,11 @@ export default function PrintScreen() {
       <ScrollView
         contentContainerStyle={{ alignItems: "center", paddingBottom: 100 }}
       >
-        <Text style={styles.title}>📄 Dokument erstellen</Text>
+        <Text style={styles.title}>📄 Create Document</Text>
 
         <TextInput
           style={styles.input}
-          placeholder="Titel eingeben"
+          placeholder="Enter title"
           placeholderTextColor="#888"
           value={title}
           onChangeText={setTitle}
@@ -93,29 +93,29 @@ export default function PrintScreen() {
 
         <TextInput
           style={[styles.input, { height: 100 }]}
-          placeholder="Inhalt eingeben"
+          placeholder="Enter content"
           placeholderTextColor="#888"
           multiline
           value={content}
           onChangeText={setContent}
         />
 
-        <GradientButton text="🖨 Dokument drucken" onPress={printDocument} />
+        <GradientButton text="🖨 Print Document" onPress={printDocument} />
         <View style={styles.space} />
-        <GradientButton text="💾 Als PDF speichern" onPress={createPDF} />
+        <GradientButton text="💾 Save as PDF" onPress={createPDF} />
         <View style={styles.space} />
         <GradientButton
-          text="📡 Drucker auswählen (nur iOS)"
+          text="📡 Select Printer (iOS only)"
           onPress={selectPrinter}
         />
 
         {selectedPrinter && (
           <Text style={styles.printerText}>
-            Ausgewählter Drucker: {selectedPrinter.name}
+            Selected printer: {selectedPrinter.name}
           </Text>
         )}
 
-        <Text style={styles.previewTitle}>📄 Vorschau:</Text>
+        <Text style={styles.previewTitle}>📄 Preview:</Text>
         <View style={styles.previewBox}>
           <Text style={styles.previewHTML}>{generateHTML()}</Text>
         </View>

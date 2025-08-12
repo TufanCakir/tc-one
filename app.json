@@ -22,16 +22,16 @@
         "ITSAppUsesNonExemptEncryption": false,
         "UIBatteryMonitoringEnabled": true,
 
-        "NSCameraUsageDescription": "Diese App benötigt Zugriff auf die Kamera, um Fotos und Videos aufzunehmen.",
-        "NSBluetoothAlwaysUsageDescription": "Diese App kann Bluetooth verwenden, um kompatible Geräte zu finden und zu verbinden.",
-        "NSLocationWhenInUseUsageDescription": "Diese App benötigt Zugriff auf deinen Standort, um Karten korrekt anzuzeigen, die Kompassrichtung zu bestimmen und GPS-Funktionen zu nutzen.",
+        "NSCameraUsageDescription": "This app requires access to the camera to take photos and record videos.",
+        "NSBluetoothAlwaysUsageDescription": "This app may use Bluetooth to discover and connect to compatible devices.",
+        "NSLocationWhenInUseUsageDescription": "This app requires access to your location to correctly display maps, determine compass direction, and use GPS features.",
 
-        "NSCalendarsUsageDescription": "Diese App benötigt Lesezugriff auf deinen Kalender, um Ereignisse anzuzeigen.",
-        "NSCalendarsWriteOnlyAccessUsageDescription": "Diese App benötigt Schreibzugriff auf deinen Kalender, um neue Ereignisse hinzuzufügen.",
+        "NSCalendarsUsageDescription": "This app requires read access to your calendar to display events.",
+        "NSCalendarsWriteOnlyAccessUsageDescription": "This app requires write access to your calendar to add new events.",
 
-        "NSRemindersUsageDescription": "Diese App benötigt Zugriff auf Erinnerungen, um Reminder zu lesen und anzulegen.",
-        "NSPhotoLibraryUsageDescription": "Diese App benötigt Zugriff auf deine Fotos, um gespeicherte Bilder zu verwenden.",
-        "NSMicrophoneUsageDescription": "Diese App benötigt Zugriff auf das Mikrofon, um Audio aufnehmen zu können."
+        "NSRemindersUsageDescription": "This app requires access to your reminders to read and create them.",
+        "NSPhotoLibraryUsageDescription": "This app requires access to your photos to use saved images.",
+        "NSMicrophoneUsageDescription": "This app requires access to the microphone to record audio."
       }
     },
     "android": {
@@ -58,7 +58,7 @@
       [
         "expo-calendar",
         {
-          "calendarPermission": "Diese App benötigt Zugriff auf deinen Kalender, um Termine anzuzeigen und zu erstellen."
+          "calendarPermission": "This app requires access to your calendar to view and create events."
         }
       ]
     ],
