@@ -5,7 +5,6 @@ import {
   Dimensions,
   PanResponder,
   TouchableOpacity,
-  StatusBar,
 } from "react-native";
 import Footer from "../components/Footer";
 import styles from "../styles/SnakeScreenStyles";
@@ -171,7 +170,6 @@ export default function SnakeScreen() {
 
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" />
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.title}>Snake</Text>
