@@ -57,8 +57,7 @@
         {
           "calendarPermission": "This app requires access to your calendar to view and create events."
         }
-      ],
-      "expo-asset"
+      ]
     ],
     "extra": {
       "eas": {
